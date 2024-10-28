@@ -7,6 +7,7 @@ draft = false
 
 The architectural components of LangChain, illustrated in Figure 1.1, will be thoroughly explored and discussed in detail throughout the book. 
 
+
 {{< plantuml >}}
 package LangChain {
     package Agent_Tooling {
@@ -41,6 +42,8 @@ TextSplitter -[hidden]- Embedding_Model
 Tools -[hidden]- Toolkits
 {{< /plantuml >}}
 
+
+
 Figure 1.1: LangChain Architecture
 
 - **Model**: also known as LLM model serve as the core elements of LangChain. They essentially act as wrappers for these models, enabling the utilization of their specific functionalities and capabilities. 
@@ -51,7 +54,9 @@ Figure 1.1: LangChain Architecture
 - **Output Parsers**: The `output_parser` converts the output of an LLM into a more appropriate format, especially beneficial when generating structured data using LLMs. 
 - **Agents**: LLMs can communicate with their surroundings through agents. For instance, carrying out a particular task via an external API, or grabbing extra data from outside website. 
 
-LangChain utilizes a sequential pipeline method to construct tailored applications for LLM. This structured approach integrates diverse services, data inputs, and formatting processes, ensuring accurate processing and consistent output. Modules in LangChain follow a step-by-step process with single inputs and outputs, facilitating smooth data flow. This mechanism simplifies development and enhances LLM utilization. By streamlining workflows, LangChain optimizes AI application development, executing steps in a specific order to real-world processes for managed outcomes. ### LangChain Workflow
+LangChain utilizes a sequential pipeline method to construct tailored applications for LLM. This structured approach integrates diverse services, data inputs, and formatting processes, ensuring accurate processing and consistent output. Modules in LangChain follow a step-by-step process with single inputs and outputs, facilitating smooth data flow. This mechanism simplifies development and enhances LLM utilization. By streamlining workflows, LangChain optimizes AI application development, executing steps in a specific order to real-world processes for managed outcomes. 
+
+### LangChain Workflow
 
 Having grasped the fundamental elements of LangChain, let's observe its process in detail and how the message is handled. The actual scenarios can change the workflow's logic depending on the requirements. A very common conversation flow is shown in Figure 1.2, which includes `document_loaders`, data embedding into vectorstore, and query `similarity_search` within `RetrievalQA` chain, then returns the analyzed result to the user.
 

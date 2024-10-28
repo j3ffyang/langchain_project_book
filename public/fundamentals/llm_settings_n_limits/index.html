@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head><script src="/langchain_project_book/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=langchain_project_book/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.134.2">
+    <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
+    <meta name="description" content="LLM Settings When working with prompts, you can communicate directly or through an API with the LLM. A few parameters can be set to get different outcomes for your prompts.
+temperature: In other words, results are more deterministic when the temperature is lower because the next most likely token is always selected. A higher temperature may cause more unpredictability, which promotes more varied or imaginative results. In essence, you are making the other potential tokens heavier. In order toTo encourage more factual and succinct responses, you might want to apply a lower temperature value for tasks like fact-based quality assurance. It could be useful to raise the temperature value for writing poems or other creative tasks. The impact of adjusting this value can vary significantly based on the settings of the pre-trained model. Hence, it is advisable to experiment with and fine-tune this parameter according to the specific models to align with your requirements.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="LLM Settings and Limits :: LangChain AI">
+    <meta name="twitter:description" content="LLM Settings When working with prompts, you can communicate directly or through an API with the LLM. A few parameters can be set to get different outcomes for your prompts.
+temperature: In other words, results are more deterministic when the temperature is lower because the next most likely token is always selected. A higher temperature may cause more unpredictability, which promotes more varied or imaginative results. In essence, you are making the other potential tokens heavier. In order toTo encourage more factual and succinct responses, you might want to apply a lower temperature value for tasks like fact-based quality assurance. It could be useful to raise the temperature value for writing poems or other creative tasks. The impact of adjusting this value can vary significantly based on the settings of the pre-trained model. Hence, it is advisable to experiment with and fine-tune this parameter according to the specific models to align with your requirements.">
+    <meta property="og:url" content="http://localhost:1313/langchain_project_book/fundamentals/llm_settings_n_limits/index.html">
+    <meta property="og:site_name" content="LangChain AI">
+    <meta property="og:title" content="LLM Settings and Limits :: LangChain AI">
+    <meta property="og:description" content="LLM Settings When working with prompts, you can communicate directly or through an API with the LLM. A few parameters can be set to get different outcomes for your prompts.
+temperature: In other words, results are more deterministic when the temperature is lower because the next most likely token is always selected. A higher temperature may cause more unpredictability, which promotes more varied or imaginative results. In essence, you are making the other potential tokens heavier. In order toTo encourage more factual and succinct responses, you might want to apply a lower temperature value for tasks like fact-based quality assurance. It could be useful to raise the temperature value for writing poems or other creative tasks. The impact of adjusting this value can vary significantly based on the settings of the pre-trained model. Hence, it is advisable to experiment with and fine-tune this parameter according to the specific models to align with your requirements.">
+    <meta property="og:locale" content="en_us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="LangChain Fundamentals">
+    <meta property="article:published_time" content="2024-10-28T17:58:27+08:00">
+    <meta property="article:modified_time" content="2024-10-28T17:58:27+08:00">
+    <meta itemprop="name" content="LLM Settings and Limits :: LangChain AI">
+    <meta itemprop="description" content="LLM Settings When working with prompts, you can communicate directly or through an API with the LLM. A few parameters can be set to get different outcomes for your prompts.
+temperature: In other words, results are more deterministic when the temperature is lower because the next most likely token is always selected. A higher temperature may cause more unpredictability, which promotes more varied or imaginative results. In essence, you are making the other potential tokens heavier. In order toTo encourage more factual and succinct responses, you might want to apply a lower temperature value for tasks like fact-based quality assurance. It could be useful to raise the temperature value for writing poems or other creative tasks. The impact of adjusting this value can vary significantly based on the settings of the pre-trained model. Hence, it is advisable to experiment with and fine-tune this parameter according to the specific models to align with your requirements.">
+    <meta itemprop="datePublished" content="2024-10-28T17:58:27+08:00">
+    <meta itemprop="dateModified" content="2024-10-28T17:58:27+08:00">
+    <meta itemprop="wordCount" content="788">
+    <title>LLM Settings and Limits :: LangChain AI</title>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1730117286" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1730117286" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1730117286" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1730117286" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1730117286" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1730117286" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1730117286" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1730117286" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1730117286" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1730117286" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1730117286" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1730117286" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1730117286"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/langchain_project_book';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.variants && variants.init( [ 'auto' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/langchain_project_book/fundamentals/llm_settings_n_limits/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+<nav class="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#llm-settings">LLM Settings</a></li>
+        <li><a href="#llm-limitations">LLM Limitations</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/index.html"><span itemprop="name">LangChain Project Handbook</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/fundamentals/index.html"><span itemprop="name">LangChain Fundamentals</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">LLM Settings and Limits</span><meta itemprop="position" content="3"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/fundamentals/select_a_right_lm/index.html" title="Select a Right Language Model (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/fundamentals/thoughts_on_prompt/index.html" title="Thoughts on Prompt Engineering (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable fundamentals" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="llm-settings-and-limits">LLM Settings and Limits</h1>
+
+<h3 id="llm-settings">LLM Settings</h3>
+<p>When working with prompts, you can communicate directly or through an API with the LLM. A few parameters can be set to get different outcomes for your prompts.</p>
+<ul>
+<li>
+<p><code>temperature</code>: In other words, results are more deterministic when the <code>temperature</code> is lower because the next most likely token is always selected. A higher <code>temperature</code> may cause more unpredictability, which promotes more varied or imaginative results. In essence, you are making the other potential tokens heavier. In order toTo encourage more factual and succinct responses, you might want to apply a lower <code>temperature</code> value for tasks like fact-based quality assurance. It could be useful to raise the <code>temperature</code> value for writing poems or other creative tasks. The impact of adjusting this value can vary significantly based on the settings of the pre-trained model. Hence, it is advisable to experiment with and fine-tune this parameter according to the specific models to align with your requirements.</p>
+</li>
+<li>
+<p><code>top_k</code>: In text generation, a language model predicts the next word by analyzing preceding words. While one common method involves choosing the word with the highest probability, known as &ldquo;greedy decoding,&rdquo; it can lead to repetitive and incoherent text. This is where sampling methods such as Top-K sampling offer a solution.
+Top-K sampling simplifies the process by restricting the selection to the K most probable next words from the vocabulary, allowing for more varied and coherent text generation.</p>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ul>
+<li><code>top_p</code>: Top-K sampling limits the selection to the K most probable next words, whereas Top-P sampling, also referred to as &ldquo;nucleus sampling,&rdquo; introduces a different approach. Rather than defining a fixed number of top candidates (K), it involves setting a probability mass (P) and sampling exclusively from the smallest subset of words with a combined probability exceeding P.</li>
+</ul>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p><code>max_length</code>: By changing the <code>max_length</code>, you can control how many tokens the model produces. You can avoid lengthy or irrelevant responses and keep costs under control by setting a maximum length.</p>
+</li>
+<li>
+<p><code>max_new_tokens</code>: The maximum numbers of tokens to generate, ignoring the number of tokens in the prompt.</p>
+</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>The above are the default parameters in settings that we use for our projects. We’ll go through them in real code later in this book.</p>
+<h3 id="llm-limitations">LLM Limitations</h3>
+<p>While LLMs in LangChain technology have many advantages, they also come with several limitations:</p>
+<ul>
+<li><strong>Computational Resources</strong>: Training LLMs require significant computational resources, which can be expensive and time-consuming. Even smaller models can take days or weeks to train on powerful hardware.</li>
+<li><strong>Data Requirement</strong>: LLMs require large amounts of diverse and high-quality data for training. Gathering such data can be challenging, and biases in the training data can lead to biased model outputs. This obstacle poses a significant challenge in my practical experience, hindering the fine-tuning of my domain-specific model and dissuading me from training my own model.</li>
+<li><strong>Model Interpretability</strong>: LLMs are often seen as &ldquo;black boxes&rdquo; because their internal workings are complex and not easily understood. This makes it difficult to diagnose and fix issues when the model produces incorrect or unexpected results. It is anticipated that a growing number of open-source LLMs will be introduced within the community to offer enhanced domain-specific capabilities and greater control over data processing workflows.</li>
+<li><strong>Adaptability</strong>: While LLMs are good at general tasks, they may not perform well in specific domains without fine-tuning. Fine-tuning itself can be tricky and requires domain-specific data. In my personal experience, every client I work with demands industry-specific solutions and robust data security measures. Addressing these requirements entails incorporating extensive additional knowledge into project design and implementation, which can pose a challenge for enterprises looking to integrate generative AI within certain industries.</li>
+<li><strong>Ethical Concerns</strong>: LLMs can generate inappropriate or offensive content if not properly controlled. They might also inadvertently leak sensitive information if they were trained on such data.</li>
+<li><strong>Dependency on Language</strong>: LLMs perform best on languages with a large amount of available training data, typically English. Performance might degrade for low-resource languages. A notable advantage I discovered is the ease with which LLMs handle language translation without the need for complex configurations. In my experience, we experimented with utilizing a pure English LLM to generate responses directly, rather than employing language-specific models for non-English languages and then translating as needed, all while customizing prompt instructions.</li>
+<li><strong>Limitations in Understanding</strong>: While LLMs can generate human-like text, they actually don&rsquo;t understand the content they&rsquo;re generating. They can&rsquo;t make logical inferences outside of their training data or handle tasks that require common sense.</li>
+<li><strong>Environmental Impact</strong>: The energy consumption for training LLMs can be substantial, leading to a significant carbon footprint.</li>
+</ul>
+<p>In conclusion, while LLMs are powerful tools in LangChain technology, they do come with their own set of challenges. It&rsquo;s crucial to be aware of these limitations when implementing and using these models in real case.</p>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+          <a id="R-logo" class="R-default" href="/langchain_project_book/index.html">
+LangChain AI
+          </a>
+        </div>
+        <script>
+          window.index_js_url="/langchain_project_book/searchindex.js?1730117286";
+        </script>
+        <search><form action="/langchain_project_book/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/langchain_project_book/js/auto-complete.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/search.js?1730117286" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/langchain_project_book/index.html"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/preface/index.html"><a class="padding" href="/langchain_project_book/preface/index.html">Preface</a></li>
+            <li class="parent " data-nav-id="/langchain_project_book/fundamentals/index.html"><a class="padding" href="/langchain_project_book/fundamentals/index.html">LangChain Fundamentals</a><ul id="R-subsections-c6757c34957c6808b13ecd5148aeca96" class="collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/architecture/index.html"><a class="padding" href="/langchain_project_book/fundamentals/architecture/index.html">LangChain Architecture</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/select_a_right_lm/index.html"><a class="padding" href="/langchain_project_book/fundamentals/select_a_right_lm/index.html">Select a Right Language Model</a></li>
+            <li class="active " data-nav-id="/langchain_project_book/fundamentals/llm_settings_n_limits/index.html"><a class="padding" href="/langchain_project_book/fundamentals/llm_settings_n_limits/index.html">LLM Settings and Limits</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/thoughts_on_prompt/index.html"><a class="padding" href="/langchain_project_book/fundamentals/thoughts_on_prompt/index.html">Thoughts on Prompt Engineering</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/embedding_n_vectorstore/index.html"><a class="padding" href="/langchain_project_book/fundamentals/embedding_n_vectorstore/index.html">Embeddings and VectorStore</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/chains_n_retriever/index.html"><a class="padding" href="/langchain_project_book/fundamentals/chains_n_retriever/index.html">Chains and Retriever</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/document_n_debugging/index.html"><a class="padding" href="/langchain_project_book/fundamentals/document_n_debugging/index.html">Document and Debugging</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/summary/index.html"><a class="padding" href="/langchain_project_book/fundamentals/summary/index.html">Summary</a></li></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/tools_n_lib/index.html"><a class="padding" href="/langchain_project_book/tools_n_lib/index.html">Tools and Libraries</a><ul id="R-subsections-cc34bf23dab60f9112ee939495610dcf" class="collapsible-menu"></ul></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/langchain_project_book/fundamentals/llm_settings_n_limits/index.html" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/langchain_project_book/js/clipboard.min.js?1730117286" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1730117286" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1730117286" defer></script>
+  </body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head><script src="/langchain_project_book/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=langchain_project_book/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.134.2">
+    <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
+    <meta name="description" content="LangChain can easily orchestrate interactions with language models, chain together various components, and incorporate resources like databases and APIs. We will examine two fundamental ideas in LangChain in this chapter: Chain and Retriever.
+Understanding Chains LangChain relies heavily on chains. The core of LangChain’s operation is these logical relationships among one or more LLMs. Depending on the requirements and LLMs involved, chains might be simple or complex. An LLM model, an output parser that is optional, and a PromptTemplate are all part of its organized configuration. The LLMChain in this configuration takes in a variety of input parameters. It converts these inputs into a logical prompt by using the PromptTemplate. The model is then fed this polished cue. Following receipt of the output, the LLMChain formats and further refines the result into its most useable form using the OutputParser, if one is supplied.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Chains and Retriever :: LangChain AI">
+    <meta name="twitter:description" content="LangChain can easily orchestrate interactions with language models, chain together various components, and incorporate resources like databases and APIs. We will examine two fundamental ideas in LangChain in this chapter: Chain and Retriever.
+Understanding Chains LangChain relies heavily on chains. The core of LangChain’s operation is these logical relationships among one or more LLMs. Depending on the requirements and LLMs involved, chains might be simple or complex. An LLM model, an output parser that is optional, and a PromptTemplate are all part of its organized configuration. The LLMChain in this configuration takes in a variety of input parameters. It converts these inputs into a logical prompt by using the PromptTemplate. The model is then fed this polished cue. Following receipt of the output, the LLMChain formats and further refines the result into its most useable form using the OutputParser, if one is supplied.">
+    <meta property="og:url" content="http://localhost:1313/langchain_project_book/fundamentals/chains_n_retriever/index.html">
+    <meta property="og:site_name" content="LangChain AI">
+    <meta property="og:title" content="Chains and Retriever :: LangChain AI">
+    <meta property="og:description" content="LangChain can easily orchestrate interactions with language models, chain together various components, and incorporate resources like databases and APIs. We will examine two fundamental ideas in LangChain in this chapter: Chain and Retriever.
+Understanding Chains LangChain relies heavily on chains. The core of LangChain’s operation is these logical relationships among one or more LLMs. Depending on the requirements and LLMs involved, chains might be simple or complex. An LLM model, an output parser that is optional, and a PromptTemplate are all part of its organized configuration. The LLMChain in this configuration takes in a variety of input parameters. It converts these inputs into a logical prompt by using the PromptTemplate. The model is then fed this polished cue. Following receipt of the output, the LLMChain formats and further refines the result into its most useable form using the OutputParser, if one is supplied.">
+    <meta property="og:locale" content="en_us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="LangChain Fundamentals">
+    <meta property="article:published_time" content="2024-10-28T18:49:37+08:00">
+    <meta property="article:modified_time" content="2024-10-28T18:49:37+08:00">
+    <meta itemprop="name" content="Chains and Retriever :: LangChain AI">
+    <meta itemprop="description" content="LangChain can easily orchestrate interactions with language models, chain together various components, and incorporate resources like databases and APIs. We will examine two fundamental ideas in LangChain in this chapter: Chain and Retriever.
+Understanding Chains LangChain relies heavily on chains. The core of LangChain’s operation is these logical relationships among one or more LLMs. Depending on the requirements and LLMs involved, chains might be simple or complex. An LLM model, an output parser that is optional, and a PromptTemplate are all part of its organized configuration. The LLMChain in this configuration takes in a variety of input parameters. It converts these inputs into a logical prompt by using the PromptTemplate. The model is then fed this polished cue. Following receipt of the output, the LLMChain formats and further refines the result into its most useable form using the OutputParser, if one is supplied.">
+    <meta itemprop="datePublished" content="2024-10-28T18:49:37+08:00">
+    <meta itemprop="dateModified" content="2024-10-28T18:49:37+08:00">
+    <meta itemprop="wordCount" content="1471">
+    <title>Chains and Retriever :: LangChain AI</title>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1730117286" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1730117286" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1730117286" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1730117286" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1730117286" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1730117286" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1730117286" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1730117286" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1730117286" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1730117286" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1730117286" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1730117286" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1730117286"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/langchain_project_book';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.variants && variants.init( [ 'auto' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/langchain_project_book/fundamentals/chains_n_retriever/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/index.html"><span itemprop="name">LangChain Project Handbook</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/fundamentals/index.html"><span itemprop="name">LangChain Fundamentals</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Chains and Retriever</span><meta itemprop="position" content="3"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/fundamentals/embedding_n_vectorstore/index.html" title="Embeddings and VectorStore (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/fundamentals/document_n_debugging/index.html" title="Document and Debugging (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable fundamentals" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="chains-and-retriever">Chains and Retriever</h1>
+
+<p>LangChain can easily orchestrate interactions with language models, chain together various components, and incorporate resources like databases and APIs. We will examine two fundamental ideas in LangChain in this chapter: Chain and Retriever.</p>
+<h4 id="understanding-chains">Understanding Chains</h4>
+<p>LangChain relies heavily on chains. The core of LangChain&rsquo;s operation is these logical relationships among one or more LLMs. Depending on the requirements and LLMs involved, chains might be simple or complex. An LLM model, an output parser that is optional, and a <code>PromptTemplate</code> are all part of its organized configuration. The <code>LLMChain</code> in this configuration takes in a variety of input parameters. It converts these inputs into a logical prompt by using the <code>PromptTemplate</code>. The model is then fed this polished cue. Following receipt of the output, the <code>LLMChain</code> formats and further refines the result into its most useable form using the <code>OutputParser</code>, if one is supplied.</p>
+<head>
+    <script src="https://cdn.jsdelivr.net/gh/jmnote/plantuml-encoder@1.2.4/dist/plantuml-encoder.min.js" integrity="sha256-Qsk2KRBCN5qVZX7B+8+2IvQl1Aqc723qV1tBCQaVoqo=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <pre class="language-plantuml">
+    
+folder chain {
+    artifact input_variables
+    artifact PromptTemplate
+    artifact LLM
+}
+
+input_variables -> PromptTemplate
+PromptTemplate -> LLM
+
+folder prompt {
+    artifact "prompt = PromptTemplate(\n    input_variables=["city"],\n    template="Describe a perfect day in {city}?"\n)"
+}
+
+folder chain.invoke {
+artifact "chain = LLMChain(\n    llm=llm, prompt=prompt\n)\nprint(chain.invoke("Paris"))"
+}
+
+chain -[hidden]- prompt
+prompt -[hidden] chain.invoke
+
+    </pre>
+    <script>
+    (function(){
+      let plantumlPrefix = "language-plantuml";
+      Array.prototype.forEach.call(document.querySelectorAll("[class^=" + plantumlPrefix + "]"), function(code){
+        
+        if (!code.previousElementSibling || !code.previousElementSibling.classList.contains('plantuml-image')) {
+          let image = document.createElement("IMG");
+          image.loading = 'lazy'; 
+          image.className = 'plantuml-image'; 
+          image.src = 'http://www.plantuml.com/plantuml/svg/~1' + plantumlEncoder.encode(code.innerText);
+          code.parentNode.insertBefore(image, code);
+          code.style.display = 'none';
+        }
+      });
+    })();
+    </script>
+</body>
+</html>
+
+
+<!-- raw HTML omitted -->
+<p>To demonstrate LangChain&rsquo;s capability for creating simple chains, here is an instance utilizing the <code>HuggingFaceEndpoint</code> class.</p>
+<p>First the code imports <code>PromptTemplate</code> from <code>langchain.prompts</code> and defines a prompt using the template &ldquo;Describe a perfect day in {city}?&rdquo; where <code>{city}</code> is a variable placeholder. It imports an LLM from Hugging Face using <code>HuggingFaceEndpoint</code>, specifying the model repository id as <code>mistralai/Mistral-7B-Instruct</code> and setting model parameters like <code>temperature</code> and <code>max_new_token</code>. Then the code imports <code>LLMChain</code> from <code>langchain.chains</code> and creates a chain (<code>llmchain</code>) by combining the selected LLM (mistral) and the defined prompt. Finally, it invokes the chain with a query &ldquo;Paris&rdquo; using <code>llmchain.invoke(&quot;Paris&quot;)</code> and prints out the result.</p>
+<p>(TL;DR</p>
+<p>Consider reading the following chapter to efficiently configure your environment for running the provided code examples.)</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.prompts <span style="color:#f92672">import</span> PromptTemplate
+</span></span><span style="display:flex;"><span>prompt <span style="color:#f92672">=</span> PromptTemplate(
+</span></span><span style="display:flex;"><span>    input_variables<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;city&#34;</span>],
+</span></span><span style="display:flex;"><span>    template<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Describe a perfect day in </span><span style="color:#e6db74">{city}</span><span style="color:#e6db74">?&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.llms <span style="color:#f92672">import</span> HuggingFaceEndpoint
+</span></span><span style="display:flex;"><span>repo_id <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;mistralai/Mistral-7B-Instruct-v0.2&#34;</span>
+</span></span><span style="display:flex;"><span>llm <span style="color:#f92672">=</span> HuggingFaceEndpoint(
+</span></span><span style="display:flex;"><span>    repo_id<span style="color:#f92672">=</span>repo_id, max_new_tokens<span style="color:#f92672">=</span><span style="color:#ae81ff">250</span>, temperature<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.chains <span style="color:#f92672">import</span> LLMChain
+</span></span><span style="display:flex;"><span>llmchain <span style="color:#f92672">=</span> LLMChain(llm<span style="color:#f92672">=</span>llm, prompt<span style="color:#f92672">=</span>prompt, verbose<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(llmchain<span style="color:#f92672">.</span>invoke(<span style="color:#e6db74">&#34;Paris&#34;</span>))</span></span></code></pre></div>
+<p>In summary, this code sets up a scenario where an LLM model is prompted to describe a perfect day in Paris based on the defined template and model settings. You see the output varies while changing the setting of <code>temperature</code>. I enabled <code>verbose</code> mode to showcase a more comprehensive display of detailed steps and information in the output.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>Token <span style="color:#f92672">is</span> valid (permission: read)<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>Your token has been saved to <span style="color:#f92672">/</span>home<span style="color:#f92672">/</span>jeff<span style="color:#f92672">/.</span>cache<span style="color:#f92672">/</span>huggingface<span style="color:#f92672">/</span>token
+</span></span><span style="display:flex;"><span>Login successful
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> Entering new LLMChain chain<span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>Prompt after formatting:
+</span></span><span style="display:flex;"><span>Describe a perfect day <span style="color:#f92672">in</span> Paris<span style="color:#960050;background-color:#1e0010">?</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&gt;</span> Finished chain<span style="color:#f92672">.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#39;city&#39;</span>: <span style="color:#e6db74">&#39;Paris&#39;</span>, <span style="color:#e6db74">&#39;text&#39;</span>: <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">A perfect day in Paris would begin with waking up early in a charming apartment located in the heart of the city. After a quick breakfast at a local bakery, I would head out to explore the beautiful Montmartre district, taking in the breathtaking views of the city from the top of the Sacré-Cœur.</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">Next, I would stroll through the picturesque streets of Le Marais, stopping to admire the historic architecture and browse the trendy boutiques. I would then make my way to the Louvre Museum to spend the afternoon exploring the countless works of art housed within its walls.</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">As the sun begins to set, I would take a leisurely boat ride along the Seine River, taking in the stunning views of the city&#39;s iconic landmarks such as the Eiffel Tower and Notre-Dame Cathedral. I would then enjoy a delicious dinner at a quintessential Parisian bistro, accompanied by a glass of fine French wine.</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">The evening would be spent exploring the vibrant nightlife of the city, perhaps catching a cabaret show or dancing the night away at a trendy club. Finally, I would&#34;</span>}</span></span></code></pre></div>
+<p>Next, we will delve into employing a retriever to fetch data from an established VectorStore. This process ensures that the retrieved data originates exclusively from the designated VectorStore source. When both the LLM and VectorStore reside within a private network, all information involved in retrieval and result generation remains secure and private. Such practices effectively address security and privacy considerations within enterprise environments.</p>
+<h4 id="understanding-retrievers">Understanding Retrievers</h4>
+<p>In LangChain, a retriever acts as a pivotal component responsible for fetching relevant information from a knowledge base or content source in response to user queries.</p>
+<p>RAG, short for Retrieval Augmented Generation, is a method employed to integrate additional, often confidential or current data into the knowledge of LLMs. While LLMs demonstrate proficiency in analyzing diverse subjects, their expertise is limited to publicly accessible data present during their training phase. To enable AI applications to reason over private or post-training data effectively, it is imperative to supply the model with precise information to expand its knowledge. RAG entails retrieving pertinent data and seamlessly incorporating it into the model prompt.</p>
+<h4 id="utilizing-chains-and-retrievers-in-langchain">Utilizing Chains and Retrievers in LangChain</h4>
+<p>Combining chains and retrievers in LangChain allows for the creation of intricate workflows that process user input, obtain pertinent data, and produce output.</p>
+<p>When a new question is received, the chain can be utilized to process it, produce a prompt, and use the retriever to get relevant data from the knowledge base. A response can then be produced using the information that was retrieved.</p>
+<p>The following diagram outlines the intricate process:</p>
+<ul>
+<li>
+<p>Initially, load the document, then split and embed it in a vectorstore, which serves as the retriever for subsequent retrieval in the RAG step.</p>
+</li>
+<li>
+<p>Utilize the <code>HuggingFacePipeline</code> to load the Transformers language model for embedding.</p>
+</li>
+<li>
+<p>Merge the steps with a customizable prompt to create a chain structure, typically followed by inclusion in the chain using the <code>RunnablePassthrough</code> class to generate the answer.</p>
+</li>
+</ul>
+<head>
+    <script src="https://cdn.jsdelivr.net/gh/jmnote/plantuml-encoder@1.2.4/dist/plantuml-encoder.min.js" integrity="sha256-Qsk2KRBCN5qVZX7B+8+2IvQl1Aqc723qV1tBCQaVoqo=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <pre class="language-plantuml">
+    
+folder documents {
+    artifact document_loaders
+    artifact text_splitter
+}
+
+folder retrievers {
+    artifact embeddings
+    artifact vectorstore
+    artifact retriever
+}
+
+folder rag_chain {
+    artifact RunnablePassthrough
+    folder prompt_template {
+        artifact prompt
+    }
+    folder llm {
+        artifact HuggingFaceEndpoint
+    }
+}
+
+file answer
+
+document_loaders -> text_splitter
+text_splitter --> embeddings
+embeddings -> vectorstore
+vectorstore -> retriever
+
+retriever -[hidden]- rag_chain
+retriever --> RunnablePassthrough
+RunnablePassthrough -> prompt
+prompt --> HuggingFaceEndpoint
+HuggingFaceEndpoint -> answer
+
+    </pre>
+    <script>
+    (function(){
+      let plantumlPrefix = "language-plantuml";
+      Array.prototype.forEach.call(document.querySelectorAll("[class^=" + plantumlPrefix + "]"), function(code){
+        
+        if (!code.previousElementSibling || !code.previousElementSibling.classList.contains('plantuml-image')) {
+          let image = document.createElement("IMG");
+          image.loading = 'lazy'; 
+          image.className = 'plantuml-image'; 
+          image.src = 'http://www.plantuml.com/plantuml/svg/~1' + plantumlEncoder.encode(code.innerText);
+          code.parentNode.insertBefore(image, code);
+          code.style.display = 'none';
+        }
+      });
+    })();
+    </script>
+</body>
+</html>
+
+
+<!-- raw HTML omitted -->
+<p>In conclusion, LangChain&rsquo;s chains and retrievers offer an adaptable and potent approach to developing LLM-based applications. These tools enable developers to design intricate processes that manage user input, obtain relevant data, and provide output.</p>
+<p>Here is an example of how to use a retriever in LangChain. In this example, the code performs the following steps:</p>
+<ul>
+<li>
+<p>Utilizes a sentence-transformers embedding model to embed data fetched from a website, subsequently inserting the embedded data into a FAISS VectorStore.</p>
+</li>
+<li>
+<p>Retrieves relevant data from the retriever (the VectorStore) and processes it through a RAG chain using the <code>RunnablePassthrough</code> library to reach the LLM, incorporating a predefined prompt, and generates the answer.</p>
+</li>
+</ul>
+<p>Let’s go through it step by step.</p>
+<p>Load a document from the web, through <code>WebBaseLoader</code> class, split it into small chunks</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.document_loaders <span style="color:#f92672">import</span> WebBaseLoader
+</span></span><span style="display:flex;"><span>loader <span style="color:#f92672">=</span> WebBaseLoader(<span style="color:#e6db74">&#34;https://en.wikisource.org/wiki/Hans_Andersen</span><span style="color:#e6db74">%27s</span><span style="color:#e6db74">_Fairy_Tales/The_Emperor</span><span style="color:#e6db74">%27s</span><span style="color:#e6db74">_New_Clothes&#34;</span>)
+</span></span><span style="display:flex;"><span>document <span style="color:#f92672">=</span> loader<span style="color:#f92672">.</span>load()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.text_splitter <span style="color:#f92672">import</span> RecursiveCharacterTextSplitter
+</span></span><span style="display:flex;"><span>splitter <span style="color:#f92672">=</span> RecursiveCharacterTextSplitter(chunk_size<span style="color:#f92672">=</span><span style="color:#ae81ff">200</span>, chunk_overlap<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>)
+</span></span><span style="display:flex;"><span>chunks <span style="color:#f92672">=</span> splitter<span style="color:#f92672">.</span>split_documents(document)</span></span></code></pre></div>
+<p>Load the embedding model.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.embeddings <span style="color:#f92672">import</span> HuggingFaceEmbeddings
+</span></span><span style="display:flex;"><span>embedding <span style="color:#f92672">=</span> HuggingFaceEmbeddings(
+</span></span><span style="display:flex;"><span>    model_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;</span>)</span></span></code></pre></div>
+<p>The <code>from_documents</code> method is used to initialize the FAISS VectorStore with the given chunks and embedding. Subsequently, the code converts this VectorStore into a retriever object using the <code>as_retriever()</code> method.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.vectorstores <span style="color:#f92672">import</span> FAISS
+</span></span><span style="display:flex;"><span>vectorstore <span style="color:#f92672">=</span> FAISS<span style="color:#f92672">.</span>from_documents(chunks, embedding)
+</span></span><span style="display:flex;"><span>retriever <span style="color:#f92672">=</span> vectorstore<span style="color:#f92672">.</span>as_retriever()</span></span></code></pre></div>
+<p>Define prompt with <code>ChatPromptTemplate</code> method.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.prompts <span style="color:#f92672">import</span> ChatPromptTemplate
+</span></span><span style="display:flex;"><span>template <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don&#39;t know the answer, just say that you don&#39;t know. Use three sentences maximum and keep the answer concise.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Question: </span><span style="color:#e6db74">{question}</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Context: </span><span style="color:#e6db74">{context}</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Answer:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>prompt <span style="color:#f92672">=</span> ChatPromptTemplate<span style="color:#f92672">.</span>from_template(template)</span></span></code></pre></div>
+<p>Use the <code>google/flan-t5-xxl</code> model through the Hugging Face platform&rsquo;s <code>HuggingFaceEndpoint</code> method remotely. Specify the model&rsquo;s keyword arguments to customize settings such as <code>temperature</code> and <code>max_new_token</code>. Utilizing <code>HuggingFaceEndpoint</code> allows you to leverage the computational resources provided by Hugging Face, eliminating the need for substantial local computing capacity. You may also experiment with Mistral&rsquo;s model to observe variations in generation quality.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.llms <span style="color:#f92672">import</span> HuggingFaceEndpoint
+</span></span><span style="display:flex;"><span>repo_id<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;google/flan-t5-xxl&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># repo_id = &#34;mistralai/Mistral-7B-Instruct-v0.2&#34;</span>
+</span></span><span style="display:flex;"><span>llm <span style="color:#f92672">=</span> HuggingFaceEndpoint(
+</span></span><span style="display:flex;"><span>    repo_id<span style="color:#f92672">=</span>repo_id, max_new_tokens<span style="color:#f92672">=</span><span style="color:#ae81ff">250</span>, temperature<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)</span></span></code></pre></div>
+<p>The RAG chain combines the context retrieved from the <code>retriever</code>, the question, the <code>prompt</code>, and the language model to produce an answer using the <code>RunnablePassthrough</code> method. This chain is both straightforward and engaging in its approach.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.schema.runnable <span style="color:#f92672">import</span> RunnablePassthrough
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.schema.output_parser <span style="color:#f92672">import</span> StrOutputParser
+</span></span><span style="display:flex;"><span>rag_chain <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>    {<span style="color:#e6db74">&#34;context&#34;</span>: retriever, <span style="color:#e6db74">&#34;question&#34;</span>: RunnablePassthrough()}
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">|</span> prompt
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">|</span> llm
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">|</span> StrOutputParser()
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>query <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;What is this story telling about?&#34;</span>
+</span></span><span style="display:flex;"><span>print(rag_chain<span style="color:#f92672">.</span>invoke(query))</span></span></code></pre></div>
+<p>The output will display:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>The emperor<span style="color:#960050;background-color:#1e0010">&#39;</span>s new clothes</span></span></code></pre></div>
+<p>The code presented above is straight-forward yet provides a comprehensive, direct, and lucid sequence to manage the entire process:</p>
+<ul>
+<li>
+<p>Extracting a document from the web, splitting it into smaller parts, and storing them in a VectorStore.</p>
+</li>
+<li>
+<p>Establishing a retriever with the VectorStore.</p>
+</li>
+<li>
+<p>Tailoring a prompt.</p>
+</li>
+<li>
+<p>Employing an LLM from <code>HuggingFaceEndpoint</code> method.</p>
+</li>
+<li>
+<p>Integrating all the components mentioned above into a coherent chain.</p>
+</li>
+</ul>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+          <a id="R-logo" class="R-default" href="/langchain_project_book/index.html">
+LangChain AI
+          </a>
+        </div>
+        <script>
+          window.index_js_url="/langchain_project_book/searchindex.js?1730117286";
+        </script>
+        <search><form action="/langchain_project_book/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/langchain_project_book/js/auto-complete.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/search.js?1730117286" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/langchain_project_book/index.html"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/preface/index.html"><a class="padding" href="/langchain_project_book/preface/index.html">Preface</a></li>
+            <li class="parent " data-nav-id="/langchain_project_book/fundamentals/index.html"><a class="padding" href="/langchain_project_book/fundamentals/index.html">LangChain Fundamentals</a><ul id="R-subsections-c6757c34957c6808b13ecd5148aeca96" class="collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/architecture/index.html"><a class="padding" href="/langchain_project_book/fundamentals/architecture/index.html">LangChain Architecture</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/select_a_right_lm/index.html"><a class="padding" href="/langchain_project_book/fundamentals/select_a_right_lm/index.html">Select a Right Language Model</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/llm_settings_n_limits/index.html"><a class="padding" href="/langchain_project_book/fundamentals/llm_settings_n_limits/index.html">LLM Settings and Limits</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/thoughts_on_prompt/index.html"><a class="padding" href="/langchain_project_book/fundamentals/thoughts_on_prompt/index.html">Thoughts on Prompt Engineering</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/embedding_n_vectorstore/index.html"><a class="padding" href="/langchain_project_book/fundamentals/embedding_n_vectorstore/index.html">Embeddings and VectorStore</a></li>
+            <li class="active " data-nav-id="/langchain_project_book/fundamentals/chains_n_retriever/index.html"><a class="padding" href="/langchain_project_book/fundamentals/chains_n_retriever/index.html">Chains and Retriever</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/document_n_debugging/index.html"><a class="padding" href="/langchain_project_book/fundamentals/document_n_debugging/index.html">Document and Debugging</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/summary/index.html"><a class="padding" href="/langchain_project_book/fundamentals/summary/index.html">Summary</a></li></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/tools_n_lib/index.html"><a class="padding" href="/langchain_project_book/tools_n_lib/index.html">Tools and Libraries</a><ul id="R-subsections-cc34bf23dab60f9112ee939495610dcf" class="collapsible-menu"></ul></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/langchain_project_book/fundamentals/chains_n_retriever/index.html" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/langchain_project_book/js/clipboard.min.js?1730117286" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1730117286" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1730117286" defer></script>
+  </body>
+</html>

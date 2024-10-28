@@ -6,7 +6,7 @@
     <description>Introduction My Journey with LangChain In late 2022, I embarked on an exciting journey with LangChain while leading a development team. This coincided with OpenAI’s significant boost in popularity, marking a pivotal moment in AI technology.&#xA;Discovery and Adoption After several months of exploration, our team identified LangChain as the ideal API standard and base platform for our projects. What drew us to LangChain was its comprehensive suite of features:</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 24 Oct 2024 00:10:48 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 28 Oct 2024 20:07:28 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/langchain_project_book/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Preface</title>
@@ -18,9 +18,16 @@
     <item>
       <title>LangChain Fundamentals</title>
       <link>http://localhost:1313/langchain_project_book/fundamentals/index.html</link>
-      <pubDate>Thu, 24 Oct 2024 00:10:48 -0400</pubDate>
+      <pubDate>Mon, 28 Oct 2024 18:56:59 +0800</pubDate>
       <guid>http://localhost:1313/langchain_project_book/fundamentals/index.html</guid>
       <description>The fundamental ideas and elements of LangChain, a framework for creating language-model-powered applications, are covered in this chapter. LangChain aims to develop data-aware and agentic applications that enable language models to communicate with their surroundings and establish connections with other data sources, rather than only calling out to a language model via an API.&#xA;At the heart of LangChain are two key components. The first one is the modular abstractions provided by LangChain, which are essential for working with language models. These components are designed to be easy to use, whether you use the rest of the LangChain framework or not.</description>
+    </item>
+    <item>
+      <title>Tools and Libraries</title>
+      <link>http://localhost:1313/langchain_project_book/tools_n_lib/index.html</link>
+      <pubDate>Mon, 28 Oct 2024 20:07:28 +0800</pubDate>
+      <guid>http://localhost:1313/langchain_project_book/tools_n_lib/index.html</guid>
+      <description>This chapter provides a comprehensive guide on how to set up LangChain in a Python environment. It is essential to have a basic understanding and knowledge of Python as a prerequisite for this guide. The following steps will help you establish a robust Python environment tailored for LangChain development.</description>
     </item>
   </channel>
 </rss>

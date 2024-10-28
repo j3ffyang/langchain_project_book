@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head><script src="/langchain_project_book/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=langchain_project_book/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.134.2">
+    <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
+    <meta name="description" content="The process of creating meaningful prompts or instructions for an AI system or language model is known as “prompt engineering”. The model’s responses and behaviors are greatly influenced by these cues. Prompts with a good design facilitate researchers and developers to modify the output of AI systems to accomplish desired results and enhance the model’s functionality.
+folder INSTRUCTION { artifact &#34;&#34;&#34;&#34;Answer the question based on the context below.\nIf the question cannot be answer using the \ninformation provided answer with &#34;I don&#39;t know&#34;.&#34; } folder CONTEXT { artifact &#34;Italian cuisine has a rich and diverse history that spans centuries \nand has been influenced by numerous cultures. In the Roman Empire, food \nwas a significant part of social life. Romans loved feasting and trying \nnew dishes, and their banquets often featured complex, intricate \nflavors that required sophisticated preparation techniques. They \nembraced the flavors and ingredients of many of the lands they had \nconquered, such as spices from the Middle East, fish from the \nMediterranean, and cereals from North Africa. This fusion of diverse \ningredients made the Empire a hot spot for culinary innovation&#34; } folder QUESTIONS { artifact &#34;What is the history of Italian cuisine?&#34; } folder ANSWER { artifact &#34;&#34;&#34;&#34;&#34;&#34;&#34; } INSTRUCTION -[hidden]- CONTEXT CONTEXT -[hidden]- QUESTIONS QUESTIONS -[hidden] ANSWER Figure 1.3: Prompt Template">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Thoughts on Prompt Engineering :: LangChain AI">
+    <meta name="twitter:description" content="The process of creating meaningful prompts or instructions for an AI system or language model is known as “prompt engineering”. The model’s responses and behaviors are greatly influenced by these cues. Prompts with a good design facilitate researchers and developers to modify the output of AI systems to accomplish desired results and enhance the model’s functionality.
+folder INSTRUCTION { artifact &#34;&#34;&#34;&#34;Answer the question based on the context below.\nIf the question cannot be answer using the \ninformation provided answer with &#34;I don&#39;t know&#34;.&#34; } folder CONTEXT { artifact &#34;Italian cuisine has a rich and diverse history that spans centuries \nand has been influenced by numerous cultures. In the Roman Empire, food \nwas a significant part of social life. Romans loved feasting and trying \nnew dishes, and their banquets often featured complex, intricate \nflavors that required sophisticated preparation techniques. They \nembraced the flavors and ingredients of many of the lands they had \nconquered, such as spices from the Middle East, fish from the \nMediterranean, and cereals from North Africa. This fusion of diverse \ningredients made the Empire a hot spot for culinary innovation&#34; } folder QUESTIONS { artifact &#34;What is the history of Italian cuisine?&#34; } folder ANSWER { artifact &#34;&#34;&#34;&#34;&#34;&#34;&#34; } INSTRUCTION -[hidden]- CONTEXT CONTEXT -[hidden]- QUESTIONS QUESTIONS -[hidden] ANSWER Figure 1.3: Prompt Template">
+    <meta property="og:url" content="http://localhost:1313/langchain_project_book/fundamentals/thoughts_on_prompt/index.html">
+    <meta property="og:site_name" content="LangChain AI">
+    <meta property="og:title" content="Thoughts on Prompt Engineering :: LangChain AI">
+    <meta property="og:description" content="The process of creating meaningful prompts or instructions for an AI system or language model is known as “prompt engineering”. The model’s responses and behaviors are greatly influenced by these cues. Prompts with a good design facilitate researchers and developers to modify the output of AI systems to accomplish desired results and enhance the model’s functionality.
+folder INSTRUCTION { artifact &#34;&#34;&#34;&#34;Answer the question based on the context below.\nIf the question cannot be answer using the \ninformation provided answer with &#34;I don&#39;t know&#34;.&#34; } folder CONTEXT { artifact &#34;Italian cuisine has a rich and diverse history that spans centuries \nand has been influenced by numerous cultures. In the Roman Empire, food \nwas a significant part of social life. Romans loved feasting and trying \nnew dishes, and their banquets often featured complex, intricate \nflavors that required sophisticated preparation techniques. They \nembraced the flavors and ingredients of many of the lands they had \nconquered, such as spices from the Middle East, fish from the \nMediterranean, and cereals from North Africa. This fusion of diverse \ningredients made the Empire a hot spot for culinary innovation&#34; } folder QUESTIONS { artifact &#34;What is the history of Italian cuisine?&#34; } folder ANSWER { artifact &#34;&#34;&#34;&#34;&#34;&#34;&#34; } INSTRUCTION -[hidden]- CONTEXT CONTEXT -[hidden]- QUESTIONS QUESTIONS -[hidden] ANSWER Figure 1.3: Prompt Template">
+    <meta property="og:locale" content="en_us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="LangChain Fundamentals">
+    <meta property="article:published_time" content="2024-10-28T18:10:58+08:00">
+    <meta property="article:modified_time" content="2024-10-28T18:10:58+08:00">
+    <meta itemprop="name" content="Thoughts on Prompt Engineering :: LangChain AI">
+    <meta itemprop="description" content="The process of creating meaningful prompts or instructions for an AI system or language model is known as “prompt engineering”. The model’s responses and behaviors are greatly influenced by these cues. Prompts with a good design facilitate researchers and developers to modify the output of AI systems to accomplish desired results and enhance the model’s functionality.
+folder INSTRUCTION { artifact &#34;&#34;&#34;&#34;Answer the question based on the context below.\nIf the question cannot be answer using the \ninformation provided answer with &#34;I don&#39;t know&#34;.&#34; } folder CONTEXT { artifact &#34;Italian cuisine has a rich and diverse history that spans centuries \nand has been influenced by numerous cultures. In the Roman Empire, food \nwas a significant part of social life. Romans loved feasting and trying \nnew dishes, and their banquets often featured complex, intricate \nflavors that required sophisticated preparation techniques. They \nembraced the flavors and ingredients of many of the lands they had \nconquered, such as spices from the Middle East, fish from the \nMediterranean, and cereals from North Africa. This fusion of diverse \ningredients made the Empire a hot spot for culinary innovation&#34; } folder QUESTIONS { artifact &#34;What is the history of Italian cuisine?&#34; } folder ANSWER { artifact &#34;&#34;&#34;&#34;&#34;&#34;&#34; } INSTRUCTION -[hidden]- CONTEXT CONTEXT -[hidden]- QUESTIONS QUESTIONS -[hidden] ANSWER Figure 1.3: Prompt Template">
+    <meta itemprop="datePublished" content="2024-10-28T18:10:58+08:00">
+    <meta itemprop="dateModified" content="2024-10-28T18:10:58+08:00">
+    <meta itemprop="wordCount" content="761">
+    <title>Thoughts on Prompt Engineering :: LangChain AI</title>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1730117286" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1730117286" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1730117286" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1730117286" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1730117286" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1730117286" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1730117286" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1730117286" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1730117286" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1730117286" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1730117286" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1730117286" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1730117286"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/langchain_project_book';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.variants && variants.init( [ 'auto' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/langchain_project_book/fundamentals/thoughts_on_prompt/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/index.html"><span itemprop="name">LangChain Project Handbook</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/fundamentals/index.html"><span itemprop="name">LangChain Fundamentals</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Thoughts on Prompt Engineering</span><meta itemprop="position" content="3"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/fundamentals/llm_settings_n_limits/index.html" title="LLM Settings and Limits (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/fundamentals/embedding_n_vectorstore/index.html" title="Embeddings and VectorStore (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable fundamentals" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="thoughts-on-prompt-engineering">Thoughts on Prompt Engineering</h1>
+
+<p>The process of creating meaningful prompts or instructions for an AI system or language model is known as &ldquo;prompt engineering&rdquo;. The model&rsquo;s responses and behaviors are greatly influenced by these cues. Prompts with a good design facilitate researchers and developers to modify the output of AI systems to accomplish desired results and enhance the model&rsquo;s functionality.</p>
+<head>
+    <script src="https://cdn.jsdelivr.net/gh/jmnote/plantuml-encoder@1.2.4/dist/plantuml-encoder.min.js" integrity="sha256-Qsk2KRBCN5qVZX7B+8+2IvQl1Aqc723qV1tBCQaVoqo=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <pre class="language-plantuml">
+    
+folder INSTRUCTION {
+    artifact """"Answer the question based on the context below.\nIf the question cannot be answer using the \ninformation provided answer with "I don't know"."
+}
+
+folder CONTEXT {
+    artifact "Italian cuisine has a rich and diverse history that spans centuries \nand has been influenced by numerous cultures. In the Roman Empire, food \nwas a significant part of social life. Romans loved feasting and trying \nnew dishes, and their banquets often featured complex, intricate \nflavors that required sophisticated preparation techniques. They \nembraced the flavors and ingredients of many of the lands they had \nconquered, such as spices from the Middle East, fish from the \nMediterranean, and cereals from North Africa. This fusion of diverse \ningredients made the Empire a hot spot for culinary innovation"
+}
+
+folder QUESTIONS {
+    artifact "What is the history of Italian cuisine?"
+}
+
+folder ANSWER {
+    artifact """""""
+}
+
+INSTRUCTION -[hidden]- CONTEXT
+CONTEXT -[hidden]- QUESTIONS
+QUESTIONS -[hidden] ANSWER
+
+    </pre>
+    <script>
+    (function(){
+      let plantumlPrefix = "language-plantuml";
+      Array.prototype.forEach.call(document.querySelectorAll("[class^=" + plantumlPrefix + "]"), function(code){
+        
+        if (!code.previousElementSibling || !code.previousElementSibling.classList.contains('plantuml-image')) {
+          let image = document.createElement("IMG");
+          image.loading = 'lazy'; 
+          image.className = 'plantuml-image'; 
+          image.src = 'http://www.plantuml.com/plantuml/svg/~1' + plantumlEncoder.encode(code.innerText);
+          code.parentNode.insertBefore(image, code);
+          code.style.display = 'none';
+        }
+      });
+    })();
+    </script>
+</body>
+</html>
+
+
+<p>Figure 1.3: Prompt Template</p>
+<p>In the context of LLMs, it consists of several key components:</p>
+<ul>
+<li>
+<p><strong>Instruction</strong>: An instruction is a specific directive given to the model, guiding its responses. It can be a statement, command, or question that dictates how the AI should process input data. For instance, instructions like &ldquo;Translate this English text to French&rdquo; or &ldquo;Summarize the article&rdquo; shape the model&rsquo;s output. Crafting precise prompts significantly impacts the quality of an LLM&rsquo;s results.
+My personal experience in LLM development reveals that output quality varies based on prompt quality, as each LLM has its preferred prompt format and template. Hence, the potential for standardizing prompts and prompt templates in metadata before adapting them to an LLM presents an innovative opportunity, such as Lepton and AutoPrompt open-source projects that I mentioned earlier. I aspire to delve deeper into this area through further research.</p>
+</li>
+<li>
+<p><strong>Context</strong>: Context offers relevant background details to steer the model&rsquo;s response, aiding in specific situational, topical, or domain-related prompts. For example, in chatbot interactions, context encompasses prior messages. In machine translation, it includes surrounding text. In practice, maintaining a completely private context ensures that similarity search outputs from a local LLM remain private and secure.</p>
+</li>
+<li>
+<p><strong>Question</strong>: The question is the specific query or input data that we want the model to respond to. It&rsquo;s the focus of the prompt and is typically what you want the model to process and generate a response for. The question should be clear and concise to ensure the model can understand and accurately respond to it.</p>
+</li>
+<li>
+<p><strong>Answer</strong>: The answer (or output, or result) is the response generated by the model based on the instruction, context, and question. The format and type of answer can be guided by an output indicator, which specifies the kind of response expected from the model. For instance, an output indicator might specify that the answer should be a list of items, a single word, or a full sentence.</p>
+</li>
+</ul>
+<p>Each of these components plays a vital role in shaping the model&rsquo;s response, and their effective use can greatly enhance the model&rsquo;s performance on a wide range of tasks. However, it is important to note that not all components are required for every prompt, and the format of the prompt can vary depending on the task at hand.</p>
+<p>Here’s an example of defining <code>prompt</code> in <code>ChatPromptTemplate</code> class in LangChain. To augment the prompt by incorporating extra context, it is essential to create a prompt template. This template allows for easy customization of the prompt, as illustrated below.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.prompts <span style="color:#f92672">import</span> ChatPromptTemplate
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>template <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don&#39;t know the answer, just say that you don&#39;t know. Use three sentences maximum and keep the answer concise.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Question: </span><span style="color:#e6db74">{question}</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Context: </span><span style="color:#e6db74">{context}</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Answer:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>prompt <span style="color:#f92672">=</span> ChatPromptTemplate<span style="color:#f92672">.</span>from_template(template)
+</span></span><span style="display:flex;"><span>print(prompt)</span></span></code></pre></div>
+<p>The output will display <code>input_variables</code> containing <code>context</code> and <code>question</code> in <code>PromptTemplate</code>.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>input_variables<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;context&#39;</span>, <span style="color:#e6db74">&#39;question&#39;</span>] messages<span style="color:#f92672">=</span>[HumanMessagePromptTemplate(prompt<span style="color:#f92672">=</span>PromptTemplate(input_variables<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;context&#39;</span>, <span style="color:#e6db74">&#39;question&#39;</span>], template<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;You are an assistant for question-anwering tasks. Use the       </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">following pieces of retrieved context to answer the question. If you don&#39;t know</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">the answer, just say that you don&#39;t know. Use three sentences maximum and keep</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">the answer concise.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Question: </span><span style="color:#e6db74">{question}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Context: </span><span style="color:#e6db74">{context}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Answer:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>))]</span></span></code></pre></div>
+<p>By understanding the significance of prompts and prompt templates in LangChain, we lay the foundation for exploring more advanced concepts like VectorStore and embeddings.</p>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+          <a id="R-logo" class="R-default" href="/langchain_project_book/index.html">
+LangChain AI
+          </a>
+        </div>
+        <script>
+          window.index_js_url="/langchain_project_book/searchindex.js?1730117286";
+        </script>
+        <search><form action="/langchain_project_book/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/langchain_project_book/js/auto-complete.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/search.js?1730117286" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/langchain_project_book/index.html"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/preface/index.html"><a class="padding" href="/langchain_project_book/preface/index.html">Preface</a></li>
+            <li class="parent " data-nav-id="/langchain_project_book/fundamentals/index.html"><a class="padding" href="/langchain_project_book/fundamentals/index.html">LangChain Fundamentals</a><ul id="R-subsections-c6757c34957c6808b13ecd5148aeca96" class="collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/architecture/index.html"><a class="padding" href="/langchain_project_book/fundamentals/architecture/index.html">LangChain Architecture</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/select_a_right_lm/index.html"><a class="padding" href="/langchain_project_book/fundamentals/select_a_right_lm/index.html">Select a Right Language Model</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/llm_settings_n_limits/index.html"><a class="padding" href="/langchain_project_book/fundamentals/llm_settings_n_limits/index.html">LLM Settings and Limits</a></li>
+            <li class="active " data-nav-id="/langchain_project_book/fundamentals/thoughts_on_prompt/index.html"><a class="padding" href="/langchain_project_book/fundamentals/thoughts_on_prompt/index.html">Thoughts on Prompt Engineering</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/embedding_n_vectorstore/index.html"><a class="padding" href="/langchain_project_book/fundamentals/embedding_n_vectorstore/index.html">Embeddings and VectorStore</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/chains_n_retriever/index.html"><a class="padding" href="/langchain_project_book/fundamentals/chains_n_retriever/index.html">Chains and Retriever</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/document_n_debugging/index.html"><a class="padding" href="/langchain_project_book/fundamentals/document_n_debugging/index.html">Document and Debugging</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/summary/index.html"><a class="padding" href="/langchain_project_book/fundamentals/summary/index.html">Summary</a></li></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/tools_n_lib/index.html"><a class="padding" href="/langchain_project_book/tools_n_lib/index.html">Tools and Libraries</a><ul id="R-subsections-cc34bf23dab60f9112ee939495610dcf" class="collapsible-menu"></ul></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/langchain_project_book/fundamentals/thoughts_on_prompt/index.html" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/langchain_project_book/js/clipboard.min.js?1730117286" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1730117286" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1730117286" defer></script>
+  </body>
+</html>

@@ -9,13 +9,18 @@
     (function(){
       let plantumlPrefix = "language-plantuml";
       Array.prototype.forEach.call(document.querySelectorAll("[class^=" + plantumlPrefix + "]"), function(code){
-        let image = document.createElement("IMG");
-        image.loading = 'lazy'; // Lazy loading
-        image.src = 'http://www.plantuml.com/plantuml/svg/~1' + plantumlEncoder.encode(code.innerText);
-        code.parentNode.insertBefore(image, code);
-        code.style.display = 'none';
+        // Check if an image already exists for this code block
+        if (!code.previousElementSibling || !code.previousElementSibling.classList.contains('plantuml-image')) {
+          let image = document.createElement("IMG");
+          image.loading = 'lazy'; // Lazy loading
+          image.className = 'plantuml-image'; // Add a class to identify the image
+          image.src = 'http://www.plantuml.com/plantuml/svg/~1' + plantumlEncoder.encode(code.innerText);
+          code.parentNode.insertBefore(image, code);
+          code.style.display = 'none';
+        }
       });
     })();
     </script>
 </body>
 </html>
+

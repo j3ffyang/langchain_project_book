@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head><script src="/langchain_project_book/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=langchain_project_book/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.134.2">
+    <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
+    <meta name="description" content="Understanding LangChain’s API offers the following advantages:
+Facilitating application development. Assisting in debugging by enabling verbose mode to provide more detailed traces. API Document in LangChain LangChain provides an API that enables developers to easily interact with LLM and other computational resources or knowledge sources. This makes it easier to build applications such as question answering systems, chatbots, and intelligent agents.
+I advise you to often check out the latest LangChain API reference, where you may examine incredibly thorough API logic at https://api.python.langchain.com/en/latest/ .">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Document and Debugging :: LangChain AI">
+    <meta name="twitter:description" content="Understanding LangChain’s API offers the following advantages:
+Facilitating application development. Assisting in debugging by enabling verbose mode to provide more detailed traces. API Document in LangChain LangChain provides an API that enables developers to easily interact with LLM and other computational resources or knowledge sources. This makes it easier to build applications such as question answering systems, chatbots, and intelligent agents.
+I advise you to often check out the latest LangChain API reference, where you may examine incredibly thorough API logic at https://api.python.langchain.com/en/latest/ .">
+    <meta property="og:url" content="http://localhost:1313/langchain_project_book/fundamentals/document_n_debugging/index.html">
+    <meta property="og:site_name" content="LangChain AI">
+    <meta property="og:title" content="Document and Debugging :: LangChain AI">
+    <meta property="og:description" content="Understanding LangChain’s API offers the following advantages:
+Facilitating application development. Assisting in debugging by enabling verbose mode to provide more detailed traces. API Document in LangChain LangChain provides an API that enables developers to easily interact with LLM and other computational resources or knowledge sources. This makes it easier to build applications such as question answering systems, chatbots, and intelligent agents.
+I advise you to often check out the latest LangChain API reference, where you may examine incredibly thorough API logic at https://api.python.langchain.com/en/latest/ .">
+    <meta property="og:locale" content="en_us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="LangChain Fundamentals">
+    <meta property="article:published_time" content="2024-10-28T18:54:03+08:00">
+    <meta property="article:modified_time" content="2024-10-28T18:54:03+08:00">
+    <meta itemprop="name" content="Document and Debugging :: LangChain AI">
+    <meta itemprop="description" content="Understanding LangChain’s API offers the following advantages:
+Facilitating application development. Assisting in debugging by enabling verbose mode to provide more detailed traces. API Document in LangChain LangChain provides an API that enables developers to easily interact with LLM and other computational resources or knowledge sources. This makes it easier to build applications such as question answering systems, chatbots, and intelligent agents.
+I advise you to often check out the latest LangChain API reference, where you may examine incredibly thorough API logic at https://api.python.langchain.com/en/latest/ .">
+    <meta itemprop="datePublished" content="2024-10-28T18:54:03+08:00">
+    <meta itemprop="dateModified" content="2024-10-28T18:54:03+08:00">
+    <meta itemprop="wordCount" content="369">
+    <title>Document and Debugging :: LangChain AI</title>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1730117286" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1730117286" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1730117286" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1730117286" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1730117286" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1730117286" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1730117286" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1730117286" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1730117286" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1730117286" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1730117286" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1730117286" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1730117286"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/langchain_project_book';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.variants && variants.init( [ 'auto' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/langchain_project_book/fundamentals/document_n_debugging/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/index.html"><span itemprop="name">LangChain Project Handbook</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/fundamentals/index.html"><span itemprop="name">LangChain Fundamentals</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Document and Debugging</span><meta itemprop="position" content="3"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/fundamentals/chains_n_retriever/index.html" title="Chains and Retriever (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/fundamentals/summary/index.html" title="Summary (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable fundamentals" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="document-and-debugging">Document and Debugging</h1>
+
+<p>Understanding LangChain&rsquo;s API offers the following advantages:</p>
+<ul>
+<li>Facilitating application development.</li>
+<li>Assisting in debugging by enabling verbose mode to provide more detailed traces.</li>
+</ul>
+<h4 id="api-document-in-langchain">API Document in LangChain</h4>
+<p>LangChain provides an API that enables developers to easily interact with LLM and other computational resources or knowledge sources. This makes it easier to build applications such as question answering systems, chatbots, and intelligent agents.</p>
+<p>I advise you to often check out the latest LangChain API reference, where you may examine incredibly thorough API logic at <a href="https://api.python.langchain.com/en/latest/" rel="external" target="_blank">https://api.python.langchain.com/en/latest/</a> .</p>
+<h4 id="debugging-in-langchain">Debugging in LangChain</h4>
+<p>Debugging is an important aspect of building applications with LangChain. There are several options that you can enable debug and/ or verbose mode in code.</p>
+<ul>
+<li>
+<p>The functions <code>set_debug(True)</code> and <code>set_verbose(True)</code> are utilized to activate debugging and verbose logging, respectively. They allow for logging intermediate stages of components and offering detailed outputs, aiding in the debugging process by printing detailed chains step by step.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.globals <span style="color:#f92672">import</span> set_debug, set_verbose
+</span></span><span style="display:flex;"><span>set_debug(<span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>set_verbose(<span style="color:#66d9ef">True</span>)</span></span></code></pre></div>
+</li>
+<li>
+<p><code>CallbackHandlers</code> are objects that implement the <code>CallbackHandler</code> interface, which has a method for each event that can be subscribed to. The <code>CallbackManager</code> will call the appropriate method on each handler when the event is triggered. (credit: this information is from <a href="https://python.langchain.com/docs/modules/callbacks/)" rel="external" target="_blank">https://python.langchain.com/docs/modules/callbacks/)</a>. Here’s an example within RetrievalQA function:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.callbacks <span style="color:#f92672">import</span> StdOutCallbackHandler
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>retrievalQA <span style="color:#f92672">=</span> RetrievalQA<span style="color:#f92672">.</span>from_chain_type(
+</span></span><span style="display:flex;"><span>    llm<span style="color:#f92672">=</span>llm,
+</span></span><span style="display:flex;"><span>    retriever <span style="color:#f92672">=</span> VectorStoreRetriever(vectorstore<span style="color:#f92672">=</span>vectorstore),
+</span></span><span style="display:flex;"><span>    chain_type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stuff&#34;</span>,
+</span></span><span style="display:flex;"><span>    chain_type_kwargs<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;prompt&#34;</span>: PROMPT},
+</span></span><span style="display:flex;"><span>    callbacks<span style="color:#f92672">=</span>[StdOutCallbackHandler()],
+</span></span><span style="display:flex;"><span>)</span></span></code></pre></div>
+</li>
+<li>
+<p>Another one is <code>ConsoleCallbackHandler</code>, which is like <code>StdOutCallbackHandler</code>. Here’s an example which is very straightforward</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e"># Define an LLM</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.llms <span style="color:#f92672">import</span> HuggingFaceEndpoint
+</span></span><span style="display:flex;"><span>repo_id <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;mistralai/Mistral-7B-Instruct-v0.2&#34;</span>
+</span></span><span style="display:flex;"><span>llm <span style="color:#f92672">=</span> HuggingFaceEndpoint(
+</span></span><span style="display:flex;"><span>    repo_id<span style="color:#f92672">=</span>repo_id, max_new_tokens<span style="color:#f92672">=</span><span style="color:#ae81ff">250</span>, temperature<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define prompt</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.prompts <span style="color:#f92672">import</span> ChatPromptTemplate
+</span></span><span style="display:flex;"><span>prompt <span style="color:#f92672">=</span> ChatPromptTemplate<span style="color:#f92672">.</span>from_template(<span style="color:#e6db74">&#34;tell me a joke about </span><span style="color:#e6db74">{topic}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load output parser for taking output of an LLM</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.schema.output_parser <span style="color:#f92672">import</span> StrOutputParser
+</span></span><span style="display:flex;"><span>output_parser <span style="color:#f92672">=</span> StrOutputParser()
+</span></span><span style="display:flex;"><span>chain <span style="color:#f92672">=</span> prompt <span style="color:#f92672">|</span> llm<span style="color:#f92672">|</span> output_parser
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Enable callbacks for logging</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.callbacks.tracers <span style="color:#f92672">import</span> ConsoleCallbackHandler
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>chain<span style="color:#f92672">.</span>invoke({<span style="color:#e6db74">&#34;topic&#34;</span>: <span style="color:#e6db74">&#34;Tintin&#34;</span>}, config<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#39;callbacks&#39;</span>: [ConsoleCallbackHandler()]})</span></span></code></pre></div>
+</li>
+</ul>
+<p>The result will showcase the output in a detailed step-by-step chain format.</p>
+<p>The debugging features within LangChain simplify the process of pinpointing and resolving issues within your application. Mastering these tools enables you to develop more resilient and effective applications using LangChain. These tools also allow for the detailed printing of each chain step, providing a clear view of how data is processed throughout the workflow.</p>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+          <a id="R-logo" class="R-default" href="/langchain_project_book/index.html">
+LangChain AI
+          </a>
+        </div>
+        <script>
+          window.index_js_url="/langchain_project_book/searchindex.js?1730117286";
+        </script>
+        <search><form action="/langchain_project_book/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/langchain_project_book/js/auto-complete.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1730117286" defer></script>
+        <script src="/langchain_project_book/js/search.js?1730117286" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/langchain_project_book/index.html"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/preface/index.html"><a class="padding" href="/langchain_project_book/preface/index.html">Preface</a></li>
+            <li class="parent " data-nav-id="/langchain_project_book/fundamentals/index.html"><a class="padding" href="/langchain_project_book/fundamentals/index.html">LangChain Fundamentals</a><ul id="R-subsections-c6757c34957c6808b13ecd5148aeca96" class="collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/architecture/index.html"><a class="padding" href="/langchain_project_book/fundamentals/architecture/index.html">LangChain Architecture</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/select_a_right_lm/index.html"><a class="padding" href="/langchain_project_book/fundamentals/select_a_right_lm/index.html">Select a Right Language Model</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/llm_settings_n_limits/index.html"><a class="padding" href="/langchain_project_book/fundamentals/llm_settings_n_limits/index.html">LLM Settings and Limits</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/thoughts_on_prompt/index.html"><a class="padding" href="/langchain_project_book/fundamentals/thoughts_on_prompt/index.html">Thoughts on Prompt Engineering</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/embedding_n_vectorstore/index.html"><a class="padding" href="/langchain_project_book/fundamentals/embedding_n_vectorstore/index.html">Embeddings and VectorStore</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/chains_n_retriever/index.html"><a class="padding" href="/langchain_project_book/fundamentals/chains_n_retriever/index.html">Chains and Retriever</a></li>
+            <li class="active " data-nav-id="/langchain_project_book/fundamentals/document_n_debugging/index.html"><a class="padding" href="/langchain_project_book/fundamentals/document_n_debugging/index.html">Document and Debugging</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/summary/index.html"><a class="padding" href="/langchain_project_book/fundamentals/summary/index.html">Summary</a></li></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/tools_n_lib/index.html"><a class="padding" href="/langchain_project_book/tools_n_lib/index.html">Tools and Libraries</a><ul id="R-subsections-cc34bf23dab60f9112ee939495610dcf" class="collapsible-menu"></ul></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/langchain_project_book/fundamentals/document_n_debugging/index.html" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/langchain_project_book/js/clipboard.min.js?1730117286" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1730117286" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1730117286" defer></script>
+  </body>
+</html>

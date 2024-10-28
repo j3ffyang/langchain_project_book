@@ -26,7 +26,9 @@ To grasp "LangChain Fundamentals", you'll need proficiency in Python, including 
 
 In practical projects, deploying a large language model (LLM) as a service typically involves launching it in a Docker container, or Kubernetes. Hence, having familiarity with containers would also be advantageous. 
 
-LangChain is an open-source tool with a Python and JavaScript codebase. However, the examples provided in this guide exclusively focus on Python. ### What is LangChain?
+LangChain is an open-source tool with a Python and JavaScript codebase. However, the examples provided in this guide exclusively focus on Python. 
+
+### What is LangChain?
 
 Imagine a scenario where you have many business reports and you're scheduled to have a business meeting with your higher management next Monday. However, you have yet to create a summary of these reports. Wouldn't it be convenient if you could simply ask your text reports to highlight the key points you need to discuss? LangChain is designed to make this task a reality.
 

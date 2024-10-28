@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tools and Libraries :: LangChain AI</title>
+    <link>http://localhost:1313/langchain_project_book/tools_n_lib/index.html</link>
+    <description>This chapter provides a comprehensive guide on how to set up LangChain in a Python environment. It is essential to have a basic understanding and knowledge of Python as a prerequisite for this guide. The following steps will help you establish a robust Python environment tailored for LangChain development.</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 28 Oct 2024 20:07:28 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/langchain_project_book/tools_n_lib/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Install LangChain</title>
+      <link>http://localhost:1313/langchain_project_book/tools_n_lib/install_lc/index.html</link>
+      <pubDate>Mon, 28 Oct 2024 19:04:28 +0800</pubDate>
+      <guid>http://localhost:1313/langchain_project_book/tools_n_lib/install_lc/index.html</guid>
+      <description>Install LangChain To install LangChain, you can use pip or conda.&#xA;To install using pip, run the command pip install langchain To install using conda, run the command conda install langchain -c conda-forge It’s always recommended to check the latest version of LangChain at https://github.com/langchain-ai/langchain&#xA;At the point of writing this book, the version of LangChain that I’m using is 0.1.11&#xA;pip list | grep langchain langchain 0.3.4 langchain-chroma 0.1.2 langchain-community 0.2.1 langchain-core 0.3.13 langchain-experimental 0.0.59 langchain-huggingface 0.1.0 langchain-openai 0.2.3 langchain-text-splitters 0.3.0 Install the required Python packages associated with your chosen LLM providers As we intend to utilize open-source language models from Hugging Face platform within LangChain, it is necessary to configure Hugging Face accordingly. Execute the following command:</description>
+    </item>
+    <item>
+      <title>Set up your Environment</title>
+      <link>http://localhost:1313/langchain_project_book/tools_n_lib/setup_env/index.html</link>
+      <pubDate>Mon, 28 Oct 2024 20:04:51 +0800</pubDate>
+      <guid>http://localhost:1313/langchain_project_book/tools_n_lib/setup_env/index.html</guid>
+      <description>In LangChain, when accessing a model from a remote platform, it is necessary to provide an API token (aka access token). For example, as demonstrated in the previous chapter using HuggingFaceEndpoint to utilize mistralai/Mistral-7B-Instruct-v0.2 model from Hugging Face platform, you will be required to generate a HuggingFace access token by following up the instruction at https://huggingface.co/docs/hub/en/security-tokens . You will be able to find your access token at https://huggingface.co/settings/tokens .&#xA;After generating the access token, you can proceed to set up and configure the token within the environment based on the following options.</description>
+    </item>
+    <item>
+      <title>Install an IDE</title>
+      <link>http://localhost:1313/langchain_project_book/tools_n_lib/install_ide/index.html</link>
+      <pubDate>Mon, 28 Oct 2024 20:07:28 +0800</pubDate>
+      <guid>http://localhost:1313/langchain_project_book/tools_n_lib/install_ide/index.html</guid>
+      <description>To develop LangChain applications, you will need an Integrated Development Environment (IDE). Visual Studio Code (VSCode) is one of the popular choices.&#xA;VSCode offers several advantages that make it one of the most recommended IDEs for Python programming:&#xA;It is open-source. Lightweight compared to PyCharm. Built-in Python support and debugging capabilities. Boasts a large community for support. Offers numerous extensions that can significantly enhance productivity. On the other hand, PyCharm is specifically tailored for Python development and provides extensive community support. It has open-source edition too.</description>
+    </item>
+  </channel>
+</rss>
