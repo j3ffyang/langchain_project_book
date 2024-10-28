@@ -1,4 +1,4 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://github.com/j3ffyang/langchain_project_book'
 languageCode = 'en-us'
 title = 'LangChain AI'
 theme = 'hugo-theme-relearn-main'

@@ -5,7 +5,7 @@ var relearn_searchindex = [
     "description": "The architectural components of LangChain, illustrated in Figure 1.1, will be thoroughly explored and discussed in detail throughout the book.\npackage LangChain { package Agent_Tooling { agent Tools agent Toolkits } package Models_IO { agent Model agent Prompt agent Output_Parser } package Chain_and_Retrieval { agent Retriever agent Document_Loaders agent VectorStore agent TextSplitter agent Embedding_Model } } Chain_and_Retrieval -[hidden] Models_IO Models_IO -[hidden] Agent_Tooling Model -[hidden]- Prompt Prompt -[hidden]- Output_Parser Retriever -[hidden] Document_Loaders Document_Loaders -[hidden]- VectorStore VectorStore -[hidden] TextSplitter Document_Loaders -[hidden]- VectorStore TextSplitter -[hidden]- Embedding_Model Tools -[hidden]- Toolkits Model: also known as LLM model serve as the core elements of LangChain. They essentially act as wrappers for these models, enabling the utilization of their specific functionalities and capabilities. Chain: Chain enables us to integrate multiple components to address a specific task. It streamlines the process of implementing complex applications by enhancing modularity, making debugging and maintenance more straightforward. Document loaders: Document Loaders play a role in loading documents into the LangChain system, managing a range of document types like PDFs, and transforming them into a compatible format for LangChain processing. This procedure encompasses multiple stages, including data ingestion, context comprehension, and refinement. Prompt: Prompts serve as inputs for LLMs to generate specific responses. Crafting effective prompts is vital for obtaining valuable outputs from LLMs. Prompt engineering aims to create prompts that yield precise, relevant, and beneficial responses from LLMs. For instance, the prompt plays an amazing role in the output when examining the prompt in OpenAI’s Sora, which creates stunning and visually striking videos. VectorStore: It brings functions for the effective storage and retrieval of vector embeddings. And it operates as a repository for vectors containing supplementary data, streamlining the processes of storage, search, and point management. Output Parsers: The output_parser converts the output of an LLM into a more appropriate format, especially beneficial when generating structured data using LLMs. Agents: LLMs can communicate with their surroundings through agents. For instance, carrying out a particular task via an external API, or grabbing extra data from outside website. LangChain utilizes a sequential pipeline method to construct tailored applications for LLM. This structured approach integrates diverse services, data inputs, and formatting processes, ensuring accurate processing and consistent output. Modules in LangChain follow a step-by-step process with single inputs and outputs, facilitating smooth data flow. This mechanism simplifies development and enhances LLM utilization. By streamlining workflows, LangChain optimizes AI application development, executing steps in a specific order to real-world processes for managed outcomes. ### LangChain Workflow",
     "tags": [],
     "title": "LangChain Architecture",
-    "uri": "/fundamentals/architecture/index.html"
+    "uri": "/j3ffyang/langchain_project_book/fundamentals/architecture/index.html"
   },
   {
     "breadcrumb": "LangChain Project Handbook",
@@ -13,7 +13,7 @@ var relearn_searchindex = [
     "description": "It is with great pleasure and enthusiasm that I present to you this book on the orchestration of large language models with LangChain. As an experienced Python and LangChain developer, I have had the privilege of participating in numerous projects that revolve around language modeling. These engagements have provided me with invaluable hands-on experience and insight into the complexities and challenges associated with building and managing large language models.\nThe goal of this book is to equip you, the reader, with the knowledge and skills necessary to successfully orchestrate large language models using LangChain. We will explore the intricacies of language modeling, delve into the nuances of LangChain, and provide practical guidance on how to effectively manage and optimize language models at scale. This book aims to serve as your comprehensive guide, blending theory with real-world scenarios to offer a holistic understanding of this cutting-edge technology.",
     "tags": [],
     "title": "Preface",
-    "uri": "/preface/index.html"
+    "uri": "/j3ffyang/langchain_project_book/preface/index.html"
   },
   {
     "breadcrumb": "LangChain Project Handbook",
@@ -21,7 +21,7 @@ var relearn_searchindex = [
     "description": "The fundamental ideas and elements of LangChain, a framework for creating language-model-powered applications, are covered in this chapter. LangChain aims to develop data-aware and agentic applications that enable language models to communicate with their surroundings and establish connections with other data sources, rather than only calling out to a language model via an API.\nAt the heart of LangChain are two key components. The first one is the modular abstractions provided by LangChain, which are essential for working with language models. These components are designed to be easy to use, whether you use the rest of the LangChain framework or not.",
     "tags": [],
     "title": "LangChain Fundamentals",
-    "uri": "/fundamentals/index.html"
+    "uri": "/j3ffyang/langchain_project_book/fundamentals/index.html"
   },
   {
     "breadcrumb": "",
@@ -29,7 +29,7 @@ var relearn_searchindex = [
     "description": "Introduction My Journey with LangChain In late 2022, I embarked on an exciting journey with LangChain while leading a development team. This coincided with OpenAI’s significant boost in popularity, marking a pivotal moment in AI technology.\nDiscovery and Adoption After several months of exploration, our team identified LangChain as the ideal API standard and base platform for our projects. What drew us to LangChain was its comprehensive suite of features:",
     "tags": [],
     "title": "LangChain Project Handbook",
-    "uri": "/index.html"
+    "uri": "/j3ffyang/langchain_project_book/index.html"
   },
   {
     "breadcrumb": "LangChain Project Handbook",
@@ -37,7 +37,7 @@ var relearn_searchindex = [
     "description": "",
     "tags": [],
     "title": "Categories",
-    "uri": "/categories/index.html"
+    "uri": "/j3ffyang/langchain_project_book/categories/index.html"
   },
   {
     "breadcrumb": "LangChain Project Handbook",
@@ -45,6 +45,6 @@ var relearn_searchindex = [
     "description": "",
     "tags": [],
     "title": "Tags",
-    "uri": "/tags/index.html"
+    "uri": "/j3ffyang/langchain_project_book/tags/index.html"
   }
 ]
