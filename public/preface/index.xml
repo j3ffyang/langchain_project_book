@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Preface :: LangChain AI</title>
-    <link>http://localhost:1313/j3ffyang/langchain_project_book/preface/index.html</link>
+    <link>http://localhost:1313/langchain_project_book/preface/index.html</link>
     <description>It is with great pleasure and enthusiasm that I present to you this book on the orchestration of large language models with LangChain. As an experienced Python and LangChain developer, I have had the privilege of participating in numerous projects that revolve around language modeling. These engagements have provided me with invaluable hands-on experience and insight into the complexities and challenges associated with building and managing large language models.&#xA;The goal of this book is to equip you, the reader, with the knowledge and skills necessary to successfully orchestrate large language models using LangChain. We will explore the intricacies of language modeling, delve into the nuances of LangChain, and provide practical guidance on how to effectively manage and optimize language models at scale. This book aims to serve as your comprehensive guide, blending theory with real-world scenarios to offer a holistic understanding of this cutting-edge technology.</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:1313/j3ffyang/langchain_project_book/preface/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/langchain_project_book/preface/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
