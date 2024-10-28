@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head><script src="/langchain_project_book/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=langchain_project_book/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.134.2">
+    <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
+    <meta name="description" content="Python As LangChain, introduced in this book, is based on Python, the following is the requirements file containing the necessary libraries and modules for LangChain installation.
+In my development environment, I have the following libraries installed:
+reminder: The community is evolving, and the library is adapting rapidly. The information presented here may change over time. This list serves as a reference for the current chapter being written.
+beautifulsoup4==4.12.3 chromaviz==0.0.2 colorama==0.4.6 faiss_cpu==1.8.0 huggingface_hub==0.21.4 langchain==0.1.13 langchain_community==0.0.29 langchain_core==0.1.33 langchain_experimental==0.0.55 langchain_openai==0.1.1 langchain_pinecone==0.0.3 matplotlib==3.8.3 numpy==1.26.4 openai==1.14.3 pandas==2.2.1 Pillow==10.2.0 PyPDF2==3.0.1 python-dotenv==1.0.1 qdrant_client==1.8.0 Requests==2.31.0 torch==2.2.1 transformers==4.39.1 Architecture Let’s observe the architectural overview:">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Software Environment :: LangChain AI">
+    <meta name="twitter:description" content="Python As LangChain, introduced in this book, is based on Python, the following is the requirements file containing the necessary libraries and modules for LangChain installation.
+In my development environment, I have the following libraries installed:
+reminder: The community is evolving, and the library is adapting rapidly. The information presented here may change over time. This list serves as a reference for the current chapter being written.
+beautifulsoup4==4.12.3 chromaviz==0.0.2 colorama==0.4.6 faiss_cpu==1.8.0 huggingface_hub==0.21.4 langchain==0.1.13 langchain_community==0.0.29 langchain_core==0.1.33 langchain_experimental==0.0.55 langchain_openai==0.1.1 langchain_pinecone==0.0.3 matplotlib==3.8.3 numpy==1.26.4 openai==1.14.3 pandas==2.2.1 Pillow==10.2.0 PyPDF2==3.0.1 python-dotenv==1.0.1 qdrant_client==1.8.0 Requests==2.31.0 torch==2.2.1 transformers==4.39.1 Architecture Let’s observe the architectural overview:">
+    <meta property="og:url" content="http://localhost:1313/langchain_project_book/doc_sum/software_env/index.html">
+    <meta property="og:site_name" content="LangChain AI">
+    <meta property="og:title" content="Software Environment :: LangChain AI">
+    <meta property="og:description" content="Python As LangChain, introduced in this book, is based on Python, the following is the requirements file containing the necessary libraries and modules for LangChain installation.
+In my development environment, I have the following libraries installed:
+reminder: The community is evolving, and the library is adapting rapidly. The information presented here may change over time. This list serves as a reference for the current chapter being written.
+beautifulsoup4==4.12.3 chromaviz==0.0.2 colorama==0.4.6 faiss_cpu==1.8.0 huggingface_hub==0.21.4 langchain==0.1.13 langchain_community==0.0.29 langchain_core==0.1.33 langchain_experimental==0.0.55 langchain_openai==0.1.1 langchain_pinecone==0.0.3 matplotlib==3.8.3 numpy==1.26.4 openai==1.14.3 pandas==2.2.1 Pillow==10.2.0 PyPDF2==3.0.1 python-dotenv==1.0.1 qdrant_client==1.8.0 Requests==2.31.0 torch==2.2.1 transformers==4.39.1 Architecture Let’s observe the architectural overview:">
+    <meta property="og:locale" content="en_us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Document Summarization">
+    <meta property="article:published_time" content="2024-10-28T20:58:01+08:00">
+    <meta property="article:modified_time" content="2024-10-28T20:58:01+08:00">
+    <meta itemprop="name" content="Software Environment :: LangChain AI">
+    <meta itemprop="description" content="Python As LangChain, introduced in this book, is based on Python, the following is the requirements file containing the necessary libraries and modules for LangChain installation.
+In my development environment, I have the following libraries installed:
+reminder: The community is evolving, and the library is adapting rapidly. The information presented here may change over time. This list serves as a reference for the current chapter being written.
+beautifulsoup4==4.12.3 chromaviz==0.0.2 colorama==0.4.6 faiss_cpu==1.8.0 huggingface_hub==0.21.4 langchain==0.1.13 langchain_community==0.0.29 langchain_core==0.1.33 langchain_experimental==0.0.55 langchain_openai==0.1.1 langchain_pinecone==0.0.3 matplotlib==3.8.3 numpy==1.26.4 openai==1.14.3 pandas==2.2.1 Pillow==10.2.0 PyPDF2==3.0.1 python-dotenv==1.0.1 qdrant_client==1.8.0 Requests==2.31.0 torch==2.2.1 transformers==4.39.1 Architecture Let’s observe the architectural overview:">
+    <meta itemprop="datePublished" content="2024-10-28T20:58:01+08:00">
+    <meta itemprop="dateModified" content="2024-10-28T20:58:01+08:00">
+    <meta itemprop="wordCount" content="503">
+    <title>Software Environment :: LangChain AI</title>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1730122565" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1730122565" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1730122565" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1730122565" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1730122565" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1730122565" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1730122565" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1730122565" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1730122565" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1730122565" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1730122565" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1730122565" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1730122565"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/langchain_project_book';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.variants && variants.init( [ 'auto' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/langchain_project_book/doc_sum/software_env/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/index.html"><span itemprop="name">LangChain Project Handbook</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/doc_sum/index.html"><span itemprop="name">Document Summarization</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Software Environment</span><meta itemprop="position" content="3"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/doc_sum/index.html" title="Document Summarization (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/doc_sum/setup_vectorstore_with_qdrant/index.html" title="Setting up Vectorstore with Qdrant (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable doc_sum" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="software-environment">Software Environment</h1>
+
+<h4 id="python">Python</h4>
+<p>As LangChain, introduced in this book, is based on Python, the following is the requirements file containing the necessary libraries and modules for LangChain installation.</p>
+<p>In my development environment, I have the following libraries installed:</p>
+<blockquote>
+<p>reminder: The community is evolving, and the library is adapting rapidly. The information presented here may change over time. This list serves as a reference for the current chapter being written.</p>
+</blockquote>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>beautifulsoup4<span style="color:#f92672">==</span><span style="color:#ae81ff">4.12.3</span>
+</span></span><span style="display:flex;"><span>chromaviz<span style="color:#f92672">==</span><span style="color:#ae81ff">0.0.2</span>
+</span></span><span style="display:flex;"><span>colorama<span style="color:#f92672">==</span><span style="color:#ae81ff">0.4.6</span>
+</span></span><span style="display:flex;"><span>faiss_cpu<span style="color:#f92672">==</span><span style="color:#ae81ff">1.8.0</span>
+</span></span><span style="display:flex;"><span>huggingface_hub<span style="color:#f92672">==</span><span style="color:#ae81ff">0.21.4</span>
+</span></span><span style="display:flex;"><span>langchain<span style="color:#f92672">==</span><span style="color:#ae81ff">0.1.13</span>
+</span></span><span style="display:flex;"><span>langchain_community<span style="color:#f92672">==</span><span style="color:#ae81ff">0.0.29</span>
+</span></span><span style="display:flex;"><span>langchain_core<span style="color:#f92672">==</span><span style="color:#ae81ff">0.1.33</span>
+</span></span><span style="display:flex;"><span>langchain_experimental<span style="color:#f92672">==</span><span style="color:#ae81ff">0.0.55</span>
+</span></span><span style="display:flex;"><span>langchain_openai<span style="color:#f92672">==</span><span style="color:#ae81ff">0.1.1</span>
+</span></span><span style="display:flex;"><span>langchain_pinecone<span style="color:#f92672">==</span><span style="color:#ae81ff">0.0.3</span>
+</span></span><span style="display:flex;"><span>matplotlib<span style="color:#f92672">==</span><span style="color:#ae81ff">3.8.3</span>
+</span></span><span style="display:flex;"><span>numpy<span style="color:#f92672">==</span><span style="color:#ae81ff">1.26.4</span>
+</span></span><span style="display:flex;"><span>openai<span style="color:#f92672">==</span><span style="color:#ae81ff">1.14.3</span>
+</span></span><span style="display:flex;"><span>pandas<span style="color:#f92672">==</span><span style="color:#ae81ff">2.2.1</span>
+</span></span><span style="display:flex;"><span>Pillow<span style="color:#f92672">==</span><span style="color:#ae81ff">10.2.0</span>
+</span></span><span style="display:flex;"><span>PyPDF2<span style="color:#f92672">==</span><span style="color:#ae81ff">3.0.1</span>
+</span></span><span style="display:flex;"><span>python<span style="color:#f92672">-</span>dotenv<span style="color:#f92672">==</span><span style="color:#ae81ff">1.0.1</span>
+</span></span><span style="display:flex;"><span>qdrant_client<span style="color:#f92672">==</span><span style="color:#ae81ff">1.8.0</span>
+</span></span><span style="display:flex;"><span>Requests<span style="color:#f92672">==</span><span style="color:#ae81ff">2.31.0</span>
+</span></span><span style="display:flex;"><span>torch<span style="color:#f92672">==</span><span style="color:#ae81ff">2.2.1</span>
+</span></span><span style="display:flex;"><span>transformers<span style="color:#f92672">==</span><span style="color:#ae81ff">4.39.1</span></span></span></code></pre></div>
+<h4 id="architecture">Architecture</h4>
+<p>Let&rsquo;s observe the architectural overview:</p>
+<ul>
+<li>LangChain oversees the LLM and VectorStore components.</li>
+<li>Ollama, serving as the manager for LLM, operates as a server process within the operating system, such as through <code>systemd</code> on Linux.</li>
+<li>VectorStore, exemplified by Qdrant in this context and overseen by LangChain, runs on Docker with a dedicated volume for persistent data storage.</li>
+</ul>
+<p><head>
+    <script src="https://cdn.jsdelivr.net/gh/jmnote/plantuml-encoder@1.2.4/dist/plantuml-encoder.min.js" integrity="sha256-Qsk2KRBCN5qVZX7B+8+2IvQl1Aqc723qV1tBCQaVoqo=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <pre class="language-plantuml">
+    
+package langchain {
+  component llm
+  component vectorstore
+}
+
+package operating-system {
+  component docker
+  component ollama
+  database storage
+}
+
+vectorstore -- docker
+docker - storage
+llm -- ollama
+
+    </pre>
+    <script>
+    (function(){
+      let plantumlPrefix = "language-plantuml";
+      Array.prototype.forEach.call(document.querySelectorAll("[class^=" + plantumlPrefix + "]"), function(code){
+        
+        if (!code.previousElementSibling || !code.previousElementSibling.classList.contains('plantuml-image')) {
+          let image = document.createElement("IMG");
+          image.loading = 'lazy'; 
+          image.className = 'plantuml-image'; 
+          image.src = 'http://www.plantuml.com/plantuml/svg/~1' + plantumlEncoder.encode(code.innerText);
+          code.parentNode.insertBefore(image, code);
+          code.style.display = 'none';
+        }
+      });
+    })();
+    </script>
+</body>
+</html>
+
+
+Figure 3.1 Software Architecture</p>
+<h4 id="docker">Docker</h4>
+<p>To store embedded data in the vector database (VectorStore), I will provide guidance on configuring VectorStore in Docker for persistent data storage. Having a vector database in Docker offers the advantage of operating the database independently, allowing it to function as a server accessible to multiple clients. This approach facilitates a smooth transition from Docker to a Kubernetes container environment, ensuring consistent service delivery with system monitoring in a production setting.</p>
+<p>By the way, having Docker is not mandatory for a vector database. Other options are to run vector database directly on the file system and in memory. The in-memory VectorStore is specifically designed for LangChain application development, as data stored this way is lost upon machine reboot.</p>
+<h4 id="ollama">Ollama</h4>
+<p>There are several ways to manage the embedding models and large language models (LLM). I want to introduce Ollama, it&rsquo;s surprisingly simple and straightforward.</p>
+<p>From Ollama official documentation, it says:</p>
+<blockquote>
+<p>Ollama is an open-source app that lets you run, create, and share large language models locally with a command-line interface. Learn why running LLMs locally is a game changer, what models Ollama supports, and how to get started with it.</p>
+</blockquote>
+<p>Its Command Line Interface (CLI) functions similarly to commands like <code>ollama pull llama2</code>, similar to Git and Docker. The server process can be managed using <code>systemd</code> on a Linux system for operational use in production. This server can consistently deliver LLM services without the need to reload the extensive model into memory each time LangChain is invoked.</p>
+<p>You can install Ollama by following the instruction from <a href="https://github.com/ollama/ollama" rel="external" target="_blank">https://github.com/ollama/ollama</a>. On Linux, you can manage it by the following commands</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>systemctl status  ollama
+</span></span><span style="display:flex;"><span>systemctl restart ollama</span></span></code></pre></div>
+<p>Pull (download) and run the models, for example:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ollama pull mistral
+</span></span><span style="display:flex;"><span>ollama pull llama2
+</span></span><span style="display:flex;"><span>ollama run  gemma:2b</span></span></code></pre></div>
+<p>Refer to the official documentation for further details.</p>
+<p>An important reminder is that the model pulled by Ollama will be stored in <code>/usr/share/ollama</code>. It is advisable to regularly monitor the disk space usage in this directory.</p>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+          <a id="R-logo" class="R-default" href="/langchain_project_book/index.html">
+LangChain AI
+          </a>
+        </div>
+        <script>
+          window.index_js_url="/langchain_project_book/searchindex.js?1730122565";
+        </script>
+        <search><form action="/langchain_project_book/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/langchain_project_book/js/auto-complete.js?1730122565" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1730122565" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1730122565" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1730122565" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1730122565" defer></script>
+        <script src="/langchain_project_book/js/search.js?1730122565" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/langchain_project_book/index.html"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/preface/index.html"><a class="padding" href="/langchain_project_book/preface/index.html">Preface</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/index.html"><a class="padding" href="/langchain_project_book/fundamentals/index.html">LangChain Fundamentals</a><ul id="R-subsections-c6757c34957c6808b13ecd5148aeca96" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/tools_n_lib/index.html"><a class="padding" href="/langchain_project_book/tools_n_lib/index.html">Tools and Libraries</a><ul id="R-subsections-cc34bf23dab60f9112ee939495610dcf" class="collapsible-menu"></ul></li>
+            <li class="parent " data-nav-id="/langchain_project_book/doc_sum/index.html"><a class="padding" href="/langchain_project_book/doc_sum/index.html">Document Summarization</a><ul id="R-subsections-76bbd5376befb633d2052d0ea4508ef3" class="collapsible-menu">
+            <li class="active " data-nav-id="/langchain_project_book/doc_sum/software_env/index.html"><a class="padding" href="/langchain_project_book/doc_sum/software_env/index.html">Software Environment</a></li>
+            <li class="" data-nav-id="/langchain_project_book/doc_sum/setup_vectorstore_with_qdrant/index.html"><a class="padding" href="/langchain_project_book/doc_sum/setup_vectorstore_with_qdrant/index.html">Setting up Vectorstore with Qdrant</a></li>
+            <li class="" data-nav-id="/langchain_project_book/doc_sum/define_a_rag_chain/index.html"><a class="padding" href="/langchain_project_book/doc_sum/define_a_rag_chain/index.html">Define a RAG Chain</a></li>
+            <li class="" data-nav-id="/langchain_project_book/doc_sum/summary/index.html"><a class="padding" href="/langchain_project_book/doc_sum/summary/index.html">Summary</a></li></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/ticketing_sys/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/index.html">Ticketing System</a><ul id="R-subsections-eaa6b154ff31d8e1af72e9555a67f96a" class="collapsible-menu"></ul></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/langchain_project_book/doc_sum/software_env/index.html" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/langchain_project_book/js/clipboard.min.js?1730122565" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1730122565" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1730122565" defer></script>
+  </body>
+</html>

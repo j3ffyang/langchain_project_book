@@ -6,7 +6,7 @@
     <description>This chapter provides a comprehensive guide on how to set up LangChain in a Python environment. It is essential to have a basic understanding and knowledge of Python as a prerequisite for this guide. The following steps will help you establish a robust Python environment tailored for LangChain development.</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Oct 2024 20:07:28 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 28 Oct 2024 20:44:50 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/langchain_project_book/tools_n_lib/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Install LangChain</title>
@@ -28,6 +28,20 @@
       <pubDate>Mon, 28 Oct 2024 20:07:28 +0800</pubDate>
       <guid>http://localhost:1313/langchain_project_book/tools_n_lib/install_ide/index.html</guid>
       <description>To develop LangChain applications, you will need an Integrated Development Environment (IDE). Visual Studio Code (VSCode) is one of the popular choices.&#xA;VSCode offers several advantages that make it one of the most recommended IDEs for Python programming:&#xA;It is open-source. Lightweight compared to PyCharm. Built-in Python support and debugging capabilities. Boasts a large community for support. Offers numerous extensions that can significantly enhance productivity. On the other hand, PyCharm is specifically tailored for Python development and provides extensive community support. It has open-source edition too.</description>
+    </item>
+    <item>
+      <title>Configure Models</title>
+      <link>http://localhost:1313/langchain_project_book/tools_n_lib/config_model/index.html</link>
+      <pubDate>Mon, 28 Oct 2024 20:42:25 +0800</pubDate>
+      <guid>http://localhost:1313/langchain_project_book/tools_n_lib/config_model/index.html</guid>
+      <description>In this book, we emphasize the use of open-source LLMs over closed-source alternatives for their benefits such as freedom, flexibility, vendor unlock, and code reusability. Personally, I advocate for and actively contribute to the open-source community. Various platforms like Hugging Face, Cohere, GPT4All, etc., offer broad repositories of open-source LLMs.&#xA;Choosing LangChain with open-source models from Hugging Face via Hugging Face APIs provides flexibility. Alternatively, one can directly orchestrate LLMs and their chains without relying on Hugging Face. Both approaches will be covered in the upcoming chapters.</description>
+    </item>
+    <item>
+      <title>Summary</title>
+      <link>http://localhost:1313/langchain_project_book/tools_n_lib/summary/index.html</link>
+      <pubDate>Mon, 28 Oct 2024 20:44:50 +0800</pubDate>
+      <guid>http://localhost:1313/langchain_project_book/tools_n_lib/summary/index.html</guid>
+      <description>This chapter focuses on setting up and configuring a Python IDE, which is essential for advancing LangChain programming. The skills to be acquired include:&#xA;Installing LangChain and its related libraries Establishing a development environment and relevant extensions in VSCode Configuring open-source LLMs from Hugging Face. Experimenting with locally downloaded LLMs while harnessing remote computing power from the Hugging Face platform. In the upcoming chapter, we will explore LangChain projects featuring real-world business scenarios for practical application. This will involve leveraging LangChain’s capacity to orchestrate LLMs, utilize similarity search capabilities from VectorStore, and implement semantic optimization using open source LLMs.</description>
     </item>
   </channel>
 </rss>

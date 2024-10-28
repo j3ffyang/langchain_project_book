@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/langchain_project_book/ticketing_sys/tech_proc/index.html</loc>
+    <lastmod>2024-10-28T21:18:01+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://localhost:1313/langchain_project_book/tools_n_lib/install_lc/index.html</loc>
     <lastmod>2024-10-28T19:04:28+08:00</lastmod>
   </url>
@@ -10,6 +14,14 @@
   </url>
   <url>
     <loc>http://localhost:1313/langchain_project_book/preface/index.html</loc>
+  </url>
+  <url>
+    <loc>http://localhost:1313/langchain_project_book/ticketing_sys/architecture/index.html</loc>
+    <lastmod>2024-10-28T21:20:49+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:1313/langchain_project_book/doc_sum/software_env/index.html</loc>
+    <lastmod>2024-10-28T20:58:01+08:00</lastmod>
   </url>
   <url>
     <loc>http://localhost:1313/langchain_project_book/tools_n_lib/setup_env/index.html</loc>
@@ -24,11 +36,19 @@
     <lastmod>2024-10-28T17:52:48+08:00</lastmod>
   </url>
   <url>
-    <loc>http://localhost:1313/langchain_project_book/tools_n_lib/install_ide/index.html</loc>
-    <lastmod>2024-10-28T20:07:28+08:00</lastmod>
+    <loc>http://localhost:1313/langchain_project_book/ticketing_sys/llm_with_gpt4all/index.html</loc>
+    <lastmod>2024-10-28T21:23:00+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:1313/langchain_project_book/doc_sum/setup_vectorstore_with_qdrant/index.html</loc>
+    <lastmod>2024-10-28T21:06:19+08:00</lastmod>
   </url>
   <url>
     <loc>http://localhost:1313/langchain_project_book/tools_n_lib/index.html</loc>
+    <lastmod>2024-10-28T20:44:50+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:1313/langchain_project_book/tools_n_lib/install_ide/index.html</loc>
     <lastmod>2024-10-28T20:07:28+08:00</lastmod>
   </url>
   <url>
@@ -36,20 +56,64 @@
     <lastmod>2024-10-28T17:58:27+08:00</lastmod>
   </url>
   <url>
+    <loc>http://localhost:1313/langchain_project_book/ticketing_sys/data_processing/index.html</loc>
+    <lastmod>2024-10-28T21:25:50+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:1313/langchain_project_book/doc_sum/index.html</loc>
+    <lastmod>2024-10-28T21:13:34+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:1313/langchain_project_book/doc_sum/define_a_rag_chain/index.html</loc>
+    <lastmod>2024-10-28T21:09:57+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:1313/langchain_project_book/tools_n_lib/config_model/index.html</loc>
+    <lastmod>2024-10-28T20:42:25+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://localhost:1313/langchain_project_book/fundamentals/thoughts_on_prompt/index.html</loc>
     <lastmod>2024-10-28T18:10:58+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:1313/langchain_project_book/ticketing_sys/index.html</loc>
+    <lastmod>2024-10-28T21:35:36+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:1313/langchain_project_book/ticketing_sys/define_embed_model_n_vector_with_faiss/index.html</loc>
+    <lastmod>2024-10-28T21:27:58+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:1313/langchain_project_book/doc_sum/summary/index.html</loc>
+    <lastmod>2024-10-28T21:13:34+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:1313/langchain_project_book/tools_n_lib/summary/index.html</loc>
+    <lastmod>2024-10-28T20:44:50+08:00</lastmod>
   </url>
   <url>
     <loc>http://localhost:1313/langchain_project_book/fundamentals/embedding_n_vectorstore/index.html</loc>
     <lastmod>2024-10-28T18:17:09+08:00</lastmod>
   </url>
   <url>
+    <loc>http://localhost:1313/langchain_project_book/ticketing_sys/complete_code/index.html</loc>
+    <lastmod>2024-10-28T21:33:00+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://localhost:1313/langchain_project_book/fundamentals/chains_n_retriever/index.html</loc>
     <lastmod>2024-10-28T18:49:37+08:00</lastmod>
   </url>
   <url>
+    <loc>http://localhost:1313/langchain_project_book/ticketing_sys/summary/index.html</loc>
+    <lastmod>2024-10-28T21:34:02+08:00</lastmod>
+  </url>
+  <url>
     <loc>http://localhost:1313/langchain_project_book/fundamentals/document_n_debugging/index.html</loc>
     <lastmod>2024-10-28T18:54:03+08:00</lastmod>
+  </url>
+  <url>
+    <loc>http://localhost:1313/langchain_project_book/ticketing_sys/appendix/index.html</loc>
+    <lastmod>2024-10-28T21:35:36+08:00</lastmod>
   </url>
   <url>
     <loc>http://localhost:1313/langchain_project_book/fundamentals/summary/index.html</loc>
@@ -57,7 +121,7 @@
   </url>
   <url>
     <loc>http://localhost:1313/langchain_project_book/index.html</loc>
-    <lastmod>2024-10-28T20:07:28+08:00</lastmod>
+    <lastmod>2024-10-28T21:35:36+08:00</lastmod>
   </url>
   <url>
     <loc>http://localhost:1313/langchain_project_book/categories/index.html</loc>

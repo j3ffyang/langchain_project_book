@@ -56,3 +56,10 @@ Enabling a Python IDE in Vim offers the following advantages:
 - It is robust in displaying documentation on-the-fly as you code without needing a GUI.
 - Vim is lightweight and does not consume excessive resources.
 - Being open-source, it aligns with the ethos of accessibility and community collaboration.
+
+![](images/2023-11-12-13-14-06.png)
+
+Figure 2.2 Python IDE with VIM
+<br>
+
+Once the IDE setup for Python programming is complete, we can proceed to configure models and commence our programming tasks with LLM.

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head><script src="/langchain_project_book/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=langchain_project_book/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.134.2">
+    <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
+    <meta name="description" content="Using PyPDFLoader and DirectoryLoader to load the multiple PDF documents from a specific directory The example provided utilizes two components:
+PyPDFLoader: This tool is used to load and parse PDF documents. DirectoryLoader: This component enables the simultaneous processing of multiple PDF files from a specific directory. As an example, the following PDF document was randomly downloaded: https://ufdcimages.uflib.ufl.edu/AA/00/01/16/99/00001/WorldHistory.pdf
+Copy this file to your project or any directory you like. In my case, I leave it in /tmp. This PDF file will be used to demonstrate the functionality of the PyPDFLoader and DirectoryLoader tools.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Define a RAG Chain :: LangChain AI">
+    <meta name="twitter:description" content="Using PyPDFLoader and DirectoryLoader to load the multiple PDF documents from a specific directory The example provided utilizes two components:
+PyPDFLoader: This tool is used to load and parse PDF documents. DirectoryLoader: This component enables the simultaneous processing of multiple PDF files from a specific directory. As an example, the following PDF document was randomly downloaded: https://ufdcimages.uflib.ufl.edu/AA/00/01/16/99/00001/WorldHistory.pdf
+Copy this file to your project or any directory you like. In my case, I leave it in /tmp. This PDF file will be used to demonstrate the functionality of the PyPDFLoader and DirectoryLoader tools.">
+    <meta property="og:url" content="http://localhost:1313/langchain_project_book/doc_sum/define_a_rag_chain/index.html">
+    <meta property="og:site_name" content="LangChain AI">
+    <meta property="og:title" content="Define a RAG Chain :: LangChain AI">
+    <meta property="og:description" content="Using PyPDFLoader and DirectoryLoader to load the multiple PDF documents from a specific directory The example provided utilizes two components:
+PyPDFLoader: This tool is used to load and parse PDF documents. DirectoryLoader: This component enables the simultaneous processing of multiple PDF files from a specific directory. As an example, the following PDF document was randomly downloaded: https://ufdcimages.uflib.ufl.edu/AA/00/01/16/99/00001/WorldHistory.pdf
+Copy this file to your project or any directory you like. In my case, I leave it in /tmp. This PDF file will be used to demonstrate the functionality of the PyPDFLoader and DirectoryLoader tools.">
+    <meta property="og:locale" content="en_us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="Document Summarization">
+    <meta property="article:published_time" content="2024-10-28T21:09:57+08:00">
+    <meta property="article:modified_time" content="2024-10-28T21:09:57+08:00">
+    <meta itemprop="name" content="Define a RAG Chain :: LangChain AI">
+    <meta itemprop="description" content="Using PyPDFLoader and DirectoryLoader to load the multiple PDF documents from a specific directory The example provided utilizes two components:
+PyPDFLoader: This tool is used to load and parse PDF documents. DirectoryLoader: This component enables the simultaneous processing of multiple PDF files from a specific directory. As an example, the following PDF document was randomly downloaded: https://ufdcimages.uflib.ufl.edu/AA/00/01/16/99/00001/WorldHistory.pdf
+Copy this file to your project or any directory you like. In my case, I leave it in /tmp. This PDF file will be used to demonstrate the functionality of the PyPDFLoader and DirectoryLoader tools.">
+    <meta itemprop="datePublished" content="2024-10-28T21:09:57+08:00">
+    <meta itemprop="dateModified" content="2024-10-28T21:09:57+08:00">
+    <meta itemprop="wordCount" content="1959">
+    <title>Define a RAG Chain :: LangChain AI</title>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1730122565" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1730122565" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1730122565" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1730122565" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1730122565" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1730122565" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1730122565" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1730122565" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1730122565" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1730122565" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1730122565" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1730122565" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1730122565"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/langchain_project_book';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.variants && variants.init( [ 'auto' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/langchain_project_book/doc_sum/define_a_rag_chain/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/index.html"><span itemprop="name">LangChain Project Handbook</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/doc_sum/index.html"><span itemprop="name">Document Summarization</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Define a RAG Chain</span><meta itemprop="position" content="3"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/doc_sum/setup_vectorstore_with_qdrant/index.html" title="Setting up Vectorstore with Qdrant (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/doc_sum/summary/index.html" title="Summary (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable doc_sum" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="define-a-rag-chain">Define a RAG Chain</h1>
+
+<h4 id="using-pypdfloader-and-directoryloader-to-load-the-multiple-pdf-documents-from-a-specific-directory">Using <code>PyPDFLoader</code> and <code>DirectoryLoader</code> to load the multiple PDF documents from a specific directory</h4>
+<p>The example provided utilizes two components:</p>
+<ul>
+<li><code>PyPDFLoader</code>: This tool is used to load and parse PDF documents.</li>
+<li><code>DirectoryLoader</code>: This component enables the simultaneous processing of multiple PDF files from a specific directory.</li>
+</ul>
+<p>As an example, the following PDF document was randomly downloaded:
+<a href="https://ufdcimages.uflib.ufl.edu/AA/00/01/16/99/00001/WorldHistory.pdf" rel="external" target="_blank">https://ufdcimages.uflib.ufl.edu/AA/00/01/16/99/00001/WorldHistory.pdf</a></p>
+<p>Copy this file to your project or any directory you like. In my case, I leave it in <code>/tmp</code>. This PDF file will be used to demonstrate the functionality of the <code>PyPDFLoader</code> and <code>DirectoryLoader</code> tools.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">## Load PDF documents from a directory</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.document_loaders <span style="color:#f92672">import</span> PyPDFLoader, DirectoryLoader
+</span></span><span style="display:flex;"><span>loader <span style="color:#f92672">=</span> DirectoryLoader(<span style="color:#e6db74">&#39;/tmp/&#39;</span>, glob<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;**/*.pdf&#34;</span>, loader_cls<span style="color:#f92672">=</span>PyPDFLoader,
+</span></span><span style="display:flex;"><span>                         show_progress<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, use_multithreading<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Sample code for loading doc from web</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># from langchain_community.document_loaders import WebBaseLoader</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;)</span>
+</span></span><span style="display:flex;"><span>documents <span style="color:#f92672">=</span> loader<span style="color:#f92672">.</span>load()</span></span></code></pre></div>
+<p>I have retained an example showcasing the use of <code>WebBaseLoader</code> to directly load documents from a website for your reference.</p>
+<h4 id="split-the-document-into-smaller-chunks">Split the document into smaller chunks</h4>
+<!-- raw HTML omitted -->
+<p>A list of characters is used as its parameter. Until the chunks get tiny enough, it tries to divide them sequentially. Specifically, for <code>RecursiveCharacterTextSplitter</code>, list <code>[&quot;\n&quot;, &quot;\n&quot;, &quot; &quot;, &quot;&quot;]</code> is the default. Because paragraphs and sentences are generally thought to be the strongest semantically related parts of text, this has the effect of striving to keep all of them together for as long as possible. You can use the document as a reference to view further <code>TextSplitter</code> functions that are accessible &gt; <a href="https://python.langchain.com/docs/modules/data_connection/document_transformers" rel="external" target="_blank">https://python.langchain.com/docs/modules/data_connection/document_transformers</a></p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">## Split the documents into chunks</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.text_splitter <span style="color:#f92672">import</span> RecursiveCharacterTextSplitter
+</span></span><span style="display:flex;"><span>splitter <span style="color:#f92672">=</span> RecursiveCharacterTextSplitter(chunk_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>, chunk_overlap<span style="color:#f92672">=</span><span style="color:#ae81ff">200</span>)
+</span></span><span style="display:flex;"><span>docs <span style="color:#f92672">=</span> splitter<span style="color:#f92672">.</span>split_documents(documents)</span></span></code></pre></div>
+<h4 id="specify-the-embedding-model">Specify the embedding model</h4>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.embeddings <span style="color:#f92672">import</span> HuggingFaceEmbeddings
+</span></span><span style="display:flex;"><span>embeddings <span style="color:#f92672">=</span> HuggingFaceEmbeddings(
+</span></span><span style="display:flex;"><span>    model_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># model_name=&#34;bert-base-multilingual-cased&#34;)</span></span></span></code></pre></div>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Numerical machine learning representations of the semantics of the input data are called embeddings. They convert complicated, high-dimensional data, such as text, photos, or audio, into vectors that represent their meaning. Enabling more effective data processing and analysis using algorithms.</p>
+<p>Since we are utilising an open-source embedding model that can be deployed locally, we can freely set the token&rsquo;s <code>chunk_size</code> to a greater amount.</p>
+<p>The <code>paraphrase-multilingual-MiniLM-L12-v2</code> model, requiring 477MB of disc space, is the one I like to use. It is compact, strong, and capable. I also include <code>bert-base-multilingual-cased</code> embedding model as reference, which I used for production as well.</p>
+<p><code>all-MiniLM-L6-v2</code> is an additional embedding model that I can suggest for testing while developing an application. It is quite compact, weighing in at just 90 MB.</p>
+<p>Hugging Face has a tonne of alternative and open source embedding models available &gt; <a href="https://huggingface.co/models?sort=downloads&search=embedding" rel="external" target="_blank">https://huggingface.co/models?sort=downloads&search=embedding</a></p>
+<h4 id="save-the-embedded-data-into-vectorstore">Save the embedded data into VectorStore</h4>
+<p>A Vector Database, or vector store, stores vectors (fixed-length number lists) and other data. It employs Approximate Nearest Neighbor (ANN) algorithms for searching with query vectors. Vectors represent data in a high-dimensional space, with each dimension corresponding to a feature. They are used for various data types and can be computed using machine learning methods. Vector databases support tasks like similarity search, multi-modal search, and large language models. They are also integral to Retrieval-Augmented Generation (RAG), enhancing domain-specific responses of large language models by querying relevant documents based on user prompts.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">## Configure Qdrant client, and define vectorstore and retriever</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> qdrant_client <span style="color:#f92672">import</span> QdrantClient
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.vectorstores <span style="color:#f92672">import</span> Qdrant
+</span></span><span style="display:flex;"><span>url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://127.0.0.1:6333&#34;</span>
+</span></span><span style="display:flex;"><span>vectorstore <span style="color:#f92672">=</span> Qdrant<span style="color:#f92672">.</span>from_documents(
+</span></span><span style="display:flex;"><span>    docs,
+</span></span><span style="display:flex;"><span>    embedding,
+</span></span><span style="display:flex;"><span>    url<span style="color:#f92672">=</span>url,
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># prefer_grpc=True,</span>
+</span></span><span style="display:flex;"><span>    collection_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;worldhistory&#34;</span>,
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>retriever <span style="color:#f92672">=</span> vectorstore<span style="color:#f92672">.</span>as_retriever()</span></span></code></pre></div>
+<p>In this code snippet, I am utilizing the Qdrant vector database, which is launched via Docker, with persistent data storage located at <code>/$DIR/qdrant_storage</code>.</p>
+<p>Further elaboration on these open-source alternatives to VectorStore will be provided in upcoming chapters. Additional options include FAISS, Chroma and Pinecone, the latter of which boasts excellent documentation from my personal perspective.</p>
+<p>Reminder: re-executing <code>Qdrant.from_documents</code> will insert the embedded data into the vector database (VectorStore), resulting in duplication of the data. This operation only needs to be run once to insert the chunked documents into the VectorStore.</p>
+<p>You can find more information about Qdrant at <a href="https://qdrant.tech/documentation/quick-start" rel="external" target="_blank">https://qdrant.tech/documentation/quick-start</a> and <a href="https://python.langchain.com/docs/integrations/vectorstores/qdrant" rel="external" target="_blank">https://python.langchain.com/docs/integrations/vectorstores/qdrant</a> .</p>
+<h4 id="configure-prompttemplate-and-prompt">Configure <code>PromptTemplate</code> and <code>Prompt</code></h4>
+<p>This template is designed for question-answering tasks. The template consists of several placeholders that will be filled in dynamically when the template is used:</p>
+<p><code>{question}</code>: this placeholder will be replaced with the actual question that the user wants to have answered.
+<code>{context}</code>: this placeholder will be replaced with the relevant context or information that the language model can use to formulate the answer.</p>
+<p>The template instructs the language model to use the provided context to answer the question concisely, within a maximum of three sentences. If the language model is unable to provide a definitive answer, it should simply state that it doesn&rsquo;t know.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.prompts <span style="color:#f92672">import</span> ChatPromptTemplate
+</span></span><span style="display:flex;"><span>template <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;You are an assistant for question-answering tasks. Use the
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">following pieces of retrieved context to answer the question. If you don&#39;t know
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">the answer, just say that you don&#39;t know. Use three sentences maximum and keep
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">the answer concise.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Question: </span><span style="color:#e6db74">{question}</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Context: </span><span style="color:#e6db74">{context}</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Answer:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>prompt <span style="color:#f92672">=</span> ChatPromptTemplate<span style="color:#f92672">.</span>from_template(template)</span></span></code></pre></div>
+<p>For more comprehensive information, I recommend visiting <a href="https://python.langchain.com/docs/expression_language/cookbook/prompt_llm_parser" rel="external" target="_blank">https://python.langchain.com/docs/expression_language/cookbook/prompt_llm_parser</a>.</p>
+<p>Please be aware that the effectiveness of prompts and their templates can vary significantly across different models. Essentially, the language model (LLM) might not always interpret the prompt and its template as intended. It may be necessary to dedicate some time to experimentation and testing to achieve the desired results.</p>
+<h4 id="load-mistral-model">Load <code>Mistral</code> model</h4>
+<p>The following code snippet demonstrates the Ollama, acting as a middleware for Large Language Models (LLMs). It instantiates the Ollama class and specifies the particular LLM to be utilized.</p>
+<p>My experience with the Mistral language model in real projects has shown it to deliver exceptional semantic optimization capabilities. In our project, we explored and tested approximately 30+ different models, including Gemma, GPT4All and GPT-2, etc, open-sourced from the HuggingFace platform. I&rsquo;ll cover these in this book.</p>
+<p>To get <code>mistral</code> model loaded and run, you can execute the following command:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ollama pull mistral
+</span></span><span style="display:flex;"><span>ollama run  mistral</span></span></code></pre></div>
+<p>You can check what exact model(s) pulled:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ollama list
+</span></span><span style="display:flex;"><span>NAME                   	ID          	SIZE  	MODIFIED
+</span></span><span style="display:flex;"><span>gemma:2b               	b50d6c999e59	1.7 GB	<span style="color:#ae81ff">8</span> days ago
+</span></span><span style="display:flex;"><span>mistral:7b         	61e88e884507	4.1 GB	<span style="color:#ae81ff">2</span> weeks ago</span></span></code></pre></div>
+<p>To evaluate the performance and quality of this model through Ollama, let&rsquo;s proceed with Ollama. Further in this guide, I will introduce additional LLMs directly from LangChain, without the use of Ollama.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.llms <span style="color:#f92672">import</span> Ollama
+</span></span><span style="display:flex;"><span>llm <span style="color:#f92672">=</span> Ollama(model<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mistral&#34;</span>)</span></span></code></pre></div>
+<p>Before executing the code, it&rsquo;s crucial that Ollama is started. On Linux systems, you can verify and initiate the process</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>systemctl status  ollama
+</span></span><span style="display:flex;"><span>systemctl restart ollama</span></span></code></pre></div>
+<p>To initiate the process on macOS, simply click on the Ollama icon that appears after installation.</p>
+<h4 id="enable-debug-and-verbose-mode-optional">Enable debug and verbose mode (optional)</h4>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.globals <span style="color:#f92672">import</span> set_verbose, set_debug
+</span></span><span style="display:flex;"><span>set_debug(<span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>set_verbose(<span style="color:#66d9ef">True</span>)</span></span></code></pre></div>
+<p>Enabling debug and verbose mode can print the detailed chain step by step. It&rsquo;s essential to debug when having issue.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h4 id="start-an-rag-chain">Start an RAG Chain</h4>
+<p>An RAG chain is a type of LangChain that combines a retriever (to fetch relevant context) and a language model (to generate the output).</p>
+<p>The <code>rag_chain</code> is defined using the LangChain&rsquo;s pipe (<code>|</code>) operator, which allows you to compose multiple components into a single chain.</p>
+<p><code>{&quot;context&quot;: retriever, &quot;question&quot;: RunnablePassthrough()}</code>: This is the first component of the chain, which is a dictionary. The <code>context</code> key is assigned the retriever object, which is likely a component that retrieves relevant context for the given input. The <code>question</code> key is assigned a <code>RunnablePassthrough</code> object, which means the input question will be passed through the chain without modification.
+<code>| prompt</code>: This component is likely a <code>prompttemplate</code> or a prompt-related component that prepares the input for the language model.
+<code>| llm</code>: This is the language model component, which will generate the output based on the prepared input.
+<code>| StrOutputParser()</code>: This is the final component of the chain, which is an output parser that expects the output to be a string. This ensures that the final output of the chain is a string.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">## Create an RAG chain</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.schema.runnable <span style="color:#f92672">import</span> RunnablePassthrough
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.schema.output_parser <span style="color:#f92672">import</span> StrOutputParser
+</span></span><span style="display:flex;"><span>rag_chain <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>    {<span style="color:#e6db74">&#34;context&#34;</span>: retriever, <span style="color:#e6db74">&#34;question&#34;</span>: RunnablePassthrough()}
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">|</span> prompt
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">|</span> llm
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">|</span> StrOutputParser()
+</span></span><span style="display:flex;"><span>)</span></span></code></pre></div>
+<h4 id="start-an-interactive-loop-of-question-and-answer">Start an interactive loop of question and answer</h4>
+<p>This Python code snippet demonstrates a simple interactive loop that allows the user to ask questions and receive responses from the <code>rag_chain</code> defined in the previous code example.</p>
+<p>Let&rsquo;s break down the code step by step:
+<code>while True:</code>: This starts an infinite loop that will continue until the user decides to exit.
+<code>user_input = input(&quot;Enter your question: &quot;)</code>: This line prompts the user to enter a question, and the user&rsquo;s input is stored in the user_input variable.</p>
+<p><code>if user_input == &quot;exit&quot;:</code>: This checks if the user&rsquo;s input is the string &ldquo;exit&rdquo;. If it is, the loop will be terminated using the break statement.</p>
+<p><code>else:</code>: If the user&rsquo;s input is not &ldquo;exit&rdquo;, the code inside the else block will be executed.
+<code>print(rag_chain.invoke(user_input))</code>: This line invokes the rag_chain defined in the previous code example, passing the user&rsquo;s input as the argument. The output of the rag_chain is then printed to the console.</p>
+<p>The overall flow of this code is as follows:</p>
+<ul>
+<li>The user is prompted to enter a question.</li>
+<li>If the user enters &ldquo;exit&rdquo;, the loop is terminated, and the program ends.</li>
+<li>If the user enters any other input, the <code>rag_chain</code> is invoked with the user&rsquo;s input, and the output is printed to the console.</li>
+<li>The loop then repeats, prompting the user for another question.</li>
+</ul>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>    user_input <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;Enter your question: &#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> user_input <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;exit&#34;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        print(rag_chain<span style="color:#f92672">.</span>invoke(user_input))</span></span></code></pre></div>
+<h4 id="the-output-is-like-the-following-with-the-detailed-chains-information">The output is like the following with the detailed chains&rsquo; information</h4>
+<p>Remember, you must copy one or more PDF documents into the loading directory.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#ae81ff">100</span><span style="color:#f92672">%|</span><span style="color:#960050;background-color:#1e0010">███████████████████████████████████████████████████████████████</span><span style="color:#f92672">|</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1</span> [<span style="color:#ae81ff">00</span>:<span style="color:#ae81ff">06</span><span style="color:#f92672">&lt;</span><span style="color:#ae81ff">00</span>:<span style="color:#ae81ff">00</span>,  <span style="color:#ae81ff">6.58</span>s<span style="color:#f92672">/</span>it]
+</span></span><span style="display:flex;"><span>Enter your question: tell me about the history of italy
+</span></span><span style="display:flex;"><span> Italy<span style="color:#e6db74">&#39;s history includes a final war for unity over the Italian peninsula in 91 BC, which ended with Roman citizenship decree for all Italians. The classical Latin language emerged around this time and held sway for about 300 years. In the Middle Ages, northern Italy was subject to German rule while southern Italy and Sicily prospered under the Normans, who allowed free choice of religion. Frederick II, grandson of Frederick Barbarossa and Norman Roger II, became emperor of Rome in 1220, dividing his time between managing affairs in both Italy and Germany, and founding the University of Naples and enlarging the medical school at Salerno. Eastern and southern Italy remained Byzantine in culture, while the rest of the peninsula developed a new civilization, language, religion, and art from its Roman heritage.</span>
+</span></span><span style="display:flex;"><span>Enter your question:</span></span></code></pre></div>
+<h4 id="the-code-for-query-only">The Code for Query Only</h4>
+<p>Given that the embedded data could be generated multiple times if the code continues to run, I&rsquo;ve developed the following code snippet to define VectorStore client, without inserting the embedded data, and prevent the duplication of embedded data in VectorStore. When defining vectorstore, use <code>Qdrant</code> instead of <code>Qdrant.from_documents</code></p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> qdrant_client <span style="color:#f92672">import</span> QdrantClient
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.vectorstores <span style="color:#f92672">import</span> Qdrant
+</span></span><span style="display:flex;"><span>client <span style="color:#f92672">=</span> QdrantClient(<span style="color:#e6db74">&#34;127.0.0.1&#34;</span>, port<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;6333&#34;</span>)
+</span></span><span style="display:flex;"><span>vectorstore <span style="color:#f92672">=</span> Qdrant(client, embeddings<span style="color:#f92672">=</span>embedding, collection_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;worldhistory&#34;</span>)
+</span></span><span style="display:flex;"><span>retriever <span style="color:#f92672">=</span> vectorstore<span style="color:#f92672">.</span>as_retriever()</span></span></code></pre></div>
+<p>The following is the full code with Qdrant client, for example:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## Define embedding model</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.embeddings <span style="color:#f92672">import</span> HuggingFaceEmbeddings
+</span></span><span style="display:flex;"><span>embedding <span style="color:#f92672">=</span> HuggingFaceEmbeddings(
+</span></span><span style="display:flex;"><span>    model_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Configure Qdrant client, and define vectorstore and retriever</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> qdrant_client <span style="color:#f92672">import</span> QdrantClient
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.vectorstores <span style="color:#f92672">import</span> Qdrant
+</span></span><span style="display:flex;"><span>client <span style="color:#f92672">=</span> QdrantClient(<span style="color:#e6db74">&#34;127.0.0.1&#34;</span>, port<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;6333&#34;</span>)
+</span></span><span style="display:flex;"><span>vectorstore <span style="color:#f92672">=</span> Qdrant(client, embeddings<span style="color:#f92672">=</span>embedding, collection_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;worldhistory&#34;</span>)
+</span></span><span style="display:flex;"><span>retriever <span style="color:#f92672">=</span> vectorstore<span style="color:#f92672">.</span>as_retriever()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Define prompt and prompttemplate</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.prompts <span style="color:#f92672">import</span> ChatPromptTemplate
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.prompts <span style="color:#f92672">import</span> PromptTemplate
+</span></span><span style="display:flex;"><span>template <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;You are an assistant for question-answering tasks. Use the
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">following pieces of retrieved context to answer the question. If you don&#39;t know
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">the answer, just say that you don&#39;t know. Use three sentences maximum and keep
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">the answer concise.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Question: </span><span style="color:#e6db74">{question}</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Context: </span><span style="color:#e6db74">{context}</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Answer:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>prompt <span style="color:#f92672">=</span> PromptTemplate<span style="color:#f92672">.</span>from_template(template)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Define LLM</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.llms <span style="color:#f92672">import</span> Ollama
+</span></span><span style="display:flex;"><span>llm <span style="color:#f92672">=</span> Ollama(model<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mistral&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Create an RAG chain</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.schema.runnable <span style="color:#f92672">import</span> RunnablePassthrough
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.schema.output_parser <span style="color:#f92672">import</span> StrOutputParser
+</span></span><span style="display:flex;"><span>rag_chain <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>    {<span style="color:#e6db74">&#34;context&#34;</span>: retriever, <span style="color:#e6db74">&#34;question&#34;</span>: RunnablePassthrough()}
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">|</span> prompt
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">|</span> llm
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">|</span> StrOutputParser()
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>    user_input <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;Enter your question: &#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> user_input <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;exit&#34;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        print(rag_chain<span style="color:#f92672">.</span>invoke(user_input))</span></span></code></pre></div>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+          <a id="R-logo" class="R-default" href="/langchain_project_book/index.html">
+LangChain AI
+          </a>
+        </div>
+        <script>
+          window.index_js_url="/langchain_project_book/searchindex.js?1730122565";
+        </script>
+        <search><form action="/langchain_project_book/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/langchain_project_book/js/auto-complete.js?1730122565" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1730122565" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1730122565" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1730122565" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1730122565" defer></script>
+        <script src="/langchain_project_book/js/search.js?1730122565" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/langchain_project_book/index.html"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/preface/index.html"><a class="padding" href="/langchain_project_book/preface/index.html">Preface</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/index.html"><a class="padding" href="/langchain_project_book/fundamentals/index.html">LangChain Fundamentals</a><ul id="R-subsections-c6757c34957c6808b13ecd5148aeca96" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/tools_n_lib/index.html"><a class="padding" href="/langchain_project_book/tools_n_lib/index.html">Tools and Libraries</a><ul id="R-subsections-cc34bf23dab60f9112ee939495610dcf" class="collapsible-menu"></ul></li>
+            <li class="parent " data-nav-id="/langchain_project_book/doc_sum/index.html"><a class="padding" href="/langchain_project_book/doc_sum/index.html">Document Summarization</a><ul id="R-subsections-76bbd5376befb633d2052d0ea4508ef3" class="collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/doc_sum/software_env/index.html"><a class="padding" href="/langchain_project_book/doc_sum/software_env/index.html">Software Environment</a></li>
+            <li class="" data-nav-id="/langchain_project_book/doc_sum/setup_vectorstore_with_qdrant/index.html"><a class="padding" href="/langchain_project_book/doc_sum/setup_vectorstore_with_qdrant/index.html">Setting up Vectorstore with Qdrant</a></li>
+            <li class="active " data-nav-id="/langchain_project_book/doc_sum/define_a_rag_chain/index.html"><a class="padding" href="/langchain_project_book/doc_sum/define_a_rag_chain/index.html">Define a RAG Chain</a></li>
+            <li class="" data-nav-id="/langchain_project_book/doc_sum/summary/index.html"><a class="padding" href="/langchain_project_book/doc_sum/summary/index.html">Summary</a></li></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/ticketing_sys/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/index.html">Ticketing System</a><ul id="R-subsections-eaa6b154ff31d8e1af72e9555a67f96a" class="collapsible-menu"></ul></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/langchain_project_book/doc_sum/define_a_rag_chain/index.html" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/langchain_project_book/js/clipboard.min.js?1730122565" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1730122565" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1730122565" defer></script>
+  </body>
+</html>
