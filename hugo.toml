@@ -2,7 +2,6 @@ baseURL = 'https://j3ffyang.github.io/langchain_project_book/'
 languageCode = 'en-us'
 title = 'LangChain AI'
 theme = 'hugo-theme-relearn-main'
-# theme = 'poison'
 
 [params]
   plantuml = true

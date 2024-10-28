@@ -36,13 +36,12 @@ Prompt -[hidden]- Output_Parser
 Retriever -[hidden] Document_Loaders
 Document_Loaders -[hidden]- VectorStore
 VectorStore -[hidden] TextSplitter
-Document_Loaders -[hidden]- VectorStore
 TextSplitter -[hidden]- Embedding_Model
 
 Tools -[hidden]- Toolkits
 {{< /plantuml >}}
 
-<center>Figure 1.1: LangChain Architecture</center>
+Figure 1.1: LangChain Architecture
 
 - **Model**: also known as LLM model serve as the core elements of LangChain. They essentially act as wrappers for these models, enabling the utilization of their specific functionalities and capabilities. 
 - **Chain**: Chain enables us to integrate multiple components to address a specific task. It streamlines the process of implementing complex applications by enhancing modularity, making debugging and maintenance more straightforward. 
@@ -56,7 +55,7 @@ LangChain utilizes a sequential pipeline method to construct tailored applicatio
 
 Having grasped the fundamental elements of LangChain, let's observe its process in detail and how the message is handled. The actual scenarios can change the workflow's logic depending on the requirements. A very common conversation flow is shown in Figure 1.2, which includes `document_loaders`, data embedding into vectorstore, and query `similarity_search` within `RetrievalQA` chain, then returns the analyzed result to the user.
 
-```plantuml
+{{< plantuml >}}
 actor user
 component Load_Docs
 component Query
@@ -82,8 +81,9 @@ RetrievalQA -> LLM_generates_answer
 
 Load_Docs -[hidden]- user
 Query -[hidden]- LLM_generates_answer
-```
-<center>Figure 1.2: LangChain Workflow</center>
+{{< /plantuml >}}
+
+Figure 1.2: LangChain Workflow
 
 <!-- Let’s discuss these steps in detail. I've included the Python code for a very popular and typical module to demonstrate the components. The intricacies of real projects will be covered in detail in the upcoming chapters. To run the Python code provided, it is required to set up a working environment, a procedure that will be elaborated on in the upcoming chapter. You can promptly proceed to the next chapter to configure your development environment, ensuring the necessary libraries are installed and properly set up for the successful execution of the sample code presented here. -->
 
