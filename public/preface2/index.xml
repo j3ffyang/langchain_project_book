@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Preface2 :: LangChain AI</title>
+    <link>http://localhost:1313/preface2/index.html</link>
+    <description>This is a new chapter.+++ title = “Preface” type = “Preface” +++&#xA;Preface It is with great pleasure and enthusiasm that I present to you this book on the orchestration of large language models with LangChain. As an experienced Python and LangChain developer, I have had the privilege of participating in numerous projects that revolve around language modeling. These engagements have provided me with invaluable hands-on experience and insight into the complexities and challenges associated with building and managing large language models.</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:1313/preface2/index.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>
