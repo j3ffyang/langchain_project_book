@@ -1,6 +1,6 @@
 # LangChain Project Handbook
 
-Welcome to the [LangChain Project Handbook[(https://j3ffyang.github.io/langchain_project_book)]! This document serves as a comprehensive guide to the LangChain framework, detailing its features, functionalities, and my personal experiences with real-world applications.
+Welcome to the [LangChain Project Handbook](https://j3ffyang.github.io/langchain_project_book)! This document serves as a comprehensive guide to the LangChain framework, detailing its features, functionalities, and my personal experiences with real-world applications.
 <!-- Table of Contents
 Introduction
 Open Source Philosophy
