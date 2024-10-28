@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+  <head><script src="/langchain_project_book/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=langchain_project_book/livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <meta name="generator" content="Hugo 0.134.2">
+    <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
+    <meta name="description" content="I’ve divided the code into two sections because the data source is loaded into the vector store only once. After this initial load, queries can be executed against the existing vector store.
+Load the data into the vector store Query against the vector store Loading the Data from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents) from langchain_community.embeddings import HuggingFaceEmbeddings embeddings = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;) import os import getpass os.environ[&#34;SUPABASE_URL&#34;] = getpass.getpass(&#34;Supabase URL: &#34;) os.environ[&#34;SUPABASE_SERVICE_KEY&#34;] = getpass.getpass(&#34;Supabase Svc Key: &#34;) from langchain_community.vectorstores import SupabaseVectorStore from supabase.client import Client, create_client supabase_url = os.environ.get(&#34;SUPABASE_URL&#34;) supabase_key = os.environ.get(&#34;SUPABASE_SERVICE_KEY&#34;) supabase: Client = create_client(supabase_url, supabase_key) vectorstore = SupabaseVectorStore.from_documents( chunks, embeddings, client=supabase, table_name=&#34;documents&#34;, query_name=&#34;match_documents&#34;, chunk_size=500, ) Querying For convenience, I’ve included the values of supabase_url and supabase_key directly in the code to bypass the need for manual input during queries. However, it’s crucial to ensure these keys are not exposed when sharing the code with others or when pushing it to a public GitHub repository.">
+    <meta name="author" content="">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Complete Code :: LangChain AI">
+    <meta name="twitter:description" content="I’ve divided the code into two sections because the data source is loaded into the vector store only once. After this initial load, queries can be executed against the existing vector store.
+Load the data into the vector store Query against the vector store Loading the Data from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents) from langchain_community.embeddings import HuggingFaceEmbeddings embeddings = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;) import os import getpass os.environ[&#34;SUPABASE_URL&#34;] = getpass.getpass(&#34;Supabase URL: &#34;) os.environ[&#34;SUPABASE_SERVICE_KEY&#34;] = getpass.getpass(&#34;Supabase Svc Key: &#34;) from langchain_community.vectorstores import SupabaseVectorStore from supabase.client import Client, create_client supabase_url = os.environ.get(&#34;SUPABASE_URL&#34;) supabase_key = os.environ.get(&#34;SUPABASE_SERVICE_KEY&#34;) supabase: Client = create_client(supabase_url, supabase_key) vectorstore = SupabaseVectorStore.from_documents( chunks, embeddings, client=supabase, table_name=&#34;documents&#34;, query_name=&#34;match_documents&#34;, chunk_size=500, ) Querying For convenience, I’ve included the values of supabase_url and supabase_key directly in the code to bypass the need for manual input during queries. However, it’s crucial to ensure these keys are not exposed when sharing the code with others or when pushing it to a public GitHub repository.">
+    <meta property="og:url" content="http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html">
+    <meta property="og:site_name" content="LangChain AI">
+    <meta property="og:title" content="Complete Code :: LangChain AI">
+    <meta property="og:description" content="I’ve divided the code into two sections because the data source is loaded into the vector store only once. After this initial load, queries can be executed against the existing vector store.
+Load the data into the vector store Query against the vector store Loading the Data from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents) from langchain_community.embeddings import HuggingFaceEmbeddings embeddings = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;) import os import getpass os.environ[&#34;SUPABASE_URL&#34;] = getpass.getpass(&#34;Supabase URL: &#34;) os.environ[&#34;SUPABASE_SERVICE_KEY&#34;] = getpass.getpass(&#34;Supabase Svc Key: &#34;) from langchain_community.vectorstores import SupabaseVectorStore from supabase.client import Client, create_client supabase_url = os.environ.get(&#34;SUPABASE_URL&#34;) supabase_key = os.environ.get(&#34;SUPABASE_SERVICE_KEY&#34;) supabase: Client = create_client(supabase_url, supabase_key) vectorstore = SupabaseVectorStore.from_documents( chunks, embeddings, client=supabase, table_name=&#34;documents&#34;, query_name=&#34;match_documents&#34;, chunk_size=500, ) Querying For convenience, I’ve included the values of supabase_url and supabase_key directly in the code to bypass the need for manual input during queries. However, it’s crucial to ensure these keys are not exposed when sharing the code with others or when pushing it to a public GitHub repository.">
+    <meta property="og:locale" content="en_us">
+    <meta property="og:type" content="article">
+    <meta property="article:section" content="KnowledgeBase Semantic Analysis">
+    <meta property="article:published_time" content="2024-10-28T22:36:51+08:00">
+    <meta property="article:modified_time" content="2024-10-28T22:36:51+08:00">
+    <meta itemprop="name" content="Complete Code :: LangChain AI">
+    <meta itemprop="description" content="I’ve divided the code into two sections because the data source is loaded into the vector store only once. After this initial load, queries can be executed against the existing vector store.
+Load the data into the vector store Query against the vector store Loading the Data from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents) from langchain_community.embeddings import HuggingFaceEmbeddings embeddings = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;) import os import getpass os.environ[&#34;SUPABASE_URL&#34;] = getpass.getpass(&#34;Supabase URL: &#34;) os.environ[&#34;SUPABASE_SERVICE_KEY&#34;] = getpass.getpass(&#34;Supabase Svc Key: &#34;) from langchain_community.vectorstores import SupabaseVectorStore from supabase.client import Client, create_client supabase_url = os.environ.get(&#34;SUPABASE_URL&#34;) supabase_key = os.environ.get(&#34;SUPABASE_SERVICE_KEY&#34;) supabase: Client = create_client(supabase_url, supabase_key) vectorstore = SupabaseVectorStore.from_documents( chunks, embeddings, client=supabase, table_name=&#34;documents&#34;, query_name=&#34;match_documents&#34;, chunk_size=500, ) Querying For convenience, I’ve included the values of supabase_url and supabase_key directly in the code to bypass the need for manual input during queries. However, it’s crucial to ensure these keys are not exposed when sharing the code with others or when pushing it to a public GitHub repository.">
+    <meta itemprop="datePublished" content="2024-10-28T22:36:51+08:00">
+    <meta itemprop="dateModified" content="2024-10-28T22:36:51+08:00">
+    <meta itemprop="wordCount" content="675">
+    <title>Complete Code :: LangChain AI</title>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1730126400" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1730126400" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1730126400" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1730126400" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1730126400" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1730126400" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1730126400" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1730126400" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1730126400" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1730126400" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1730126400" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1730126400" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1730126400"></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.relBasePath='..\/..';
+      window.relearn.relBaseUri='..\/..\/..';
+      window.relearn.absBaseUri='http:\/\/localhost:1313\/langchain_project_book';
+      window.relearn.disableAnchorCopy=false;
+      window.relearn.disableAnchorScrolling=false;
+      // variant stuff
+      window.variants && variants.init( [ 'auto' ] );
+      // translations
+      window.T_Copy_to_clipboard = `Copy to clipboard`;
+      window.T_Copied_to_clipboard = `Copied to clipboard!`;
+      window.T_Copy_link_to_clipboard = `Copy link to clipboard`;
+      window.T_Link_copied_to_clipboard = `Copied link to clipboard!`;
+      window.T_Reset_view = `Reset view`;
+      window.T_View_reset = `View reset!`;
+      window.T_No_results_found = `No results found for "{0}"`;
+      window.T_N_results_found = `{1} results found for "{0}"`;
+    </script>
+  </head>
+  <body class="mobile-support html" data-url="/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html">
+    <div id="R-body" class="default-animation">
+      <div id="R-body-overlay"></div>
+      <nav id="R-topbar">
+        <div class="topbar-wrapper">
+          <div class="topbar-sidebar-divider"></div>
+          <div class="topbar-area topbar-area-start" data-area="start">
+            <div class="topbar-button topbar-button-sidebar" data-content-empty="disable" data-width-s="show" data-width-m="hide" data-width-l="hide"><button class="topbar-control" onclick="toggleNav()" type="button" title="Menu (CTRL&#43;ALT&#43;n)"><i class="fa-fw fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-button topbar-button-toc" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="Table of Contents (CTRL&#43;ALT&#43;t)"><i class="fa-fw fas fa-list-alt"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper"> 
+                </div>
+              </div>
+            </div>
+          </div>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/index.html"><span itemprop="name">LangChain Project Handbook</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/knowledgebase_semantic_analysis/index.html"><span itemprop="name">KnowledgeBase Semantic Analysis</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Complete Code</span><meta itemprop="position" content="3"></li>
+          </ol>
+          <div class="topbar-area topbar-area-end" data-area="end">
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html" title="Conversion History as a Memory with Retriever (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html" title="Summary (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            </div>
+            <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
+              <div class="topbar-content">
+                <div class="topbar-content-wrapper">
+                  <div class="topbar-area topbar-area-more" data-area="more">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div id="R-main-overlay"></div>
+      <main id="R-body-inner" class="highlightable knowledgebase_semantic_analysis" tabindex="-1">
+        <div class="flex-block-wrapper">
+<article class="default">
+  <header class="headline">
+  </header>
+
+<h1 id="complete-code">Complete Code</h1>
+
+<p>I&rsquo;ve divided the code into two sections because the data source is loaded into the vector store only once. After this initial load, queries can be executed against the existing vector store.</p>
+<ul>
+<li>Load the data into the vector store</li>
+<li>Query against the vector store</li>
+</ul>
+<h4 id="loading-the-data">Loading the Data</h4>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.document_loaders <span style="color:#f92672">import</span> WebBaseLoader
+</span></span><span style="display:flex;"><span>loader <span style="color:#f92672">=</span> WebBaseLoader(<span style="color:#e6db74">&#34;https://en.wikisource.org/wiki/Hans_Andersen</span><span style="color:#e6db74">%27s</span><span style="color:#e6db74">_Fairy_Tales/The_Emperor</span><span style="color:#e6db74">%27s</span><span style="color:#e6db74">_New_Clothes&#34;</span>)
+</span></span><span style="display:flex;"><span>documents <span style="color:#f92672">=</span> loader<span style="color:#f92672">.</span>load()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.text_splitter <span style="color:#f92672">import</span> RecursiveCharacterTextSplitter
+</span></span><span style="display:flex;"><span>splitter <span style="color:#f92672">=</span> RecursiveCharacterTextSplitter(chunk_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>, chunk_overlap<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>chunks <span style="color:#f92672">=</span> splitter<span style="color:#f92672">.</span>split_documents(documents)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.embeddings <span style="color:#f92672">import</span> HuggingFaceEmbeddings
+</span></span><span style="display:flex;"><span>embeddings <span style="color:#f92672">=</span> HuggingFaceEmbeddings(
+</span></span><span style="display:flex;"><span>    model_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> getpass
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#34;SUPABASE_URL&#34;</span>] <span style="color:#f92672">=</span> getpass<span style="color:#f92672">.</span>getpass(<span style="color:#e6db74">&#34;Supabase URL: &#34;</span>)
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#34;SUPABASE_SERVICE_KEY&#34;</span>] <span style="color:#f92672">=</span> getpass<span style="color:#f92672">.</span>getpass(<span style="color:#e6db74">&#34;Supabase Svc Key: &#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.vectorstores <span style="color:#f92672">import</span> SupabaseVectorStore
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> supabase.client <span style="color:#f92672">import</span> Client, create_client
+</span></span><span style="display:flex;"><span>supabase_url <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>environ<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;SUPABASE_URL&#34;</span>)
+</span></span><span style="display:flex;"><span>supabase_key <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>environ<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;SUPABASE_SERVICE_KEY&#34;</span>)
+</span></span><span style="display:flex;"><span>supabase: Client <span style="color:#f92672">=</span> create_client(supabase_url, supabase_key)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vectorstore <span style="color:#f92672">=</span> SupabaseVectorStore<span style="color:#f92672">.</span>from_documents(
+</span></span><span style="display:flex;"><span>    chunks,
+</span></span><span style="display:flex;"><span>    embeddings,
+</span></span><span style="display:flex;"><span>    client<span style="color:#f92672">=</span>supabase,
+</span></span><span style="display:flex;"><span>    table_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;documents&#34;</span>,
+</span></span><span style="display:flex;"><span>    query_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;match_documents&#34;</span>,
+</span></span><span style="display:flex;"><span>    chunk_size<span style="color:#f92672">=</span><span style="color:#ae81ff">500</span>,
+</span></span><span style="display:flex;"><span>)</span></span></code></pre></div>
+<h4 id="querying">Querying</h4>
+<p>For convenience, I&rsquo;ve included the values of <code>supabase_url</code> and <code>supabase_key</code> directly in the code to bypass the need for manual input during queries. However, it&rsquo;s crucial to ensure these keys are not exposed when sharing the code with others or when pushing it to a public GitHub repository.</p>
+<p>The definition of <code>vectorstore</code> differs from its counterpart in the loading section because, during querying, there&rsquo;s no need to insert chunks into the vector store.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.embeddings <span style="color:#f92672">import</span> HuggingFaceEmbeddings
+</span></span><span style="display:flex;"><span>embeddings <span style="color:#f92672">=</span> HuggingFaceEmbeddings(
+</span></span><span style="display:flex;"><span>    model_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># import getpass</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># os.environ[&#34;SUPABASE_URL&#34;] = getpass.getpass(&#34;Supabase URL: &#34;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># os.environ[&#34;SUPABASE_SERVICE_KEY&#34;] = getpass.getpass(&#34;Supabase Svc Key: &#34;)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.vectorstores <span style="color:#f92672">import</span> SupabaseVectorStore
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> supabase.client <span style="color:#f92672">import</span> Client, create_client
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># supabase_url = os.environ.get(&#34;SUPABASE_URL&#34;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># supabase_key = os.environ.get(&#34;SUPABASE_SERVICE_KEY&#34;)</span>
+</span></span><span style="display:flex;"><span>supabase_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://127.0.0.1:8000&#34;</span>
+</span></span><span style="display:flex;"><span>supabase_key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE&#34;</span>
+</span></span><span style="display:flex;"><span>supabase: Client <span style="color:#f92672">=</span> create_client(supabase_url, supabase_key)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>vectorstore <span style="color:#f92672">=</span> SupabaseVectorStore(
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># chunks,</span>
+</span></span><span style="display:flex;"><span>    embedding<span style="color:#f92672">=</span>embeddings,
+</span></span><span style="display:flex;"><span>    client<span style="color:#f92672">=</span>supabase,
+</span></span><span style="display:flex;"><span>    table_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;documents&#34;</span>,
+</span></span><span style="display:flex;"><span>    query_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;match_documents&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># chunk_size=500,</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_core.prompts <span style="color:#f92672">import</span> PromptTemplate
+</span></span><span style="display:flex;"><span>template <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;You are a chatbot having a conversation with a human.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Given the following extracted parts of a long document and a question, create a final answer.
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"></span><span style="color:#e6db74">{context}</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"></span><span style="color:#e6db74">{chat_history}</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Human :</span><span style="color:#e6db74">{human_input}</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Chatbot:&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>prompt <span style="color:#f92672">=</span> PromptTemplate(
+</span></span><span style="display:flex;"><span>    input_variables<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;chat_history&#34;</span>, <span style="color:#e6db74">&#34;human_input&#34;</span>, <span style="color:#e6db74">&#34;context&#34;</span>],
+</span></span><span style="display:flex;"><span>    template<span style="color:#f92672">=</span>template
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.llms <span style="color:#f92672">import</span> Ollama
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># llm = Ollama(model=&#34;mistral&#34;)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># llm = Ollama(model=&#34;llama3&#34;)</span>
+</span></span><span style="display:flex;"><span>llm <span style="color:#f92672">=</span> Ollama(model<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;gemma:2b&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.memory <span style="color:#f92672">import</span> ConversationBufferMemory
+</span></span><span style="display:flex;"><span>memory <span style="color:#f92672">=</span> ConversationBufferMemory(memory_key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;chat_history&#34;</span>, input_key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;human_input&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.chains.question_answering <span style="color:#f92672">import</span> load_qa_chain
+</span></span><span style="display:flex;"><span>chain <span style="color:#f92672">=</span> load_qa_chain(llm, chain_type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stuff&#34;</span>, memory<span style="color:#f92672">=</span>memory, prompt<span style="color:#f92672">=</span>prompt)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pprint <span style="color:#f92672">import</span> pprint
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
+</span></span><span style="display:flex;"><span>    user_input <span style="color:#f92672">=</span> input(<span style="color:#e6db74">&#34;Enter your question: &#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> user_input <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;exit&#34;</span>:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
+</span></span><span style="display:flex;"><span>        retriever <span style="color:#f92672">=</span> vectorstore<span style="color:#f92672">.</span>similarity_search(user_input)
+</span></span><span style="display:flex;"><span>        pprint(chain<span style="color:#f92672">.</span>invoke({<span style="color:#e6db74">&#34;input_documents&#34;</span>: retriever, <span style="color:#e6db74">&#34;human_input&#34;</span>: user_input}, return_only_outputs<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>))</span></span></code></pre></div>
+<p>The output is like</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>Enter your question: how does the emperor think about his cloth
+</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#39;output_text&#39;</span>: <span style="color:#e6db74">&#39;The emperor thinks about his cloth as he admires it and wants &#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;to see it appear as though it is in his pretty finery. He &#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;wishes it to appear that he is admiring it in his pretty &#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;finery.&#39;</span>}
+</span></span><span style="display:flex;"><span>Enter your question: how do the emperor<span style="color:#e6db74">&#39;s people think about the emperor</span>
+</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#39;output_text&#39;</span>: <span style="color:#e6db74">&#34;Sure, here&#39;s the answer to the question:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;The emperor&#39;s people thought about the emperor as he admired &#34;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;his cloth and wanted to see it appear as though it was in his &#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;pretty finery. They were up and about all night before the &#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;day of the grand procession, and moved their hands as if they &#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;were taking the cloth from the loom; they cut with their &#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;great scissors in the air, and sewed with needles that held &#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;no thread, and said, at last, &#34;See, now, the clothes are &#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;quite ready.&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;The emperor approached the looms at which the two artful &#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;impostors were working with all their might, although there &#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;was not a single thread on the looms.&#39;</span>}
+</span></span><span style="display:flex;"><span>Enter your question: what was my first question
+</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#39;output_text&#39;</span>: <span style="color:#e6db74">&#39;The question is: How does the emperor think about his cloth?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;The final answer is: The emperor thinks about his cloth and &#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;wants to see it appear as though it was in his pretty finery.&#39;</span>}
+</span></span><span style="display:flex;"><span>Enter your question:</span></span></code></pre></div>
+<p>The application retains a record of past conversations and accurately responds to inquiries regarding the initial question posed.</p>
+<p>In case you receive the following message:</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#f92672">{</span><span style="color:#e6db74">&#39;output_text&#39;</span>: <span style="color:#e6db74">&#39;The passage does not specify how the emperor thinks about his &#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;cloth, so I cannot answer this question from the provided &#39;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;context.&#39;</span><span style="color:#f92672">}</span></span></span></code></pre></div>
+<p>You can run the model with <code>ollama</code>, to trigger the model.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ollama run gemma:2b</span></span></code></pre></div>
+
+  <footer class="footline">
+  </footer>
+</article>
+        </div>
+      </main>
+    </div>
+    <aside id="R-sidebar" class="default-animation">
+      <div id="R-header-topbar" class="default-animation"></div>
+      <div id="R-header-wrapper" class="default-animation">
+        <div id="R-header" class="default-animation">
+          <a id="R-logo" class="R-default" href="/langchain_project_book/index.html">
+LangChain AI
+          </a>
+        </div>
+        <script>
+          window.index_js_url="/langchain_project_book/searchindex.js?1730126400";
+        </script>
+        <search><form action="/langchain_project_book/search/index.html" method="get">
+          <div class="searchbox default-animation">
+            <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
+            <label class="a11y-only" for="R-search-by">Search</label>
+            <input data-search-input id="R-search-by" name="search-by" class="search-by" type="search" placeholder="Search...">
+            <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
+          </div>
+        </form></search>
+        <script>
+          var contentLangs=['en'];
+        </script>
+        <script src="/langchain_project_book/js/auto-complete.js?1730126400" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1730126400" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1730126400" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1730126400" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1730126400" defer></script>
+        <script src="/langchain_project_book/js/search.js?1730126400" defer></script>
+      </div>
+      <div id="R-homelinks" class="default-animation homelinks">
+        <ul>
+          <li><a class="padding" href="/langchain_project_book/index.html"><i class="fa-fw fas fa-home"></i> Home</a></li>
+        </ul>
+        <hr class="padding">
+      </div>
+      <div id="R-content-wrapper" class="highlightable">
+        <div id="R-topics">
+          <ul class="enlarge morespace collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/preface/index.html"><a class="padding" href="/langchain_project_book/preface/index.html">Preface</a></li>
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/index.html"><a class="padding" href="/langchain_project_book/fundamentals/index.html">LangChain Fundamentals</a><ul id="R-subsections-c6757c34957c6808b13ecd5148aeca96" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/tools_n_lib/index.html"><a class="padding" href="/langchain_project_book/tools_n_lib/index.html">Tools and Libraries</a><ul id="R-subsections-cc34bf23dab60f9112ee939495610dcf" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/doc_sum/index.html"><a class="padding" href="/langchain_project_book/doc_sum/index.html">Document Summarization</a><ul id="R-subsections-76bbd5376befb633d2052d0ea4508ef3" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/ticketing_sys/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/index.html">Ticketing System</a><ul id="R-subsections-eaa6b154ff31d8e1af72e9555a67f96a" class="collapsible-menu"></ul></li>
+            <li class="parent " data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/index.html">KnowledgeBase Semantic Analysis</a><ul id="R-subsections-c718aa372d1e4f26c29659df75d5d07f" class="collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/arch_n_workflow/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/arch_n_workflow/index.html">Architecture and Workflow</a></li>
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/pareparing_data/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/pareparing_data/index.html">Preparing Data</a></li>
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/select_embed_model/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/select_embed_model/index.html">Selecting the Embedding Model</a></li>
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/index.html">Supabase as VectorStore</a></li>
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/defining_prompt_n_prompttemplate/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/defining_prompt_n_prompttemplate/index.html">Defining Prompt and PromptTemplate</a></li>
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/config_llm_with_gemma/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/config_llm_with_gemma/index.html">Configuring LLM with Google Gemma</a></li>
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html">Conversion History as a Memory with Retriever</a></li>
+            <li class="active " data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html">Complete Code</a></li>
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html">Summary</a></li></ul></li>
+          </ul>
+        </div>
+        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter"></div>
+        <div id="R-menu-footer">
+          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter">
+          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks">
+            <ul>
+              <li id="R-select-language-container" class="footerLangSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-language"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-language">Language</label>
+                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html" lang="en-us" selected></option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+              <li id="R-select-variant-container" class="footerVariantSwitch">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-paint-brush"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <label class="a11y-only" for="R-select-variant">Theme</label>
+                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
+                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
+                    </select>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+                <script>window.variants && variants.markSelectedVariant();</script>
+              </li>
+              <li class="footerVisitedLinks">
+                <div class="padding menu-control">
+                  <i class="fa-fw fas fa-history"></i>
+                  <span>&nbsp;</span>
+                  <div class="control-style">
+                    <button onclick="clearHistory();">Clear History</button>
+                  </div>
+                  <div class="clear"></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div id="R-footer" class="footerFooter showFooter">
+        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <script src="/langchain_project_book/js/clipboard.min.js?1730126400" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1730126400" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1730126400" defer></script>
+  </body>
+</html>

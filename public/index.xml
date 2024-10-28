@@ -6,7 +6,7 @@
     <description>Introduction My Journey with LangChain In late 2022, I embarked on an exciting journey with LangChain while leading a development team. This coincided with OpenAI’s significant boost in popularity, marking a pivotal moment in AI technology.&#xA;Discovery and Adoption After several months of exploration, our team identified LangChain as the ideal API standard and base platform for our projects. What drew us to LangChain was its comprehensive suite of features:</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Oct 2024 21:35:36 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 28 Oct 2024 22:39:33 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/langchain_project_book/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Preface</title>
@@ -42,6 +42,13 @@
       <pubDate>Mon, 28 Oct 2024 21:35:36 +0800</pubDate>
       <guid>http://localhost:1313/langchain_project_book/ticketing_sys/index.html</guid>
       <description>Our company undertakes a project to offer operational and support services to one of our banking clients. A key component of this effort is the “Ticketing System,” a tool utilized by the operation team to record all customer inquiries. This system encompasses a broad spectrum of issues, ranging from password resets to more complex matters such as operating system restoration and disk failure. Once a problem is identified, it is forwarded to the expert team for resolution. The solution is then documented within the same system, contributing to a vast database of issues and their resolutions. On a daily basis, tens of thousands of problems and their solutions are logged in this ticketing system.</description>
+    </item>
+    <item>
+      <title>KnowledgeBase Semantic Analysis</title>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/index.html</link>
+      <pubDate>Mon, 28 Oct 2024 22:39:33 +0800</pubDate>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/index.html</guid>
+      <description>A knowledge base acts as a centralized hub for all essential information, streamlining the organization and standardization of knowledge within a company. This not only enhances internal efficiency by providing employees with quick access to necessary details but also projects the company as modern, professional, and up-to-date. Moreover, it facilitates direct engagement with stakeholders, fostering a feedback loop that can significantly improve relationships and customer loyalty. By adopting a knowledge base, enterprises can significantly enhance their operational efficiency, reduce customer support costs through self-service solutions, and ultimately boost their overall business performance.</description>
     </item>
   </channel>
 </rss>

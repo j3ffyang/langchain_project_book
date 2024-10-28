@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>KnowledgeBase Semantic Analysis :: LangChain AI</title>
+    <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/index.html</link>
+    <description>A knowledge base acts as a centralized hub for all essential information, streamlining the organization and standardization of knowledge within a company. This not only enhances internal efficiency by providing employees with quick access to necessary details but also projects the company as modern, professional, and up-to-date. Moreover, it facilitates direct engagement with stakeholders, fostering a feedback loop that can significantly improve relationships and customer loyalty. By adopting a knowledge base, enterprises can significantly enhance their operational efficiency, reduce customer support costs through self-service solutions, and ultimately boost their overall business performance.</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 28 Oct 2024 22:39:33 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Architecture and Workflow</title>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/arch_n_workflow/index.html</link>
+      <pubDate>Mon, 28 Oct 2024 22:17:37 +0800</pubDate>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/arch_n_workflow/index.html</guid>
+      <description>The data preparation process in this chapter is comparable to that of the previous chapter. After embedding the data chunks, we will utilize Supabase as our VectorStore. Supabase is set up with pgvector, which is based on PostgreSQL, an open-source SQL database. A notable feature we introduce here is the inclusion of both chat_history and human_input in the ConversationBufferMemory, enabling the history to be utilized in multi-round conversations. For the LLM operator, we continue to employ Ollama in conjunction with Google’s Gemma model.</description>
+    </item>
+    <item>
+      <title>Preparing Data</title>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/pareparing_data/index.html</link>
+      <pubDate>Mon, 28 Oct 2024 22:21:47 +0800</pubDate>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/pareparing_data/index.html</guid>
+      <description>This part is the same as our previous discussion, with text loading from internet or you can load from either PDF with PyPDFLoader or Microsoft Word document, with Docx2txtLoader, split into smaller chunks, then get ready to insert into the VectorStore.&#xA;from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50) chunks = splitter.split_documents(documents)</description>
+    </item>
+    <item>
+      <title>Selecting the Embedding Model</title>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/select_embed_model/index.html</link>
+      <pubDate>Mon, 28 Oct 2024 22:23:54 +0800</pubDate>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/select_embed_model/index.html</guid>
+      <description>We continue to utilize this embedding model. It’s important to note that the dense vector space of this model has a dimensionality of 384, which must be specified when setting up the vector database with Supabase.&#xA;from langchain_community.embeddings import HuggingFaceEmbeddings embeddings = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;) You can find the details of “dimensional dense vector space” from Hugging Face at https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2</description>
+    </item>
+    <item>
+      <title>Supabase as VectorStore</title>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/index.html</link>
+      <pubDate>Mon, 28 Oct 2024 22:26:09 +0800</pubDate>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/index.html</guid>
+      <description>We will introduce Supabase as a vector store and walk through the process of storing various embeddings in Supabase Vector, a combination of PostgreSQL and pgVector, aimed at facilitating semantic search.&#xA;Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL, a robust SQL database suitable for production environments. Given that Supabase Vector is built on pgVector, it allows for the storage of embeddings alongside other application data within the same database. This integration with pgvector’s indexing algorithms ensures that vector searches remain efficient even at large scales.</description>
+    </item>
+    <item>
+      <title>Defining Prompt and PromptTemplate</title>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/defining_prompt_n_prompttemplate/index.html</link>
+      <pubDate>Mon, 28 Oct 2024 22:29:49 +0800</pubDate>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/defining_prompt_n_prompttemplate/index.html</guid>
+      <description>This is the standard PromptTemplate designed to merge context, chat_history, and human_input, where the context is derived from the similarity_search results obtained from the vector store.&#xA;from langchain_core.prompts import PromptTemplate template = &#34;&#34;&#34;You are a chatbot having a conversation with a human. Given the following extracted parts of a long document and a question, create a final answer. {context} {chat_history} Human :{human_input} Chatbot:&#34;&#34;&#34; prompt = PromptTemplate( input_variables=[&#34;chat_history&#34;, &#34;human_input&#34;, &#34;context&#34;], template=template )</description>
+    </item>
+    <item>
+      <title>Configuring LLM with Google Gemma</title>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/config_llm_with_gemma/index.html</link>
+      <pubDate>Mon, 28 Oct 2024 22:31:49 +0800</pubDate>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/config_llm_with_gemma/index.html</guid>
+      <description>Gemma is a collection of lightweight, open-source generative AI models, primarily designed for developers and researchers. Developed by Google DeepMind, the same team behind the closed-source Gemini, Gemma is engineered to be compatible with a wide array of developer tools and Google Cloud services. The name Gemma is inspired from the Latin term for precious stone, underscoring its high value within the AI development community.&#xA;The model we’re utilizing has a limitation: it is quantized, which reduces accuracy to enhance performance and maintain a compact size suitable for local execution, especially when there’s insufficient capacity. Therefore, it’s important to remember that the quantized language model will have a compromised quality to balance performance.</description>
+    </item>
+    <item>
+      <title>Conversion History as a Memory with Retriever</title>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html</link>
+      <pubDate>Mon, 28 Oct 2024 22:33:54 +0800</pubDate>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html</guid>
+      <description>This segment highlights the innovative feature of utilizing ConversationBufferMemory. This component merges human_input and chat_history into a unified memory, which is part of the load_qa_chain process. The prompt incorporates chat_history and context derived from the similarity_search output of the retriever. The technical procedure is depicted in the subsequent diagram.&#xA;rectangle ConversationBufferMemory { file chat_history file human_input } rectangle load_qa_chain { file llm file chain_type file memory rectangle prompt { file &#34;chat_history&#34; as ch file &#34;human_input&#34; as hi file context ch -[hidden]-&gt; hi hi -[hidden]-&gt; context } memory -[hidden]l- llm chain_type -[hidden]r- prompt llm -[hidden]d-&gt; chain_type memory -[hidden]d-&gt; prompt } rectangle retriever { database vectorstore } retriever -[hidden]l- human_input hi -l-&gt; vectorstore: similarity_search retriever -r-&gt; context ConversationBufferMemory -d-&gt; memory Figure 5.3 Memory in a Chain</description>
+    </item>
+    <item>
+      <title>Complete Code</title>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html</link>
+      <pubDate>Mon, 28 Oct 2024 22:36:51 +0800</pubDate>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html</guid>
+      <description>I’ve divided the code into two sections because the data source is loaded into the vector store only once. After this initial load, queries can be executed against the existing vector store.&#xA;Load the data into the vector store Query against the vector store Loading the Data from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents) from langchain_community.embeddings import HuggingFaceEmbeddings embeddings = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;) import os import getpass os.environ[&#34;SUPABASE_URL&#34;] = getpass.getpass(&#34;Supabase URL: &#34;) os.environ[&#34;SUPABASE_SERVICE_KEY&#34;] = getpass.getpass(&#34;Supabase Svc Key: &#34;) from langchain_community.vectorstores import SupabaseVectorStore from supabase.client import Client, create_client supabase_url = os.environ.get(&#34;SUPABASE_URL&#34;) supabase_key = os.environ.get(&#34;SUPABASE_SERVICE_KEY&#34;) supabase: Client = create_client(supabase_url, supabase_key) vectorstore = SupabaseVectorStore.from_documents( chunks, embeddings, client=supabase, table_name=&#34;documents&#34;, query_name=&#34;match_documents&#34;, chunk_size=500, ) Querying For convenience, I’ve included the values of supabase_url and supabase_key directly in the code to bypass the need for manual input during queries. However, it’s crucial to ensure these keys are not exposed when sharing the code with others or when pushing it to a public GitHub repository.</description>
+    </item>
+    <item>
+      <title>Summary</title>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html</link>
+      <pubDate>Mon, 28 Oct 2024 22:39:33 +0800</pubDate>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html</guid>
+      <description>Key takeaways from this chapter:&#xA;All components are open-source. The source data is loaded from a website. Supabase, a platform built on PostgreSQL with vector extensions enabled, offers a user-friendly interface for managing data. This interface allows for the manipulation and management of embedded data according to business needs, including updating, modifying, and deleting incorrect data. A memory system that supports multiple inputs with Retriever for multi-round conversations is implemented. The code is divided into two sections: loading and querying.&gt; Ref &gt; https://blog.streamlit.io/build-your-own-notion-chatbot/ DataSet and Convert content into VectorStore &gt; https://blendle.notion.site/Blendle-s-Employee-Handbook-7692ffe24f07450785f093b94bbe1a09</description>
+    </item>
+  </channel>
+</rss>
