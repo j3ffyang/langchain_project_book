@@ -35,4 +35,4 @@ I invite you to explore these resources and share your thoughts. Your feedback a
 
 Feel free to engage in discussions, ask questions, or suggest improvements, at [Github](https://github.com/j3ffyang/langchain_project_book). Let's foster a vibrant community around LangChain and push the boundaries of what's possible with this powerful tool!
 
-Please follow me at https://x.com/AnalyticSource and https://x.com/j3ffyang
+Please follow me at [@AnalyticSource](https://x.com/AnalyticSource) and [@j3ffyang](https://x.com/j3ffyang)
