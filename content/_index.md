@@ -33,6 +33,6 @@ This decision aligns with the spirit of collaborative innovation that drives man
 
 I invite you to explore these resources and share your thoughts. Your feedback and comments are invaluable in refining and expanding this body of knowledge. Together, we can create a richer understanding of LangChain and its applications.
 
-Feel free to engage in discussions, ask questions, or suggest improvements. Let's foster a vibrant community around LangChain and push the boundaries of what's possible with this powerful tool!
+Feel free to engage in discussions, ask questions, or suggest improvements, at [Github](https://github.com/j3ffyang/langchain_project_book). Let's foster a vibrant community around LangChain and push the boundaries of what's possible with this powerful tool!
 
-Please follow me https://x.com/AnalyticSource
+Please follow me at https://x.com/AnalyticSource and https://x.com/j3ffyang
