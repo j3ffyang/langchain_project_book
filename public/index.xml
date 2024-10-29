@@ -3,7 +3,7 @@
   <channel>
     <title>LangChain Project Handbook :: LangChain AI</title>
     <link>http://localhost:1313/langchain_project_book/index.html</link>
-    <description>Introduction My Journey with LangChain In late 2022, I embarked on an exciting journey with LangChain while leading a development team. This coincided with OpenAI’s significant boost in popularity, marking a pivotal moment in AI technology.&#xA;Discovery and Adoption After several months of exploration, our team identified LangChain as the ideal API standard and base platform for our projects. What drew us to LangChain was its comprehensive suite of features:</description>
+    <description>My Journey with LangChain In late 2022, I embarked on an exciting journey with LangChain while leading a development team. This coincided with OpenAI’s significant boost in popularity, marking a pivotal moment in AI technology.&#xA;Discovery and Adoption After several months of exploration, our team identified LangChain as the ideal API standard and base platform for our projects. What drew us to LangChain was its comprehensive suite of features:&#xA;Configuring vector databases Orchestrating multiple popular embeddings and large language models from open source community Facilitating complex workflows with agents These capabilities made LangChain an indispensable tool for our development needs.</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 28 Oct 2024 22:39:33 +0800</lastBuildDate>
