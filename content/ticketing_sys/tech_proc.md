@@ -35,4 +35,4 @@ compression_retriever --> llm: prompt
 llm -> result
 {{< /plantuml >}}
 
-Figure 4.1 Work Flow
+Figure 5.1 Work Flow

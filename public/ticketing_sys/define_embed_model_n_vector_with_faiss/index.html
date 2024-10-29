@@ -29,16 +29,16 @@
     <meta itemprop="dateModified" content="2024-10-28T21:27:58+08:00">
     <meta itemprop="wordCount" content="729">
     <title>Define Embedding Model and VectorStore with FAISS :: LangChain AI</title>
-    <link href="/langchain_project_book/css/fontawesome-all.min.css?1730158732" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1730158732" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/nucleus.css?1730158732" rel="stylesheet">
-    <link href="/langchain_project_book/css/auto-complete.css?1730158732" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1730158732" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1730158732" rel="stylesheet">
-    <link href="/langchain_project_book/css/fonts.css?1730158732" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1730158732" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/theme.css?1730158732" rel="stylesheet">
-    <link href="/langchain_project_book/css/theme-auto.css?1730158732" rel="stylesheet" id="R-variant-style">
-    <link href="/langchain_project_book/css/chroma-auto.css?1730158732" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/langchain_project_book/css/print.css?1730158732" rel="stylesheet" media="print">
-    <script src="/langchain_project_book/js/variant.js?1730158732"></script>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1730171756" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1730171756" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1730171756" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1730171756" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1730171756" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1730171756" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1730171756" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1730171756" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1730171756" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1730171756" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1730171756" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1730171756" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1730171756"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
@@ -141,7 +141,7 @@
 <p>Reference &gt; <a href="https://python.langchain.com/docs/modules/data_connection/retrievers/contextual_compression/" rel="external" target="_blank">https://python.langchain.com/docs/modules/data_connection/retrievers/contextual_compression/</a></p>
 </blockquote>
 <p>Here&rsquo;s an example:</p>
-<p><head>
+<head>
     <script src="https://cdn.jsdelivr.net/gh/jmnote/plantuml-encoder@1.2.4/dist/plantuml-encoder.min.js" integrity="sha256-Qsk2KRBCN5qVZX7B+8+2IvQl1Aqc723qV1tBCQaVoqo=" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -179,8 +179,7 @@ ContextualCompressionRetriever -> compression_retriever
 </html>
 
 
-<!-- raw HTML omitted -->
-Figure 4.3 Contextual Compression Retriever logic</p>
+<p>Figure 5.3 Contextual Compression Retriever logic</p>
 <div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.vectorstores <span style="color:#f92672">import</span> FAISS
 </span></span><span style="display:flex;"><span>vectorstore <span style="color:#f92672">=</span> FAISS<span style="color:#f92672">.</span>from_documents(documents, embeddings)
 </span></span><span style="display:flex;"><span>retriever <span style="color:#f92672">=</span> vectorstore<span style="color:#f92672">.</span>as_retriever()
@@ -223,7 +222,7 @@ LangChain AI
           </a>
         </div>
         <script>
-          window.index_js_url="/langchain_project_book/searchindex.js?1730158732";
+          window.index_js_url="/langchain_project_book/searchindex.js?1730171756";
         </script>
         <search><form action="/langchain_project_book/search/index.html" method="get">
           <div class="searchbox default-animation">
@@ -236,12 +235,12 @@ LangChain AI
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/langchain_project_book/js/auto-complete.js?1730158732" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.min.js?1730158732" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1730158732" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1730158732" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1730158732" defer></script>
-        <script src="/langchain_project_book/js/search.js?1730158732" defer></script>
+        <script src="/langchain_project_book/js/auto-complete.js?1730171756" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1730171756" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1730171756" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1730171756" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1730171756" defer></script>
+        <script src="/langchain_project_book/js/search.js?1730171756" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -318,8 +317,8 @@ LangChain AI
         </div>
       </div>
     </aside>
-    <script src="/langchain_project_book/js/clipboard.min.js?1730158732" defer></script>
-    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1730158732" defer></script>
-    <script src="/langchain_project_book/js/theme.js?1730158732" defer></script>
+    <script src="/langchain_project_book/js/clipboard.min.js?1730171756" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1730171756" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1730171756" defer></script>
   </body>
 </html>

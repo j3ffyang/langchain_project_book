@@ -1,5 +1,5 @@
 +++
-title = 'Conversion History as a Memory with Retriever'
+title = 'Conversation History as a Memory with Retriever'
 date = 2024-10-28T22:33:54+08:00
 draft = false
 weight = 7
@@ -45,7 +45,8 @@ retriever -r-> context
 
 ConversationBufferMemory -d-> memory
 {{< /plantuml >}}
-Figure 5.3 Memory in a Chain
+
+Figure 6.4 Memory in a Chain
 
 
 The following example shows how to define memory with `ConversationBufferMemory` function and place it into a variable in `load_qa_chain`.

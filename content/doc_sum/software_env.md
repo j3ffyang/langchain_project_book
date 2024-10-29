@@ -11,7 +11,7 @@ As LangChain, introduced in this book, is based on Python, the following is the 
 
 In my development environment, I have the following libraries installed:
 
-> reminder: The community is evolving, and the library is adapting rapidly. The information presented here may change over time. This list serves as a reference for the current chapter being written.
+> Reminder: The community is evolving, and the library is adapting rapidly. The information presented here may change over time. This list serves as a reference for the current chapter being written.
 
 ```py
 beautifulsoup4==4.12.3
@@ -64,7 +64,8 @@ vectorstore -- docker
 docker - storage
 llm -- ollama
 {{< /plantuml >}}
-Figure 3.1 Software Architecture
+
+Figure 4.1 Software Architecture
 
 #### Docker
 

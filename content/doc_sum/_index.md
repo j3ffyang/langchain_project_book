@@ -38,4 +38,4 @@ I have 2 laptops at home for leisure and work. One is MacBook Pro 16,2 (16G RAM,
 
 <center>Figure 3.0 Hardware Specification for Development</center>
 
-The code example provided in this book can run on both macOS Sonoma 14.4 and Manjaro Linux with kernel `6.6.19`.
+The code example provided in this book can run on both macOS `Sonoma 14.4` and Manjaro Linux with kernel `6.6.19`.

@@ -95,7 +95,8 @@ docker compose up -d
 After you successfully log into the portal, you can see
 
 ![](images/2024-05-01-21-22-34.png)
-<center>Figure 5.2 Supabase Dashboard</center>
+
+Figure 6.2 Supabase Dashboard
 
 <!-- First, select `Database` from navigation panel,  -->
 
@@ -161,7 +162,8 @@ On macOS, you may experience an issue where the containers `supabase-meta` and `
 Settings > General > Use Virtualization framework > select "gRPC FUSE" then un-check "Use Virtualization framework"
 
 ![](images/2024-05-07-11-29-17.png)
-<center>Figure 5.3 Change Virtualization framework for Supabase on macOS</center>
+
+Figure 6.3 Change Virtualization framework for Supabase on macOS
 
 > Reference > https://github.com/supabase/cli/issues/1724
 

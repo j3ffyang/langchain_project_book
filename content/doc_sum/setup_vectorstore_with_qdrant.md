@@ -29,7 +29,7 @@ docker run -p 6333:6333 -p 6334:6334 \
 
 After Qdrant is launched completely, you can browse https://localhost:6333/dashboard and view the following or similar.
 ![](images/2024-03-25-18-35-14.png)
-Figure 3.2 Qdrant Dashboard Sample
+Figure 4.2 Qdrant Dashboard Sample
 <br>
 
 Please be aware that this service is accessible to anyone within the same network. This means that anyone who can access the URL has the ability to view and potentially delete your data. Therefore, it is essential to implement HTTP Basic Authentication to restrict access. For example, if using Nginx, refer to the documentation > https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/

@@ -54,7 +54,8 @@ vectorstore --> load_qa_chain
 
 chat_history -[hidden]d- human_input
 {{< /plantuml >}}
-Figure 5.1 Data Flow
+
+Figure 6.1 Data Flow
 
 
 ### Dependencies
@@ -79,6 +80,6 @@ Remember the rapid pace of development within the open-source community, which l
 
 For instance, to upgrade `langchain` related packages
 
-```py
+```sh
 pip install --upgrade `pip list | grep langchain | awk '{print $1}'`
 ```

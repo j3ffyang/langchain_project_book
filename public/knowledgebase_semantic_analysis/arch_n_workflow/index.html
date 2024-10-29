@@ -25,16 +25,16 @@
     <meta itemprop="dateModified" content="2024-10-28T22:17:37+08:00">
     <meta itemprop="wordCount" content="301">
     <title>Architecture and Workflow :: LangChain AI</title>
-    <link href="/langchain_project_book/css/fontawesome-all.min.css?1730158732" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1730158732" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/nucleus.css?1730158732" rel="stylesheet">
-    <link href="/langchain_project_book/css/auto-complete.css?1730158732" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1730158732" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1730158732" rel="stylesheet">
-    <link href="/langchain_project_book/css/fonts.css?1730158732" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1730158732" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/theme.css?1730158732" rel="stylesheet">
-    <link href="/langchain_project_book/css/theme-auto.css?1730158732" rel="stylesheet" id="R-variant-style">
-    <link href="/langchain_project_book/css/chroma-auto.css?1730158732" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/langchain_project_book/css/print.css?1730158732" rel="stylesheet" media="print">
-    <script src="/langchain_project_book/js/variant.js?1730158732"></script>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1730171756" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1730171756" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1730171756" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1730171756" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1730171756" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1730171756" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1730171756" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1730171756" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1730171756" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1730171756" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1730171756" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1730171756" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1730171756"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
@@ -112,7 +112,7 @@
 
 <p>The data preparation process in this chapter is comparable to that of the previous chapter. After embedding the data chunks, we will utilize Supabase as our VectorStore. Supabase is set up with <code>pgvector</code>, which is based on PostgreSQL, an open-source SQL database. A notable feature we introduce here is the inclusion of both <code>chat_history</code> and <code>human_input</code> in the <code>ConversationBufferMemory</code>, enabling the history to be utilized in multi-round conversations. For the LLM operator, we continue to employ Ollama in conjunction with Google&rsquo;s Gemma model.</p>
 <p>The architecture is highly modular, allowing each module to be interchangeable. This modularity is how LangChain integrates all components seamlessly.</p>
-<p><head>
+<head>
     <script src="https://cdn.jsdelivr.net/gh/jmnote/plantuml-encoder@1.2.4/dist/plantuml-encoder.min.js" integrity="sha256-Qsk2KRBCN5qVZX7B+8+2IvQl1Aqc723qV1tBCQaVoqo=" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -183,7 +183,7 @@ chat_history -[hidden]d- human_input
 </html>
 
 
-Figure 5.1 Data Flow</p>
+<p>Figure 6.1 Data Flow</p>
 <h3 id="dependencies">Dependencies</h3>
 <p>The code utilized in this chapter has specific dependencies. It is crucial to install these libraries prior to running the code.</p>
 <div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>pip list <span style="color:#f92672">|</span> grep <span style="color:#f92672">-</span>i <span style="color:#e6db74">&#39;langchain\|supabase&#39;</span>
@@ -199,7 +199,7 @@ Figure 5.1 Data Flow</p>
 </span></span><span style="display:flex;"><span>supabase                                 <span style="color:#ae81ff">2.9.1</span></span></span></code></pre></div>
 <p>Remember the rapid pace of development within the open-source community, which leads to frequent updates, sometimes even daily. Ensure to regularly update your packages and consult the associated documentation for the most current information.</p>
 <p>For instance, to upgrade <code>langchain</code> related packages</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>pip install <span style="color:#f92672">--</span>upgrade <span style="color:#960050;background-color:#1e0010">`</span>pip list <span style="color:#f92672">|</span> grep langchain <span style="color:#f92672">|</span> awk <span style="color:#e6db74">&#39;{print $1}&#39;</span><span style="color:#960050;background-color:#1e0010">`</span></span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>pip install --upgrade <span style="color:#e6db74">`</span>pip list | grep langchain | awk <span style="color:#e6db74">&#39;{print $1}&#39;</span><span style="color:#e6db74">`</span></span></span></code></pre></div>
 
   <footer class="footline">
   </footer>
@@ -216,7 +216,7 @@ LangChain AI
           </a>
         </div>
         <script>
-          window.index_js_url="/langchain_project_book/searchindex.js?1730158732";
+          window.index_js_url="/langchain_project_book/searchindex.js?1730171756";
         </script>
         <search><form action="/langchain_project_book/search/index.html" method="get">
           <div class="searchbox default-animation">
@@ -229,12 +229,12 @@ LangChain AI
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/langchain_project_book/js/auto-complete.js?1730158732" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.min.js?1730158732" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1730158732" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1730158732" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1730158732" defer></script>
-        <script src="/langchain_project_book/js/search.js?1730158732" defer></script>
+        <script src="/langchain_project_book/js/auto-complete.js?1730171756" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1730171756" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1730171756" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1730171756" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1730171756" defer></script>
+        <script src="/langchain_project_book/js/search.js?1730171756" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -257,7 +257,7 @@ LangChain AI
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/index.html">Supabase as VectorStore</a></li>
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/defining_prompt_n_prompttemplate/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/defining_prompt_n_prompttemplate/index.html">Defining Prompt and PromptTemplate</a></li>
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/config_llm_with_gemma/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/config_llm_with_gemma/index.html">Configuring LLM with Google Gemma</a></li>
-            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html">Conversion History as a Memory with Retriever</a></li>
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html">Conversation History as a Memory with Retriever</a></li>
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html">Complete Code</a></li>
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html">Summary</a></li></ul></li>
           </ul>
@@ -312,8 +312,8 @@ LangChain AI
         </div>
       </div>
     </aside>
-    <script src="/langchain_project_book/js/clipboard.min.js?1730158732" defer></script>
-    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1730158732" defer></script>
-    <script src="/langchain_project_book/js/theme.js?1730158732" defer></script>
+    <script src="/langchain_project_book/js/clipboard.min.js?1730171756" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1730171756" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1730171756" defer></script>
   </body>
 </html>

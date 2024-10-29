@@ -87,8 +87,8 @@ note bottom of compression_retriever: new retriever, used in chain
 base_retriever -> base_compressor
 ContextualCompressionRetriever -> compression_retriever
 {{< /plantuml >}}
-<br>
-Figure 4.3 Contextual Compression Retriever logic
+
+Figure 5.3 Contextual Compression Retriever logic
 
 ```python
 from langchain_community.vectorstores import FAISS

@@ -40,7 +40,8 @@ vectorstore --> ContextualCompressionRetriever:context from `retriever.get_relev
 ContextualCompressionRetriever --> prompt:compression_retriever.get_relevant_documents(query)
 prompt -> llm
 {{< /plantuml >}}
-Figure 4.2 RAG with Contextual Compression Retriever
+
+Figure 5.2 RAG with Contextual Compression Retriever
 
 
 The diagram illustrates that the Contextual Compression Retriever is situated between the Base Retriever and the LLM, serving as an enhancement component. We will delve into the rationale behind this arrangement later in this chapter.

@@ -30,7 +30,7 @@ CONTEXT -[hidden]- QUESTIONS
 QUESTIONS -[hidden] ANSWER
 {{< /plantuml >}}
 
-Figure 1.3: Prompt Template
+Figure 2.3: Prompt Template
 
 In the context of LLMs, it consists of several key components:
 

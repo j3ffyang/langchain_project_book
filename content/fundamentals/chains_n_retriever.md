@@ -34,7 +34,7 @@ chain -[hidden]- prompt
 prompt -[hidden] chain.invoke
 {{< /plantuml >}}
 
-<center>Figure 1.4: Chain in Process</center>
+Figure 2.4: Chain in Process
 
 To demonstrate LangChain's capability for creating simple chains, here is an instance utilizing the `HuggingFaceEndpoint` class.
 
@@ -137,7 +137,7 @@ prompt --> HuggingFaceEndpoint
 HuggingFaceEndpoint -> answer
 {{< /plantuml >}}
 
-<center>Figure 1.5: Chain of RAG</center>
+Figure 2.5: Chain of RAG
 
 In conclusion, LangChain's chains and retrievers offer an adaptable and potent approach to developing LLM-based applications. These tools enable developers to design intricate processes that manage user input, obtain relevant data, and provide output.
 

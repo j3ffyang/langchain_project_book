@@ -16,7 +16,7 @@ To install LangChain, you can use `pip` or `conda`.
 
 It's always recommended to check the latest version of `LangChain` at https://github.com/langchain-ai/langchain
 
-At the point of writing this book, the version of LangChain that I'm using is `0.1.11`
+> Reminder: The community is evolving, and the library is adapting rapidly. The information presented here may change over time. This list serves as a reference for the current chapter being written.
 
 ```py
 pip list | grep langchain

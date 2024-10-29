@@ -6,39 +6,39 @@
     <meta name="generator" content="Hugo 0.134.2">
     <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
     <meta name="description" content="This segment highlights the innovative feature of utilizing ConversationBufferMemory. This component merges human_input and chat_history into a unified memory, which is part of the load_qa_chain process. The prompt incorporates chat_history and context derived from the similarity_search output of the retriever. The technical procedure is depicted in the subsequent diagram.
-rectangle ConversationBufferMemory { file chat_history file human_input } rectangle load_qa_chain { file llm file chain_type file memory rectangle prompt { file &#34;chat_history&#34; as ch file &#34;human_input&#34; as hi file context ch -[hidden]-&gt; hi hi -[hidden]-&gt; context } memory -[hidden]l- llm chain_type -[hidden]r- prompt llm -[hidden]d-&gt; chain_type memory -[hidden]d-&gt; prompt } rectangle retriever { database vectorstore } retriever -[hidden]l- human_input hi -l-&gt; vectorstore: similarity_search retriever -r-&gt; context ConversationBufferMemory -d-&gt; memory Figure 5.3 Memory in a Chain">
+rectangle ConversationBufferMemory { file chat_history file human_input } rectangle load_qa_chain { file llm file chain_type file memory rectangle prompt { file &#34;chat_history&#34; as ch file &#34;human_input&#34; as hi file context ch -[hidden]-&gt; hi hi -[hidden]-&gt; context } memory -[hidden]l- llm chain_type -[hidden]r- prompt llm -[hidden]d-&gt; chain_type memory -[hidden]d-&gt; prompt } rectangle retriever { database vectorstore } retriever -[hidden]l- human_input hi -l-&gt; vectorstore: similarity_search retriever -r-&gt; context ConversationBufferMemory -d-&gt; memory Figure 6.4 Memory in a Chain">
     <meta name="author" content="">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Conversion History as a Memory with Retriever :: LangChain AI">
+    <meta name="twitter:title" content="Conversation History as a Memory with Retriever :: LangChain AI">
     <meta name="twitter:description" content="This segment highlights the innovative feature of utilizing ConversationBufferMemory. This component merges human_input and chat_history into a unified memory, which is part of the load_qa_chain process. The prompt incorporates chat_history and context derived from the similarity_search output of the retriever. The technical procedure is depicted in the subsequent diagram.
-rectangle ConversationBufferMemory { file chat_history file human_input } rectangle load_qa_chain { file llm file chain_type file memory rectangle prompt { file &#34;chat_history&#34; as ch file &#34;human_input&#34; as hi file context ch -[hidden]-&gt; hi hi -[hidden]-&gt; context } memory -[hidden]l- llm chain_type -[hidden]r- prompt llm -[hidden]d-&gt; chain_type memory -[hidden]d-&gt; prompt } rectangle retriever { database vectorstore } retriever -[hidden]l- human_input hi -l-&gt; vectorstore: similarity_search retriever -r-&gt; context ConversationBufferMemory -d-&gt; memory Figure 5.3 Memory in a Chain">
+rectangle ConversationBufferMemory { file chat_history file human_input } rectangle load_qa_chain { file llm file chain_type file memory rectangle prompt { file &#34;chat_history&#34; as ch file &#34;human_input&#34; as hi file context ch -[hidden]-&gt; hi hi -[hidden]-&gt; context } memory -[hidden]l- llm chain_type -[hidden]r- prompt llm -[hidden]d-&gt; chain_type memory -[hidden]d-&gt; prompt } rectangle retriever { database vectorstore } retriever -[hidden]l- human_input hi -l-&gt; vectorstore: similarity_search retriever -r-&gt; context ConversationBufferMemory -d-&gt; memory Figure 6.4 Memory in a Chain">
     <meta property="og:url" content="http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html">
     <meta property="og:site_name" content="LangChain AI">
-    <meta property="og:title" content="Conversion History as a Memory with Retriever :: LangChain AI">
+    <meta property="og:title" content="Conversation History as a Memory with Retriever :: LangChain AI">
     <meta property="og:description" content="This segment highlights the innovative feature of utilizing ConversationBufferMemory. This component merges human_input and chat_history into a unified memory, which is part of the load_qa_chain process. The prompt incorporates chat_history and context derived from the similarity_search output of the retriever. The technical procedure is depicted in the subsequent diagram.
-rectangle ConversationBufferMemory { file chat_history file human_input } rectangle load_qa_chain { file llm file chain_type file memory rectangle prompt { file &#34;chat_history&#34; as ch file &#34;human_input&#34; as hi file context ch -[hidden]-&gt; hi hi -[hidden]-&gt; context } memory -[hidden]l- llm chain_type -[hidden]r- prompt llm -[hidden]d-&gt; chain_type memory -[hidden]d-&gt; prompt } rectangle retriever { database vectorstore } retriever -[hidden]l- human_input hi -l-&gt; vectorstore: similarity_search retriever -r-&gt; context ConversationBufferMemory -d-&gt; memory Figure 5.3 Memory in a Chain">
+rectangle ConversationBufferMemory { file chat_history file human_input } rectangle load_qa_chain { file llm file chain_type file memory rectangle prompt { file &#34;chat_history&#34; as ch file &#34;human_input&#34; as hi file context ch -[hidden]-&gt; hi hi -[hidden]-&gt; context } memory -[hidden]l- llm chain_type -[hidden]r- prompt llm -[hidden]d-&gt; chain_type memory -[hidden]d-&gt; prompt } rectangle retriever { database vectorstore } retriever -[hidden]l- human_input hi -l-&gt; vectorstore: similarity_search retriever -r-&gt; context ConversationBufferMemory -d-&gt; memory Figure 6.4 Memory in a Chain">
     <meta property="og:locale" content="en_us">
     <meta property="og:type" content="article">
     <meta property="article:section" content="KnowledgeBase Semantic Analysis">
     <meta property="article:published_time" content="2024-10-28T22:33:54+08:00">
     <meta property="article:modified_time" content="2024-10-28T22:33:54+08:00">
-    <meta itemprop="name" content="Conversion History as a Memory with Retriever :: LangChain AI">
+    <meta itemprop="name" content="Conversation History as a Memory with Retriever :: LangChain AI">
     <meta itemprop="description" content="This segment highlights the innovative feature of utilizing ConversationBufferMemory. This component merges human_input and chat_history into a unified memory, which is part of the load_qa_chain process. The prompt incorporates chat_history and context derived from the similarity_search output of the retriever. The technical procedure is depicted in the subsequent diagram.
-rectangle ConversationBufferMemory { file chat_history file human_input } rectangle load_qa_chain { file llm file chain_type file memory rectangle prompt { file &#34;chat_history&#34; as ch file &#34;human_input&#34; as hi file context ch -[hidden]-&gt; hi hi -[hidden]-&gt; context } memory -[hidden]l- llm chain_type -[hidden]r- prompt llm -[hidden]d-&gt; chain_type memory -[hidden]d-&gt; prompt } rectangle retriever { database vectorstore } retriever -[hidden]l- human_input hi -l-&gt; vectorstore: similarity_search retriever -r-&gt; context ConversationBufferMemory -d-&gt; memory Figure 5.3 Memory in a Chain">
+rectangle ConversationBufferMemory { file chat_history file human_input } rectangle load_qa_chain { file llm file chain_type file memory rectangle prompt { file &#34;chat_history&#34; as ch file &#34;human_input&#34; as hi file context ch -[hidden]-&gt; hi hi -[hidden]-&gt; context } memory -[hidden]l- llm chain_type -[hidden]r- prompt llm -[hidden]d-&gt; chain_type memory -[hidden]d-&gt; prompt } rectangle retriever { database vectorstore } retriever -[hidden]l- human_input hi -l-&gt; vectorstore: similarity_search retriever -r-&gt; context ConversationBufferMemory -d-&gt; memory Figure 6.4 Memory in a Chain">
     <meta itemprop="datePublished" content="2024-10-28T22:33:54+08:00">
     <meta itemprop="dateModified" content="2024-10-28T22:33:54+08:00">
     <meta itemprop="wordCount" content="272">
-    <title>Conversion History as a Memory with Retriever :: LangChain AI</title>
-    <link href="/langchain_project_book/css/fontawesome-all.min.css?1730158732" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1730158732" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/nucleus.css?1730158732" rel="stylesheet">
-    <link href="/langchain_project_book/css/auto-complete.css?1730158732" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1730158732" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1730158732" rel="stylesheet">
-    <link href="/langchain_project_book/css/fonts.css?1730158732" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1730158732" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/theme.css?1730158732" rel="stylesheet">
-    <link href="/langchain_project_book/css/theme-auto.css?1730158732" rel="stylesheet" id="R-variant-style">
-    <link href="/langchain_project_book/css/chroma-auto.css?1730158732" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/langchain_project_book/css/print.css?1730158732" rel="stylesheet" media="print">
-    <script src="/langchain_project_book/js/variant.js?1730158732"></script>
+    <title>Conversation History as a Memory with Retriever :: LangChain AI</title>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1730171756" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1730171756" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1730171756" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1730171756" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1730171756" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1730171756" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1730171756" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1730171756" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1730171756" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1730171756" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1730171756" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1730171756" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1730171756"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
@@ -78,7 +78,7 @@ rectangle ConversationBufferMemory { file chat_history file human_input } rectan
           <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
             itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/index.html"><span itemprop="name">LangChain Project Handbook</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
             itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/knowledgebase_semantic_analysis/index.html"><span itemprop="name">KnowledgeBase Semantic Analysis</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
-            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Conversion History as a Memory with Retriever</span><meta itemprop="position" content="3"></li>
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Conversation History as a Memory with Retriever</span><meta itemprop="position" content="3"></li>
           </ol>
           <div class="topbar-area topbar-area-end" data-area="end">
             <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/knowledgebase_semantic_analysis/config_llm_with_gemma/index.html" title="Configuring LLM with Google Gemma (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
@@ -103,10 +103,10 @@ rectangle ConversationBufferMemory { file chat_history file human_input } rectan
   <header class="headline">
   </header>
 
-<h1 id="conversion-history-as-a-memory-with-retriever">Conversion History as a Memory with Retriever</h1>
+<h1 id="conversation-history-as-a-memory-with-retriever">Conversation History as a Memory with Retriever</h1>
 
 <p>This segment highlights the innovative feature of utilizing <code>ConversationBufferMemory</code>. This component merges <code>human_input</code> and <code>chat_history</code> into a unified <code>memory</code>, which is part of the <code>load_qa_chain</code> process. The <code>prompt</code> incorporates <code>chat_history</code> and <code>context</code> derived from the <code>similarity_search</code> output of the <code>retriever</code>. The technical procedure is depicted in the subsequent diagram.</p>
-<p><head>
+<head>
     <script src="https://cdn.jsdelivr.net/gh/jmnote/plantuml-encoder@1.2.4/dist/plantuml-encoder.min.js" integrity="sha256-Qsk2KRBCN5qVZX7B+8+2IvQl1Aqc723qV1tBCQaVoqo=" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -169,7 +169,7 @@ ConversationBufferMemory -d-> memory
 </html>
 
 
-Figure 5.3 Memory in a Chain</p>
+<p>Figure 6.4 Memory in a Chain</p>
 <p>The following example shows how to define memory with <code>ConversationBufferMemory</code> function and place it into a variable in <code>load_qa_chain</code>.</p>
 <div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.memory <span style="color:#f92672">import</span> ConversationBufferMemory
 </span></span><span style="display:flex;"><span>memory <span style="color:#f92672">=</span> ConversationBufferMemory(memory_key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;chat_history&#34;</span>, input_key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;human_input&#34;</span>)
@@ -202,7 +202,7 @@ LangChain AI
           </a>
         </div>
         <script>
-          window.index_js_url="/langchain_project_book/searchindex.js?1730158732";
+          window.index_js_url="/langchain_project_book/searchindex.js?1730171756";
         </script>
         <search><form action="/langchain_project_book/search/index.html" method="get">
           <div class="searchbox default-animation">
@@ -215,12 +215,12 @@ LangChain AI
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/langchain_project_book/js/auto-complete.js?1730158732" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.min.js?1730158732" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1730158732" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1730158732" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1730158732" defer></script>
-        <script src="/langchain_project_book/js/search.js?1730158732" defer></script>
+        <script src="/langchain_project_book/js/auto-complete.js?1730171756" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1730171756" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1730171756" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1730171756" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1730171756" defer></script>
+        <script src="/langchain_project_book/js/search.js?1730171756" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -243,7 +243,7 @@ LangChain AI
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/index.html">Supabase as VectorStore</a></li>
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/defining_prompt_n_prompttemplate/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/defining_prompt_n_prompttemplate/index.html">Defining Prompt and PromptTemplate</a></li>
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/config_llm_with_gemma/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/config_llm_with_gemma/index.html">Configuring LLM with Google Gemma</a></li>
-            <li class="active " data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html">Conversion History as a Memory with Retriever</a></li>
+            <li class="active " data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html">Conversation History as a Memory with Retriever</a></li>
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html">Complete Code</a></li>
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html">Summary</a></li></ul></li>
           </ul>
@@ -298,8 +298,8 @@ LangChain AI
         </div>
       </div>
     </aside>
-    <script src="/langchain_project_book/js/clipboard.min.js?1730158732" defer></script>
-    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1730158732" defer></script>
-    <script src="/langchain_project_book/js/theme.js?1730158732" defer></script>
+    <script src="/langchain_project_book/js/clipboard.min.js?1730171756" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1730171756" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1730171756" defer></script>
   </body>
 </html>

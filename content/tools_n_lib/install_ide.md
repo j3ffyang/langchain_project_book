@@ -43,7 +43,7 @@ extension | function
 `tabnine-vscode` | AI coding tool
 `vscodevim.vim` | enable `vim` in VSCode
 
-<center>Figure 2.1 VSCode Extension</center>
+Figure 3.1 VSCode Extension
 <br>
 
 
@@ -59,7 +59,7 @@ Enabling a Python IDE in Vim offers the following advantages:
 
 ![](images/2023-11-12-13-14-06.png)
 
-Figure 2.2 Python IDE with VIM
+Figure 3.2 Python IDE with VIM
 <br>
 
 Once the IDE setup for Python programming is complete, we can proceed to configure models and commence our programming tasks with LLM.
