@@ -20,14 +20,14 @@ It's always recommended to check the latest version of `LangChain` at https://gi
 
 ```py
 pip list | grep langchain
-langchain                                0.3.4
-langchain-chroma                         0.1.2
-langchain-community                      0.2.1
-langchain-core                           0.3.13
-langchain-experimental                   0.0.59
-langchain-huggingface                    0.1.0
-langchain-openai                         0.2.3
-langchain-text-splitters                 0.3.0
+langchain                                0.3.7
+langchain-chroma                         0.1.4
+langchain-community                      0.3.5
+langchain-core                           0.3.15
+langchain-experimental                   0.3.3
+langchain-huggingface                    0.1.2
+langchain-openai                         0.2.6
+langchain-text-splitters                 0.3.2
 ```
 
 ### Install the required Python packages associated with your chosen LLM providers
@@ -42,21 +42,24 @@ In my development environment, I use the following main libraries to work on mod
 
 ```py
 pip list | grep -i 'faiss\|huggingface\|langchain\|transformers\|openai\|qdrant\|tensor\|torch\|tokenizers\|tiktoken'
-faiss-cpu                                1.8.0
-huggingface-hub                          0.23.2
-langchain                                0.2.11
-langchain-chroma                         0.1.2
-langchain-community                      0.2.1
-langchain-core                           0.2.25
-langchain-experimental                   0.0.59
-langchain-huggingface                    0.0.3
-langchain-openai                         0.1.8
-langchain-text-splitters                 0.2.0
-openai                                   1.31.1
-safetensors                              0.4.3
-sentence-transformers                    3.0.0
-tiktoken                                 0.7.0
-tokenizers                               0.19.1
-torch                                    2.3.0
-transformers                             4.41.2
+
+faiss-cpu                                1.9.0
+huggingface-hub                          0.26.2
+langchain                                0.3.7
+langchain-chroma                         0.1.4
+langchain-community                      0.3.5
+langchain-core                           0.3.15
+langchain-experimental                   0.3.3
+langchain-huggingface                    0.1.2
+langchain-openai                         0.2.6
+langchain-qdrant                         0.2.0
+langchain-text-splitters                 0.3.2
+openai                                   1.54.3
+qdrant-client                            1.12.1
+safetensors                              0.4.5
+sentence-transformers                    3.2.1
+tiktoken                                 0.8.0
+tokenizers                               0.20.3
+torch                                    2.5.1
+transformers                             4.46.2
 ```
