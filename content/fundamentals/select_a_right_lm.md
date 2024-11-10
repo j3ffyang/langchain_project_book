@@ -50,24 +50,21 @@ Undoubtedly, this model ranks among the top-tier open-source LLMs I have utilize
 
     ```py
     from pprint import pprint
-    from dotenv import load_dotenv
-
-    load_dotenv()
 
     from langchain_community.llms import HuggingFaceHub
-    hub_llm = HuggingFaceHub(repo_id="mrm8488/t5-base-finetuned-wikiSQL")
-
+    llm = HuggingFaceHub(repo_id="mrm8488/t5-base-finetuned-wikiSQL")
+    
     from langchain.prompts import PromptTemplate
     prompt = PromptTemplate(
         input_variables=["question"],
         template="Translate English to SQL: {question}"
     )
-
-    from langchain.chains import LLMChain
-    hub_chain = LLMChain(prompt=prompt, llm=hub_llm, verbose=True)
-
-    pprint(hub_chain("What is the average age of the respondents using a mobile device?"))
-    pprint(hub_chain("What is the median  age of the respondents using a mobile device?"))
+    
+    from langchain_core.runnables import RunnableLambda
+    chain = prompt | llm
+    
+    pprint(chain.invoke("What is the average age of the respondents using a mobile device?"))
+    pprint(chain.invoke("What is the median  age of the respondents using a mobile device?"))
     ```
 
     The output shows a SQL generated from `t5-base-finetuned-wikiSQL` model, which is fine-tuned from Google’s T5
