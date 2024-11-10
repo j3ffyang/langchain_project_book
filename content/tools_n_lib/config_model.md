@@ -63,11 +63,11 @@ print(type(query_result))
 
 In the above case, we're using `sentence-transformers/paraphrase-multilingual-MiniLM` which is downloaded locally from Hugging Face repository.
 
-By default, the download resides in `~/.cache/torch/sentence_transformers`.
+By default, the download resides in `~/.cache/huggingface/hub/models--sentence-transformers--paraphrase-multilingual-MiniLM-L12-v2`
 
 For example:
 ```sh
-cd ~/.cache/torch/sentence_transformers; ls
+cd /home/jeff/.cache/huggingface/hub; ls
 sentence-transformers_all-MiniLM-L6-v2
 sentence-transformers_all-mpnet-base-v2
 sentence-transformers_paraphrase-multilingual-MiniLM-L12-v2
