@@ -27,18 +27,18 @@ folder INSTRUCTION { artifact &#34;&#34;&#34;&#34;Answer the question based on t
 folder INSTRUCTION { artifact &#34;&#34;&#34;&#34;Answer the question based on the context below.\nIf the question cannot be answer using the \ninformation provided answer with &#34;I don&#39;t know&#34;.&#34; } folder CONTEXT { artifact &#34;Italian cuisine has a rich and diverse history that spans centuries \nand has been influenced by numerous cultures. In the Roman Empire, food \nwas a significant part of social life. Romans loved feasting and trying \nnew dishes, and their banquets often featured complex, intricate \nflavors that required sophisticated preparation techniques. They \nembraced the flavors and ingredients of many of the lands they had \nconquered, such as spices from the Middle East, fish from the \nMediterranean, and cereals from North Africa. This fusion of diverse \ningredients made the Empire a hot spot for culinary innovation&#34; } folder QUESTIONS { artifact &#34;What is the history of Italian cuisine?&#34; } folder ANSWER { artifact &#34;&#34;&#34;&#34;&#34;&#34;&#34; } INSTRUCTION -[hidden]- CONTEXT CONTEXT -[hidden]- QUESTIONS QUESTIONS -[hidden] ANSWER Figure 2.3: Prompt Template">
     <meta itemprop="datePublished" content="2024-10-28T18:10:58+08:00">
     <meta itemprop="dateModified" content="2024-10-28T18:10:58+08:00">
-    <meta itemprop="wordCount" content="761">
+    <meta itemprop="wordCount" content="768">
     <title>Thoughts on Prompt Engineering :: LangChain AI</title>
-    <link href="/langchain_project_book/css/fontawesome-all.min.css?1731234540" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731234540" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/nucleus.css?1731234540" rel="stylesheet">
-    <link href="/langchain_project_book/css/auto-complete.css?1731234540" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731234540" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1731234540" rel="stylesheet">
-    <link href="/langchain_project_book/css/fonts.css?1731234540" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1731234540" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/theme.css?1731234540" rel="stylesheet">
-    <link href="/langchain_project_book/css/theme-auto.css?1731234540" rel="stylesheet" id="R-variant-style">
-    <link href="/langchain_project_book/css/chroma-auto.css?1731234540" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/langchain_project_book/css/print.css?1731234540" rel="stylesheet" media="print">
-    <script src="/langchain_project_book/js/variant.js?1731234540"></script>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1731235150" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731235150" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1731235150" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1731235150" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731235150" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1731235150" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1731235150" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1731235150" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1731235150" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1731235150" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1731235150" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1731235150" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1731235150"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
@@ -182,7 +182,7 @@ My personal experience in LLM development reveals that output quality varies bas
 </span></span><span style="display:flex;"><span>prompt <span style="color:#f92672">=</span> ChatPromptTemplate<span style="color:#f92672">.</span>from_template(template)
 </span></span><span style="display:flex;"><span>print(prompt)</span></span></code></pre></div>
 <p>The output will display <code>input_variables</code> containing <code>context</code> and <code>question</code> in <code>PromptTemplate</code>.</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>input_variables<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;context&#39;</span>, <span style="color:#e6db74">&#39;question&#39;</span>] messages<span style="color:#f92672">=</span>[HumanMessagePromptTemplate(prompt<span style="color:#f92672">=</span>PromptTemplate(input_variables<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;context&#39;</span>, <span style="color:#e6db74">&#39;question&#39;</span>], template<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;You are an assistant for question-anwering tasks. Use the       </span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">following pieces of retrieved context to answer the question. If you don&#39;t know</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">the answer, just say that you don&#39;t know. Use three sentences maximum and keep</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">the answer concise.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Question: </span><span style="color:#e6db74">{question}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Context: </span><span style="color:#e6db74">{context}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">Answer:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>))]</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>input_variables<span style="color:#f92672">=[</span><span style="color:#e6db74">&#39;context&#39;</span>, <span style="color:#e6db74">&#39;question&#39;</span><span style="color:#f92672">]</span> input_types<span style="color:#f92672">={}</span> partial_variables<span style="color:#f92672">={}</span> messages<span style="color:#f92672">=[</span>HumanMessagePromptTemplate<span style="color:#f92672">(</span>prompt<span style="color:#f92672">=</span>PromptTemplate<span style="color:#f92672">(</span>input_variables<span style="color:#f92672">=[</span><span style="color:#e6db74">&#39;context&#39;</span>, <span style="color:#e6db74">&#39;question&#39;</span><span style="color:#f92672">]</span>, input_types<span style="color:#f92672">={}</span>, partial_variables<span style="color:#f92672">={}</span>, template<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don&#39;t know the answer, just say that you don&#39;t know. Use three sentences maximum and keep the answer concise.\nQuestion: {question}\nContext: {context}\nAnswer:\n&#34;</span><span style="color:#f92672">)</span>, additional_kwargs<span style="color:#f92672">={})]</span></span></span></code></pre></div>
 <p>By understanding the significance of prompts and prompt templates in LangChain, we lay the foundation for exploring more advanced concepts like VectorStore and embeddings.</p>
 
   <footer class="footline">
@@ -200,7 +200,7 @@ LangChain AI
           </a>
         </div>
         <script>
-          window.index_js_url="/langchain_project_book/searchindex.js?1731234540";
+          window.index_js_url="/langchain_project_book/searchindex.js?1731235150";
         </script>
         <search><form action="/langchain_project_book/search/index.html" method="get">
           <div class="searchbox default-animation">
@@ -213,12 +213,12 @@ LangChain AI
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/langchain_project_book/js/auto-complete.js?1731234540" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.min.js?1731234540" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1731234540" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1731234540" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1731234540" defer></script>
-        <script src="/langchain_project_book/js/search.js?1731234540" defer></script>
+        <script src="/langchain_project_book/js/auto-complete.js?1731235150" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1731235150" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1731235150" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1731235150" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1731235150" defer></script>
+        <script src="/langchain_project_book/js/search.js?1731235150" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -295,8 +295,8 @@ LangChain AI
         </div>
       </div>
     </aside>
-    <script src="/langchain_project_book/js/clipboard.min.js?1731234540" defer></script>
-    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1731234540" defer></script>
-    <script src="/langchain_project_book/js/theme.js?1731234540" defer></script>
+    <script src="/langchain_project_book/js/clipboard.min.js?1731235150" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1731235150" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1731235150" defer></script>
   </body>
 </html>
