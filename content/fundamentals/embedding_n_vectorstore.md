@@ -19,10 +19,9 @@ Here is an example of how to create vector embeddings using the `sentence_transf
 
 ```py
 # load embedding library
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 
 # define embedding with using sentence-transformers model from HuggingFace.co
-
 embeddings = HuggingFaceEmbeddings(
     model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 )

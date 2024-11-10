@@ -29,16 +29,16 @@ Understanding Embeddings In the realm of LLMs, embeddings serve as numeric depic
     <meta itemprop="dateModified" content="2024-10-28T18:17:09+08:00">
     <meta itemprop="wordCount" content="719">
     <title>Embeddings and VectorStore :: LangChain AI</title>
-    <link href="/langchain_project_book/css/fontawesome-all.min.css?1731235150" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731235150" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/nucleus.css?1731235150" rel="stylesheet">
-    <link href="/langchain_project_book/css/auto-complete.css?1731235150" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731235150" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1731235150" rel="stylesheet">
-    <link href="/langchain_project_book/css/fonts.css?1731235150" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1731235150" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/theme.css?1731235150" rel="stylesheet">
-    <link href="/langchain_project_book/css/theme-auto.css?1731235150" rel="stylesheet" id="R-variant-style">
-    <link href="/langchain_project_book/css/chroma-auto.css?1731235150" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/langchain_project_book/css/print.css?1731235150" rel="stylesheet" media="print">
-    <script src="/langchain_project_book/js/variant.js?1731235150"></script>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1731235544" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731235544" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1731235544" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1731235544" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731235544" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1731235544" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1731235544" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1731235544" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1731235544" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1731235544" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1731235544" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1731235544" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1731235544"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
@@ -112,10 +112,9 @@ Understanding Embeddings In the realm of LLMs, embeddings serve as numeric depic
 <p>In the context of an LLM with LangChain, embeddings are used to capture the &ldquo;meaning&rdquo; of text. The closeness of two vectors indicates the degree of correlation between them, where shorter distances imply a stronger correlation, and longer distances suggest a weaker correlation.</p>
 <p>Here is an example of how to create vector embeddings using the <code>sentence_transformers</code> library in Python: In this example, <code>embeddings.embed_query(text)</code> generates embeddings for the given text.</p>
 <div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e"># load embedding library</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.embeddings <span style="color:#f92672">import</span> HuggingFaceEmbeddings
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_huggingface <span style="color:#f92672">import</span> HuggingFaceEmbeddings
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># define embedding with using sentence-transformers model from HuggingFace.co</span>
-</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>embeddings <span style="color:#f92672">=</span> HuggingFaceEmbeddings(
 </span></span><span style="display:flex;"><span>    model_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;</span>
 </span></span><span style="display:flex;"><span>)
@@ -181,7 +180,7 @@ LangChain AI
           </a>
         </div>
         <script>
-          window.index_js_url="/langchain_project_book/searchindex.js?1731235150";
+          window.index_js_url="/langchain_project_book/searchindex.js?1731235544";
         </script>
         <search><form action="/langchain_project_book/search/index.html" method="get">
           <div class="searchbox default-animation">
@@ -194,12 +193,12 @@ LangChain AI
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/langchain_project_book/js/auto-complete.js?1731235150" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.min.js?1731235150" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1731235150" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1731235150" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1731235150" defer></script>
-        <script src="/langchain_project_book/js/search.js?1731235150" defer></script>
+        <script src="/langchain_project_book/js/auto-complete.js?1731235544" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1731235544" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1731235544" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1731235544" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1731235544" defer></script>
+        <script src="/langchain_project_book/js/search.js?1731235544" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -276,8 +275,8 @@ LangChain AI
         </div>
       </div>
     </aside>
-    <script src="/langchain_project_book/js/clipboard.min.js?1731235150" defer></script>
-    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1731235150" defer></script>
-    <script src="/langchain_project_book/js/theme.js?1731235150" defer></script>
+    <script src="/langchain_project_book/js/clipboard.min.js?1731235544" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1731235544" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1731235544" defer></script>
   </body>
 </html>
