@@ -15,36 +15,32 @@ You have the option to establish a direct connection to the model through Huggin
 
 ```py
 import os
-# os.environ['HUGGINGFACEHUB_API_TOKEN'] = 'HF_API_KEY'
 HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
-from langchain.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate
+question = "What is NFT?"
 template = """Question: {question}
-Answer: """
 
-prompt = PromptTemplate(template=template,
-input_variables=['question'])
+Answer: Let's think step by step."""
 
-# user question
-question = "Which NFL team won the Super Bowl in the 2010 season?"
+prompt = PromptTemplate.from_template(template)
 
-from langchain_community.llms import HuggingFaceEndpoint
+
+from langchain_huggingface import HuggingFaceEndpoint
 from langchain.chains import LLMChain
-# initialize Hub LLM
-# repo_id = "google/flan-t5-xxl" # flan-t5's available too
 repo_id = "mistralai/Mistral-7B-Instruct-v0.2"
-hub_llm = HuggingFaceEndpoint(
-    repo_id=repo_id,
-    temperature=0.5
+# repo_id = "meta-llama/Llama-3.2-1B"
+llm = HuggingFaceEndpoint(
+    repo_id = repo_id,
+    temperature = 0.5,
+    huggingfacehub_api_token=HUGGINGFACEHUB_API_TOKEN,
 )
-# create prompt template > LLM chain
-llm_chain = LLMChain(prompt=prompt, llm=hub_llm)
 
-# ask the user question about NFL 2010
-print(llm_chain.invoke(question))
+llm_chain = prompt | llm
+print(llm_chain.invoke({"question": question}))
 ```
 
-In above example, we call `HuggingFaceEndpoint` class to access the `Mistral-7B-Instruct` model from Hugging Face platform directly without having to download any model when you don’t have enough capacity locally. The code also shows how to access `google/flan-t5-xxl` model.
+In above example, we call `HuggingFaceEndpoint` class to access the `Mistral-7B-Instruct` model from Hugging Face platform directly without having to download any model when you don’t have enough capacity locally. The code also shows how to access `meta-llama/Llama-3.2-1B` model.
 
 #### Use `model` offline of Hugging Face
 
