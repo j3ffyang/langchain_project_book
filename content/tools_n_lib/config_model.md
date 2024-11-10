@@ -63,7 +63,7 @@ print(type(query_result))
 
 In the above case, we're using `sentence-transformers/paraphrase-multilingual-MiniLM` which is downloaded locally from Hugging Face repository.
 
-By default, the download resides in `~/.cache/huggingface/hub/models--sentence-transformers--paraphrase-multilingual-MiniLM-L12-v2`
+By default, the download resides in `~/.cache/huggingface/hub/` on my Manjaro Linux machine.
 
 For example:
 ```sh

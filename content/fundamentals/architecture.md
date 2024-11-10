@@ -115,18 +115,25 @@ Let’s discuss these steps in detail. I've included the Python code for a set o
 - LangChain uses a VectorStore to create `embeddings` for each document split. These `embeddings` are numerical representations of the text that can be used for efficient information retrieval. The provided code snippet utilizes the `all-mpnet-base-v2` model from `HuggingFaceEmbeddings` by default. If not explicitly specified, this model is used. Additionally, the code operates with a vector store based on Qdrant, running in memory. (Please be aware that the vector store we have just set up operates in memory, which implies that all data will be lost when your computer is turned off. The advantage of utilizing a memory-based vector store is the ability to swiftly test your code without the need to save it. We will delve into persistent storage for production purposes in upcoming chapters). The collection is named `wikipedia` in vectorstore.
 
   ```py
-  from langchain_community.embeddings import HuggingFaceEmbeddings
+  from langchain_huggingface import HuggingFaceEmbeddings
+  model_name = "sentence-transformers/all-mpnet-base-v2"
+  model_kwargs = {'device': 'cpu'}
+  encode_kwargs = {'normalize_embeddings': True}
+  embedding = HuggingFaceEmbeddings(
+      model_name = model_name,
+      model_kwargs = model_kwargs,
+      encode_kwargs = encode_kwargs,
+  )
+  
   from langchain_community.vectorstores import Qdrant
-
+  
   vectorstore = Qdrant.from_documents(
       docs,
-      embedding=HuggingFaceEmbeddings(),
-      location=":memory:",
-      collection_name="wikipedia",
+      embedding = embedding,
+      location = ":memory:",
+      collection_name = "wikipedia",
   )
-
-  # You can print out all parameters of Embeddings
-  # print(HuggingFaceEmbeddings())
+  print(vectorstore)
   ```
 
 - Subsequently, the VectorStore is employed to conduct a `similarity_search` on the document embeddings, aiming to identify the documents most pertinent to the user's query. The search provides relevance scores for the query and outputs 2 results.
@@ -148,32 +155,37 @@ Let’s discuss these steps in detail. I've included the Python code for a set o
 The entire code, for instance, looks like this:
 
 ```py
+from bs4 import BeautifulSoup
 from langchain_community.document_loaders import WebBaseLoader
 
 loader = WebBaseLoader("https://en.wikipedia.org/wiki/Text_file")
 document = loader.load()
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-
-splitter = RecursiveCharacterTextSplitter(
-  chunk_size=1000, chunk_overlap=50
-)
+splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=50)
 docs = splitter.split_documents(document)
 
-from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.vectorstores import Qdrant
-vectorstore = Qdrant.from_documents(
-    docs,
-    embedding=HuggingFaceEmbeddings(),
-    location=":memory:",
-    collection_name="wikipedia",
+from langchain_huggingface import HuggingFaceEmbeddings
+model_name = "sentence-transformers/all-mpnet-base-v2"
+model_kwargs = {'device': 'cpu'}
+encode_kwargs = {'normalize_embeddings': True}
+embedding = HuggingFaceEmbeddings(
+    model_name = model_name,
+    model_kwargs = model_kwargs,
+    encode_kwargs = encode_kwargs,
 )
 
-# print(HuggingFaceEmbeddings())
+from langchain_community.vectorstores import Qdrant
+
+vectorstore = Qdrant.from_documents(
+    docs,
+    embedding = embedding,
+    location = ":memory:",
+    collection_name = "wikipedia",
+)
 
 query = "What's flatfile?"
 result = vectorstore.similarity_search_with_score(query, k=2)
-print(result)
 
 retriever = vectorstore.as_retriever()
 print(retriever.get_relevant_documents(query)[0])
