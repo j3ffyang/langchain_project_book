@@ -38,7 +38,7 @@ Figure 2.4: Chain in Process
 
 To demonstrate LangChain's capability for creating simple chains, here is an instance utilizing the `HuggingFaceEndpoint` class.
 
-First the code imports `PromptTemplate` from `langchain.prompts` and defines a prompt using the template "Describe a perfect day in {city}?" where `{city}` is a variable placeholder. It imports an LLM from Hugging Face using `HuggingFaceEndpoint`, specifying the model repository id as `mistralai/Mistral-7B-Instruct` and setting model parameters like `temperature` and `max_new_token`. Then the code imports `LLMChain` from `langchain.chains` and creates a chain (`llmchain`) by combining the selected LLM (mistral) and the defined prompt. Finally, it invokes the chain with a query "Paris" using `llmchain.invoke("Paris")` and prints out the result.
+First the code imports `PromptTemplate` from `langchain.prompts` and defines a prompt using the template "Describe a perfect day in {city}?" where `{city}` is a variable placeholder. It imports an LLM from Hugging Face using `HuggingFaceEndpoint`, specifying the model repository id as `mistralai/Mistral-7B-Instruct` and setting model parameters like `temperature` and `max_new_token`. Then the code creates a chain by combining then defined prompt and the selected LLM (mistral). Finally, it invokes the chain with a query "cairo" using `chain.invoke("cairo")` and prints out the result.
 
 (TL;DR
 
@@ -47,19 +47,24 @@ Consider reading the following chapter to efficiently configure your environment
 ```py
 from langchain.prompts import PromptTemplate
 prompt = PromptTemplate(
-    input_variables=["city"],
-    template="Describe a perfect day in {city}?")
-
-from langchain_community.llms import HuggingFaceEndpoint
-repo_id = "mistralai/Mistral-7B-Instruct-v0.2"
-llm = HuggingFaceEndpoint(
-    repo_id=repo_id, max_new_tokens=250, temperature=0.5
+    input_variables = ["city"],
+    template = "Describe a perfect day in {city}?"
 )
 
-from langchain.chains import LLMChain
-llmchain = LLMChain(llm=llm, prompt=prompt, verbose=True)
+import os
+HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACE_API_TOKEN")
 
-print(llmchain.invoke("Paris"))
+from langchain_huggingface import HuggingFaceEndpoint
+repo_id = "mistralai/Mistral-7B-Instruct-v0.2"
+llm = HuggingFaceEndpoint(
+    repo_id = repo_id,
+    temperature = 0.5,
+    huggingfacehub_api_token = HUGGINGFACEHUB_API_TOKEN,
+    max_new_tokens = 250,
+)
+
+chain = prompt | llm
+print(chain.invoke("cairo"))
 ```
 
 In summary, this code sets up a scenario where an LLM model is prompted to describe a perfect day in Paris based on the defined template and model settings. You see the output varies while changing the setting of `temperature`. I enabled `verbose` mode to showcase a more comprehensive display of detailed steps and information in the output.
@@ -157,15 +162,16 @@ loader = WebBaseLoader("https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_T
 document = loader.load()
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-splitter = RecursiveCharacterTextSplitter(chunk_size=200, chunk_overlap=20)
+splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 chunks = splitter.split_documents(document)
 ```
 
 Load the embedding model.
 ```py
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 embedding = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
+    model_name = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+)
 ```
 
 
@@ -188,12 +194,11 @@ Answer:
 prompt = ChatPromptTemplate.from_template(template)
 ```
 
-Use the `google/flan-t5-xxl` model through the Hugging Face platform's `HuggingFaceEndpoint` method remotely. Specify the model's keyword arguments to customize settings such as `temperature` and `max_new_token`. Utilizing `HuggingFaceEndpoint` allows you to leverage the computational resources provided by Hugging Face, eliminating the need for substantial local computing capacity. You may also experiment with Mistral's model to observe variations in generation quality.
+Use the `mistralai/Mistral-7B-Instruct-v0.2` model through the Hugging Face platform's `HuggingFaceEndpoint` method remotely. Specify the model's keyword arguments to customize settings such as `temperature` and `max_new_token`. Utilizing `HuggingFaceEndpoint` allows you to leverage the computational resources provided by Hugging Face, eliminating the need for substantial local computing capacity. 
 
 ```py
 from langchain_community.llms import HuggingFaceEndpoint
-repo_id="google/flan-t5-xxl"
-# repo_id = "mistralai/Mistral-7B-Instruct-v0.2"
+repo_id = "mistralai/Mistral-7B-Instruct-v0.2"
 llm = HuggingFaceEndpoint(
     repo_id=repo_id, max_new_tokens=250, temperature=0.5)
 ```
@@ -216,7 +221,7 @@ print(rag_chain.invoke(query))
 
 The output will display:
 ```sh
-The emperor's new clothes
+The story is about an emperor who is deceived by two swindlers who claim to weave the most beautiful, invisible fabric. The emperor believes that wearing this fabric will help him identify the unfit or stupid people in his empire. He orders the swindlers to weave him some clothes, but in reality, they have no loom or fabric. The emperor, fearing being seen as unfit or stupid himself, is too afraid to admit he cannot see the fabric and sends others to inspect it instead.
 ```
 
 The code presented above is straight-forward yet provides a comprehensive, direct, and lucid sequence to manage the entire process:
