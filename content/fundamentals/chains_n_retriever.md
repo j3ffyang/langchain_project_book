@@ -27,7 +27,7 @@ folder prompt {
 }
 
 folder chain.invoke {
-artifact "chain = LLMChain(\n    llm=llm, prompt=prompt\n)\nprint(chain.invoke("Paris"))"
+artifact "chain = prompt | llm \nprint(chain.invoke("Paris"))"
 }
 
 chain -[hidden]- prompt
@@ -38,7 +38,7 @@ Figure 2.4: Chain in Process
 
 To demonstrate LangChain's capability for creating simple chains, here is an instance utilizing the `HuggingFaceEndpoint` class.
 
-First the code imports `PromptTemplate` from `langchain.prompts` and defines a prompt using the template "Describe a perfect day in {city}?" where `{city}` is a variable placeholder. It imports an LLM from Hugging Face using `HuggingFaceEndpoint`, specifying the model repository id as `mistralai/Mistral-7B-Instruct` and setting model parameters like `temperature` and `max_new_token`. Then the code creates a chain by combining then defined prompt and the selected LLM (mistral). Finally, it invokes the chain with a query "cairo" using `chain.invoke("cairo")` and prints out the result.
+First the code imports `PromptTemplate` from `langchain.prompts` and defines a prompt using the template "Describe a perfect day in {city}?" where `{city}` is a variable placeholder. It imports an LLM from Hugging Face using `HuggingFaceEndpoint`, specifying the model repository id as `mistralai/Mistral-7B-Instruct` and setting model parameters like `temperature` and `max_new_tokens`. Then the code creates a chain by combining then defined prompt and the selected LLM (mistral). Finally, it invokes the chain with a query "paris" using `chain.invoke("paris")` and prints out the result.
 
 (TL;DR
 
@@ -64,7 +64,7 @@ llm = HuggingFaceEndpoint(
 )
 
 chain = prompt | llm
-print(chain.invoke("cairo"))
+print(chain.invoke("paris"))
 ```
 
 In summary, this code sets up a scenario where an LLM model is prompted to describe a perfect day in Paris based on the defined template and model settings. You see the output varies while changing the setting of `temperature`. I enabled `verbose` mode to showcase a more comprehensive display of detailed steps and information in the output.
@@ -194,7 +194,7 @@ Answer:
 prompt = ChatPromptTemplate.from_template(template)
 ```
 
-Use the `mistralai/Mistral-7B-Instruct-v0.2` model through the Hugging Face platform's `HuggingFaceEndpoint` method remotely. Specify the model's keyword arguments to customize settings such as `temperature` and `max_new_token`. Utilizing `HuggingFaceEndpoint` allows you to leverage the computational resources provided by Hugging Face, eliminating the need for substantial local computing capacity. 
+Use the `mistralai/Mistral-7B-Instruct-v0.2` model through the Hugging Face platform's `HuggingFaceEndpoint` method remotely. Specify the model's keyword arguments to customize settings such as `temperature` and `max_new_tokens`. Utilizing `HuggingFaceEndpoint` allows you to leverage the computational resources provided by Hugging Face, eliminating the need for substantial local computing capacity. 
 
 ```py
 from langchain_community.llms import HuggingFaceEndpoint
