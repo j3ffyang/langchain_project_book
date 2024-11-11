@@ -34,8 +34,8 @@ I have 2 laptops at home for leisure and work. One is MacBook Pro 16,2 (16G RAM,
 
 ![](images/2024-03-26-23-37-12.png)
 
-![](images/2024-03-26-18-33-25.png)
+![](images/2024-11-11-13-20-02.png)
 
 <center>Figure 3.0 Hardware Specification for Development</center>
 
-The code example provided in this book can run on both macOS `Sonoma 14.4` and Manjaro Linux with kernel `6.6.19`.
+The code example provided in this book can run on both macOS `Sonoma 14.4` and Manjaro Linux with kernel `6.10.13`.

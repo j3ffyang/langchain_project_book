@@ -54,6 +54,10 @@ prompt = PromptTemplate(
 import os
 HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACE_API_TOKEN")
 
+from langchain.globals import set_verbose, set_debug
+set_debug(True)
+set_verbose(True)
+
 from langchain_huggingface import HuggingFaceEndpoint
 repo_id = "mistralai/Mistral-7B-Instruct-v0.2"
 llm = HuggingFaceEndpoint(
@@ -101,7 +105,7 @@ The following diagram outlines the intricate process:
 
 - Initially, load the document, then split and embed it in a vectorstore, which serves as the retriever for subsequent retrieval in the RAG step.
 
-- Utilize the `HuggingFacePipeline` to load the Transformers language model for embedding.
+- Utilize the `HuggingFaceEmbeddings` to load the Transformers embedding model for embedding.
 
 - Merge the steps with a customizable prompt to create a chain structure, typically followed by inclusion in the chain using the `RunnablePassthrough` class to generate the answer.
 
