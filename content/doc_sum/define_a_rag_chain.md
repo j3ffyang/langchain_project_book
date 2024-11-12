@@ -47,10 +47,11 @@ docs = splitter.split_documents(documents)
 #### Specify the embedding model
 
 ```py
-from langchain_community.embeddings import HuggingFaceEmbeddings
-embeddings = HuggingFaceEmbeddings(
-    model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
-    # model_name="bert-base-multilingual-cased")
+from langchain_huggingface import HuggingFaceEmbeddings
+embedding = HuggingFaceEmbeddings(
+    # model_name = "sentense-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    model_name = "sentence-transformers/all-mpnet-base-v2"
+)
 ```
 
 <!-- As we are using a locally installed open-source embedding model, we have the flexibility to set a large value for the token's `chunk_size` at no cost.
