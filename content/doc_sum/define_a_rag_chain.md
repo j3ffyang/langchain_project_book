@@ -74,15 +74,13 @@ A Vector Database, or vector store, stores vectors (fixed-length number lists) a
 
 ```py
 ## Configure Qdrant client, and define vectorstore and retriever
-from qdrant_client import QdrantClient
-from langchain_community.vectorstores import Qdrant
+from langchain_qdrant import QdrantVectorStore
 url = "http://127.0.0.1:6333"
-vectorstore = Qdrant.from_documents(
+vectorstore = QdrantVectorStore.from_documents(
     docs,
     embedding,
-    url=url,
-    # prefer_grpc=True,
-    collection_name="worldhistory",
+    url = url,
+    collection_name = "worldHist",
 )
 retriever = vectorstore.as_retriever()
 ```
@@ -150,8 +148,11 @@ mistral:7b         	61e88e884507	4.1 GB	2 weeks ago
 To evaluate the performance and quality of this model through Ollama, let's proceed with Ollama. Further in this guide, I will introduce additional LLMs directly from LangChain, without the use of Ollama.
 
 ```py
-from langchain_community.llms import Ollama
-llm = Ollama(model="mistral")
+from langchain_ollama import ChatOllama
+llm = ChatOllama(
+    model="mistral",
+    temperature=0.5,
+)
 ```
 
 Before executing the code, it's crucial that Ollama is started. On Linux systems, you can verify and initiate the process

@@ -14,28 +14,27 @@ In my development environment, I have the following libraries installed:
 > Reminder: The community is evolving, and the library is adapting rapidly. The information presented here may change over time. This list serves as a reference for the current chapter being written.
 
 ```py
-beautifulsoup4==4.12.3
-chromaviz==0.0.2
-colorama==0.4.6
-faiss_cpu==1.8.0
-huggingface_hub==0.21.4
-langchain==0.1.13
-langchain_community==0.0.29
-langchain_core==0.1.33
-langchain_experimental==0.0.55
-langchain_openai==0.1.1
-langchain_pinecone==0.0.3
-matplotlib==3.8.3
-numpy==1.26.4
-openai==1.14.3
-pandas==2.2.1
-Pillow==10.2.0
-PyPDF2==3.0.1
-python-dotenv==1.0.1
-qdrant_client==1.8.0
-Requests==2.31.0
-torch==2.2.1
-transformers==4.39.1
+beautifulsoup4                           4.12.3
+faiss-cpu                                1.9.0
+huggingface-hub                          0.26.2
+langchain                                0.3.7
+langchain-chroma                         0.1.4
+langchain-community                      0.3.5
+langchain-core                           0.3.15
+langchain-experimental                   0.3.3
+langchain-huggingface                    0.1.2
+langchain-ollama                         0.2.0
+langchain-openai                         0.2.6
+langchain-qdrant                         0.2.0
+langchain-text-splitters                 0.3.2
+numpy                                    1.26.4
+pypdf                                    5.1.0
+requests                                 2.32.3
+requests-oauthlib                        2.0.0
+requests-toolbelt                        1.0.0
+sentence-transformers                    3.2.1
+torch                                    2.5.1
+transformers                             4.46.2
 ```
 
 
@@ -92,7 +91,7 @@ systemctl restart ollama
 Pull (download) and run the models, for example:
 ```sh
 ollama pull mistral
-ollama pull llama2
+ollama pull llama3
 ollama run  gemma:2b
 ```
 

@@ -31,18 +31,18 @@ PyPDFLoader: This tool is used to load and parse PDF documents. DirectoryLoader:
 Copy this file to your project or any directory you like. In my case, I leave it in /tmp. This PDF file will be used to demonstrate the functionality of the PyPDFLoader and DirectoryLoader tools.">
     <meta itemprop="datePublished" content="2024-10-28T21:09:57+08:00">
     <meta itemprop="dateModified" content="2024-10-28T21:09:57+08:00">
-    <meta itemprop="wordCount" content="1964">
+    <meta itemprop="wordCount" content="1965">
     <title>Define a RAG Chain :: LangChain AI</title>
-    <link href="/langchain_project_book/css/fontawesome-all.min.css?1731395520" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731395520" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/nucleus.css?1731395520" rel="stylesheet">
-    <link href="/langchain_project_book/css/auto-complete.css?1731395520" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731395520" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1731395520" rel="stylesheet">
-    <link href="/langchain_project_book/css/fonts.css?1731395520" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1731395520" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/theme.css?1731395520" rel="stylesheet">
-    <link href="/langchain_project_book/css/theme-auto.css?1731395520" rel="stylesheet" id="R-variant-style">
-    <link href="/langchain_project_book/css/chroma-auto.css?1731395520" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/langchain_project_book/css/print.css?1731395520" rel="stylesheet" media="print">
-    <script src="/langchain_project_book/js/variant.js?1731395520"></script>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1731592876" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731592876" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1731592876" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1731592876" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731592876" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1731592876" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1731592876" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1731592876" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1731592876" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1731592876" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1731592876" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1731592876" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1731592876"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
@@ -150,15 +150,13 @@ Copy this file to your project or any directory you like. In my case, I leave it
 <h4 id="save-the-embedded-data-into-vectorstore">Save the embedded data into VectorStore</h4>
 <p>A Vector Database, or vector store, stores vectors (fixed-length number lists) and other data. It employs Approximate Nearest Neighbor (ANN) algorithms for searching with query vectors. Vectors represent data in a high-dimensional space, with each dimension corresponding to a feature. They are used for various data types and can be computed using machine learning methods. Vector databases support tasks like similarity search, multi-modal search, and large language models. They are also integral to Retrieval-Augmented Generation (RAG), enhancing domain-specific responses of large language models by querying relevant documents based on user prompts.</p>
 <div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e">## Configure Qdrant client, and define vectorstore and retriever</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> qdrant_client <span style="color:#f92672">import</span> QdrantClient
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.vectorstores <span style="color:#f92672">import</span> Qdrant
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_qdrant <span style="color:#f92672">import</span> QdrantVectorStore
 </span></span><span style="display:flex;"><span>url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://127.0.0.1:6333&#34;</span>
-</span></span><span style="display:flex;"><span>vectorstore <span style="color:#f92672">=</span> Qdrant<span style="color:#f92672">.</span>from_documents(
+</span></span><span style="display:flex;"><span>vectorstore <span style="color:#f92672">=</span> QdrantVectorStore<span style="color:#f92672">.</span>from_documents(
 </span></span><span style="display:flex;"><span>    docs,
 </span></span><span style="display:flex;"><span>    embedding,
-</span></span><span style="display:flex;"><span>    url<span style="color:#f92672">=</span>url,
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># prefer_grpc=True,</span>
-</span></span><span style="display:flex;"><span>    collection_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;worldhistory&#34;</span>,
+</span></span><span style="display:flex;"><span>    url <span style="color:#f92672">=</span> url,
+</span></span><span style="display:flex;"><span>    collection_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;worldHist&#34;</span>,
 </span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span>retriever <span style="color:#f92672">=</span> vectorstore<span style="color:#f92672">.</span>as_retriever()</span></span></code></pre></div>
 <p>In this code snippet, I am utilizing the Qdrant vector database, which is launched via Docker, with persistent data storage located at <code>/$DIR/qdrant_storage</code>.</p>
@@ -196,8 +194,11 @@ Copy this file to your project or any directory you like. In my case, I leave it
 </span></span><span style="display:flex;"><span>gemma:2b               	b50d6c999e59	1.7 GB	<span style="color:#ae81ff">8</span> days ago
 </span></span><span style="display:flex;"><span>mistral:7b         	61e88e884507	4.1 GB	<span style="color:#ae81ff">2</span> weeks ago</span></span></code></pre></div>
 <p>To evaluate the performance and quality of this model through Ollama, let&rsquo;s proceed with Ollama. Further in this guide, I will introduce additional LLMs directly from LangChain, without the use of Ollama.</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.llms <span style="color:#f92672">import</span> Ollama
-</span></span><span style="display:flex;"><span>llm <span style="color:#f92672">=</span> Ollama(model<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mistral&#34;</span>)</span></span></code></pre></div>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_ollama <span style="color:#f92672">import</span> ChatOllama
+</span></span><span style="display:flex;"><span>llm <span style="color:#f92672">=</span> ChatOllama(
+</span></span><span style="display:flex;"><span>    model<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;mistral&#34;</span>,
+</span></span><span style="display:flex;"><span>    temperature<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>,
+</span></span><span style="display:flex;"><span>)</span></span></code></pre></div>
 <p>Before executing the code, it&rsquo;s crucial that Ollama is started. On Linux systems, you can verify and initiate the process</p>
 <div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>systemctl status  ollama
 </span></span><span style="display:flex;"><span>systemctl restart ollama</span></span></code></pre></div>
@@ -323,7 +324,7 @@ LangChain AI
           </a>
         </div>
         <script>
-          window.index_js_url="/langchain_project_book/searchindex.js?1731395520";
+          window.index_js_url="/langchain_project_book/searchindex.js?1731592876";
         </script>
         <search><form action="/langchain_project_book/search/index.html" method="get">
           <div class="searchbox default-animation">
@@ -336,12 +337,12 @@ LangChain AI
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/langchain_project_book/js/auto-complete.js?1731395520" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.min.js?1731395520" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1731395520" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1731395520" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1731395520" defer></script>
-        <script src="/langchain_project_book/js/search.js?1731395520" defer></script>
+        <script src="/langchain_project_book/js/auto-complete.js?1731592876" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1731592876" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1731592876" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1731592876" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1731592876" defer></script>
+        <script src="/langchain_project_book/js/search.js?1731592876" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -414,8 +415,8 @@ LangChain AI
         </div>
       </div>
     </aside>
-    <script src="/langchain_project_book/js/clipboard.min.js?1731395520" defer></script>
-    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1731395520" defer></script>
-    <script src="/langchain_project_book/js/theme.js?1731395520" defer></script>
+    <script src="/langchain_project_book/js/clipboard.min.js?1731592876" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1731592876" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1731592876" defer></script>
   </body>
 </html>
