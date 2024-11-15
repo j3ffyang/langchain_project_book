@@ -89,7 +89,7 @@ In this code snippet, I am utilizing the Qdrant vector database, which is launch
 
 Further elaboration on these open-source alternatives to VectorStore will be provided in upcoming chapters. Additional options include FAISS, Chroma and Pinecone, the latter of which boasts excellent documentation from my personal perspective.
 
-Reminder: re-executing `Qdrant.from_documents` will insert the embedded data into the vector database (VectorStore), resulting in duplication of the data. This operation only needs to be run once to insert the chunked documents into the VectorStore.
+Reminder: re-executing `QdrantVectorStore.from_documents` will insert the embedded data into the vector database (VectorStore), resulting in duplication of the data. This operation only needs to be run once to insert the chunked documents into the VectorStore.
 
 You can find more information about Qdrant at https://qdrant.tech/documentation/quick-start and https://python.langchain.com/docs/integrations/vectorstores/qdrant .
 
@@ -259,18 +259,20 @@ Enter your question:
 
 #### The Code for Query Only
 
-Given that the embedded data could be generated multiple times if the code continues to run, I've developed the following code snippet to define VectorStore client, without inserting the embedded data, and prevent the duplication of embedded data in VectorStore. When defining vectorstore, use `Qdrant` instead of `Qdrant.from_documents`
+Given that the embedded data could be generated multiple times if the code continues to run, I've developed the following code snippet to define VectorStore client, without inserting the embedded data, and prevent the duplication of embedded data in VectorStore. When defining vectorstore, use `QdrantVectorStore.from_existing_collection` instead of `QdrantVectorStore.from_documents`
 
 ```python
-from qdrant_client import QdrantClient
-from langchain_community.vectorstores import Qdrant
-client = QdrantClient("127.0.0.1", port="6333")
-vectorstore = Qdrant(client, embeddings=embedding, collection_name="worldhistory")
+from langchain_qdrant import QdrantVectorStore
+vectorstore = QdrantVectorStore.from_existing_collection(
+    embedding = embedding,
+    url = "http://127.0.0.1:6333",
+    collection_name = "worldHist",
+)
 retriever = vectorstore.as_retriever()
 ```
 
 
-The following is the full code with Qdrant client, for example:
+The following is the full code with Qdrant vectorstore, for example:
 
 ```python
 ## Define embedding model
@@ -279,15 +281,16 @@ embedding = HuggingFaceEmbeddings(
     model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
 
 ## Configure Qdrant client, and define vectorstore and retriever
-from qdrant_client import QdrantClient
-from langchain_community.vectorstores import Qdrant
-client = QdrantClient("127.0.0.1", port="6333")
-vectorstore = Qdrant(client, embeddings=embedding, collection_name="worldhistory")
+from langchain_qdrant import QdrantVectorStore
+vectorstore = QdrantVectorStore.from_existing_collection(
+    embedding = embedding,
+    url = "http://127.0.0.1:6333",
+    collection_name = "worldHist",
+)
 retriever = vectorstore.as_retriever()
 
 ## Define prompt and prompttemplate
 from langchain.prompts import ChatPromptTemplate
-from langchain.prompts import PromptTemplate
 template = """You are an assistant for question-answering tasks. Use the
 following pieces of retrieved context to answer the question. If you don't know
 the answer, just say that you don't know. Use three sentences maximum and keep
@@ -296,11 +299,22 @@ Question: {question}
 Context: {context}
 Answer:
 """
-prompt = PromptTemplate.from_template(template)
+prompt = ChatPromptTemplate.from_template(template)
 
 ## Define LLM
-from langchain_community.llms import Ollama
-llm = Ollama(model="mistral")
+import os
+HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+
+from langchain_ollama import ChatOllama
+llm = ChatOllama(
+    model="mistral",
+    temperature=0.5,
+)
+
+## Turn on debug mode
+from langchain.globals import set_verbose, set_debug
+set_debug(True)
+set_verbose(True)
 
 ## Create an RAG chain
 from langchain.schema.runnable import RunnablePassthrough
