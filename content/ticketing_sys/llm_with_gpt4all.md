@@ -42,7 +42,13 @@ You can also customize the generation parameters, such as `n_predict`, `temp`, `
 
 #### Download the Model
 
-Visit https://gpt4all.io and download `mistral-7b-openorca.gguf2.Q4_0.gguf` under "Model Explorer". Place it in `models/` directory.
+Visit https://github.com/nomic-ai/gpt4all and find the model with your interest. Or just directly download
+
+```sh
+mkdir models
+wget https://gpt4all.io/models/gguf/mistral-7b-openorca.Q4_0.gguf -O models/mistral-7b-openorca.Q4_0.gguf
+```
+
 
 #### Define and Call the Quantized LLM
 
