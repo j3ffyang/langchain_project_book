@@ -62,7 +62,7 @@ Numerical machine learning representations of the semantics of the input data ar
 
 Since we are utilising an open-source embedding model that can be deployed locally, we can freely set the token's `chunk_size` to a greater amount.
 
-The `paraphrase-multilingual-MiniLM-L12-v2` model, requiring 477MB of disc space, is the one I like to use. It is compact, strong, and capable. I also include `bert-base-multilingual-cased` embedding model as reference, which I used for production as well.
+The `paraphrase-multilingual-MiniLM-L12-v2` model, requiring 477MB of disc space, is the one I like to use. It is compact, strong, and capable. I also include `all-mpnet-base` embedding model as reference, which I used for production as well.
 
 `all-MiniLM-L6-v2` is an additional embedding model that I can suggest for testing while developing an application. It is quite compact, weighing in at just 90 MB.
 
@@ -93,7 +93,7 @@ Reminder: re-executing `QdrantVectorStore.from_documents` will insert the embedd
 
 You can find more information about Qdrant at https://qdrant.tech/documentation/quick-start and https://python.langchain.com/docs/integrations/vectorstores/qdrant .
 
-#### Configure `PromptTemplate` and `Prompt`
+#### Configure `ChatPromptTemplate` and `Prompt`
 
 This template is designed for question-answering tasks. The template consists of several placeholders that will be filled in dynamically when the template is used:
 
@@ -125,7 +125,7 @@ For more comprehensive information, I recommend visiting https://python.langchai
 
 Please be aware that the effectiveness of prompts and their templates can vary significantly across different models. Essentially, the language model (LLM) might not always interpret the prompt and its template as intended. It may be necessary to dedicate some time to experimentation and testing to achieve the desired results.
 
-#### Load `Mistral` model
+#### Load `Mistral` model with `ollama`
 
 The following code snippet demonstrates the Ollama, acting as a middleware for Large Language Models (LLMs). It instantiates the Ollama class and specifies the particular LLM to be utilized.
 
@@ -276,7 +276,7 @@ The following is the full code with Qdrant vectorstore, for example:
 
 ```python
 ## Define embedding model
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 embedding = HuggingFaceEmbeddings(
     model_name="sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
 

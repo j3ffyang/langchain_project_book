@@ -31,18 +31,18 @@ PyPDFLoader: This tool is used to load and parse PDF documents. DirectoryLoader:
 Copy this file to your project or any directory you like. In my case, I leave it in /tmp. This PDF file will be used to demonstrate the functionality of the PyPDFLoader and DirectoryLoader tools.">
     <meta itemprop="datePublished" content="2024-10-28T21:09:57+08:00">
     <meta itemprop="dateModified" content="2024-10-28T21:09:57+08:00">
-    <meta itemprop="wordCount" content="1981">
+    <meta itemprop="wordCount" content="1983">
     <title>Define a RAG Chain :: LangChain AI</title>
-    <link href="/langchain_project_book/css/fontawesome-all.min.css?1731640123" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731640123" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/nucleus.css?1731640123" rel="stylesheet">
-    <link href="/langchain_project_book/css/auto-complete.css?1731640123" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731640123" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1731640123" rel="stylesheet">
-    <link href="/langchain_project_book/css/fonts.css?1731640123" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1731640123" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/theme.css?1731640123" rel="stylesheet">
-    <link href="/langchain_project_book/css/theme-auto.css?1731640123" rel="stylesheet" id="R-variant-style">
-    <link href="/langchain_project_book/css/chroma-auto.css?1731640123" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/langchain_project_book/css/print.css?1731640123" rel="stylesheet" media="print">
-    <script src="/langchain_project_book/js/variant.js?1731640123"></script>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1731641723" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731641723" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1731641723" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1731641723" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731641723" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1731641723" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1731641723" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1731641723" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1731641723" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1731641723" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1731641723" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1731641723" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1731641723"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
@@ -144,7 +144,7 @@ Copy this file to your project or any directory you like. In my case, I leave it
 <!-- raw HTML omitted -->
 <p>Numerical machine learning representations of the semantics of the input data are called embeddings. They convert complicated, high-dimensional data, such as text, photos, or audio, into vectors that represent their meaning. Enabling more effective data processing and analysis using algorithms.</p>
 <p>Since we are utilising an open-source embedding model that can be deployed locally, we can freely set the token&rsquo;s <code>chunk_size</code> to a greater amount.</p>
-<p>The <code>paraphrase-multilingual-MiniLM-L12-v2</code> model, requiring 477MB of disc space, is the one I like to use. It is compact, strong, and capable. I also include <code>bert-base-multilingual-cased</code> embedding model as reference, which I used for production as well.</p>
+<p>The <code>paraphrase-multilingual-MiniLM-L12-v2</code> model, requiring 477MB of disc space, is the one I like to use. It is compact, strong, and capable. I also include <code>all-mpnet-base</code> embedding model as reference, which I used for production as well.</p>
 <p><code>all-MiniLM-L6-v2</code> is an additional embedding model that I can suggest for testing while developing an application. It is quite compact, weighing in at just 90 MB.</p>
 <p>Hugging Face has a tonne of alternative and open source embedding models available &gt; <a href="https://huggingface.co/models?sort=downloads&search=embedding" rel="external" target="_blank">https://huggingface.co/models?sort=downloads&search=embedding</a></p>
 <h4 id="save-the-embedded-data-into-vectorstore">Save the embedded data into VectorStore</h4>
@@ -163,7 +163,7 @@ Copy this file to your project or any directory you like. In my case, I leave it
 <p>Further elaboration on these open-source alternatives to VectorStore will be provided in upcoming chapters. Additional options include FAISS, Chroma and Pinecone, the latter of which boasts excellent documentation from my personal perspective.</p>
 <p>Reminder: re-executing <code>QdrantVectorStore.from_documents</code> will insert the embedded data into the vector database (VectorStore), resulting in duplication of the data. This operation only needs to be run once to insert the chunked documents into the VectorStore.</p>
 <p>You can find more information about Qdrant at <a href="https://qdrant.tech/documentation/quick-start" rel="external" target="_blank">https://qdrant.tech/documentation/quick-start</a> and <a href="https://python.langchain.com/docs/integrations/vectorstores/qdrant" rel="external" target="_blank">https://python.langchain.com/docs/integrations/vectorstores/qdrant</a> .</p>
-<h4 id="configure-prompttemplate-and-prompt">Configure <code>PromptTemplate</code> and <code>Prompt</code></h4>
+<h4 id="configure-chatprompttemplate-and-prompt">Configure <code>ChatPromptTemplate</code> and <code>Prompt</code></h4>
 <p>This template is designed for question-answering tasks. The template consists of several placeholders that will be filled in dynamically when the template is used:</p>
 <p><code>{question}</code>: this placeholder will be replaced with the actual question that the user wants to have answered.
 <code>{context}</code>: this placeholder will be replaced with the relevant context or information that the language model can use to formulate the answer.</p>
@@ -182,7 +182,7 @@ Copy this file to your project or any directory you like. In my case, I leave it
 </span></span><span style="display:flex;"><span>prompt <span style="color:#f92672">=</span> ChatPromptTemplate<span style="color:#f92672">.</span>from_template(template)</span></span></code></pre></div>
 <p>For more comprehensive information, I recommend visiting <a href="https://python.langchain.com/docs/expression_language/cookbook/prompt_llm_parser" rel="external" target="_blank">https://python.langchain.com/docs/expression_language/cookbook/prompt_llm_parser</a>.</p>
 <p>Please be aware that the effectiveness of prompts and their templates can vary significantly across different models. Essentially, the language model (LLM) might not always interpret the prompt and its template as intended. It may be necessary to dedicate some time to experimentation and testing to achieve the desired results.</p>
-<h4 id="load-mistral-model">Load <code>Mistral</code> model</h4>
+<h4 id="load-mistral-model-with-ollama">Load <code>Mistral</code> model with <code>ollama</code></h4>
 <p>The following code snippet demonstrates the Ollama, acting as a middleware for Large Language Models (LLMs). It instantiates the Ollama class and specifies the particular LLM to be utilized.</p>
 <p>My experience with the Mistral language model in real projects has shown it to deliver exceptional semantic optimization capabilities. In our project, we explored and tested approximately 30+ different models, including Gemma, GPT4All and GPT-2, etc, open-sourced from the HuggingFace platform. I&rsquo;ll cover these in this book.</p>
 <p>To get <code>mistral</code> model loaded and run, you can execute the following command:</p>
@@ -266,7 +266,7 @@ Copy this file to your project or any directory you like. In my case, I leave it
 </span></span><span style="display:flex;"><span>retriever <span style="color:#f92672">=</span> vectorstore<span style="color:#f92672">.</span>as_retriever()</span></span></code></pre></div>
 <p>The following is the full code with Qdrant vectorstore, for example:</p>
 <div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#75715e">## Define embedding model</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.embeddings <span style="color:#f92672">import</span> HuggingFaceEmbeddings
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_huggingface <span style="color:#f92672">import</span> HuggingFaceEmbeddings
 </span></span><span style="display:flex;"><span>embedding <span style="color:#f92672">=</span> HuggingFaceEmbeddings(
 </span></span><span style="display:flex;"><span>    model_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;</span>)
 </span></span><span style="display:flex;"><span>
@@ -338,7 +338,7 @@ LangChain AI
           </a>
         </div>
         <script>
-          window.index_js_url="/langchain_project_book/searchindex.js?1731640123";
+          window.index_js_url="/langchain_project_book/searchindex.js?1731641723";
         </script>
         <search><form action="/langchain_project_book/search/index.html" method="get">
           <div class="searchbox default-animation">
@@ -351,12 +351,12 @@ LangChain AI
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/langchain_project_book/js/auto-complete.js?1731640123" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.min.js?1731640123" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1731640123" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1731640123" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1731640123" defer></script>
-        <script src="/langchain_project_book/js/search.js?1731640123" defer></script>
+        <script src="/langchain_project_book/js/auto-complete.js?1731641723" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1731641723" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1731641723" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1731641723" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1731641723" defer></script>
+        <script src="/langchain_project_book/js/search.js?1731641723" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -429,8 +429,8 @@ LangChain AI
         </div>
       </div>
     </aside>
-    <script src="/langchain_project_book/js/clipboard.min.js?1731640123" defer></script>
-    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1731640123" defer></script>
-    <script src="/langchain_project_book/js/theme.js?1731640123" defer></script>
+    <script src="/langchain_project_book/js/clipboard.min.js?1731641723" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1731641723" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1731641723" defer></script>
   </body>
 </html>
