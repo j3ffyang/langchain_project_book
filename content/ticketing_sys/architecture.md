@@ -36,8 +36,8 @@ embedding --> vectorstore:insert selected data\ninto vectordb
 embedding --> vectorstore:embed user's query
 user -> embedding: query
 
-vectorstore --> ContextualCompressionRetriever:context from `retriever.get_relevant_documents`
-ContextualCompressionRetriever --> prompt:compression_retriever.get_relevant_documents(query)
+vectorstore --> ContextualCompressionRetriever
+ContextualCompressionRetriever --> prompt:compression_retriever.invoke(query)
 prompt -> llm
 {{< /plantuml >}}
 

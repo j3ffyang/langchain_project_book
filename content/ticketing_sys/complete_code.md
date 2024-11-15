@@ -67,8 +67,8 @@ llm = HuggingFaceEndpoint(
 Define Contextual Compression Retriever. The `LLMChainExtractor` uses an `LLMChain` to extract from each document only the statements that are relevant to the query.
 
 ```python
-from langchain.retrievers.contextual_compression import ContextualCompressionRetriever
 from langchain.retrievers.document_compressors import LLMChainExtractor
+from langchain.retrievers.contextual_compression import ContextualCompressionRetriever
 compressor = LLMChainExtractor.from_llm(llm)
 compression_retriever = ContextualCompressionRetriever(
     base_compressor=compressor, base_retriever=retriever
