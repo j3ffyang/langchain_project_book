@@ -41,8 +41,7 @@ pprint(data[0])
 The output appears to be
 
 ```py
-Document(page_content="application: Windows Operating System\nquery: I'm having trouble logging into my account. I keep getting an error message saying my password is incorrect, even though I know I'm entering it correctly.\nsolution: Verified the user's account information and reset their password. Provided step-by-step instructions on how to log in with the new password.",
-metadata={'source': './240409_contextCompression.csv', 'row': 0, 'ticket_number': '000001', 'date': '2024-04-01', 'caller': 'John Doe', 'responder': 'Jane Smith', 'timestamp': '2024-04-01 10:15:23'})
+Document(metadata={'source': './reranker_sample.csv', 'row': 0, 'ticket_number': '000001', 'date': '2024-04-01', 'caller': 'John Doe', 'responder': 'Jane Smith', 'timestamp': '2024-04-01 10:15:23'}, page_content="application: Windows Operating System\nquery: I'm having trouble logging into my account. I keep getting an error message saying my password is incorrect, even though I know I'm entering it correctly.\nsolution: Verified the user's account information and reset their password. Provided step-by-step instructions on how to log in with the new password.")
 ```
 
 <!-- From the output, we can see that Document's `page_content` contains the solution related information and `ticket_number`, `date`, and `caller` go to `metadata`, where `page_content` will be embedded and inserted into vectorstore. -->

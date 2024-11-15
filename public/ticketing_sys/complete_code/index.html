@@ -31,18 +31,18 @@ from pprint import pprint from warnings import filterwarnings filterwarnings(&#3
 Use CSVLoader to load the CSV file and include only the specified columns in the page_content of each Document. Note that any columns not listed under metadata_columns will be included in page_content.">
     <meta itemprop="datePublished" content="2024-10-28T21:33:00+08:00">
     <meta itemprop="dateModified" content="2024-10-28T21:33:00+08:00">
-    <meta itemprop="wordCount" content="386">
+    <meta itemprop="wordCount" content="341">
     <title>Complete Code :: LangChain AI</title>
-    <link href="/langchain_project_book/css/fontawesome-all.min.css?1731636524" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731636524" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/nucleus.css?1731636524" rel="stylesheet">
-    <link href="/langchain_project_book/css/auto-complete.css?1731636524" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731636524" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1731636524" rel="stylesheet">
-    <link href="/langchain_project_book/css/fonts.css?1731636524" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1731636524" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/theme.css?1731636524" rel="stylesheet">
-    <link href="/langchain_project_book/css/theme-auto.css?1731636524" rel="stylesheet" id="R-variant-style">
-    <link href="/langchain_project_book/css/chroma-auto.css?1731636524" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/langchain_project_book/css/print.css?1731636524" rel="stylesheet" media="print">
-    <script src="/langchain_project_book/js/variant.js?1731636524"></script>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1731666681" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731666681" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1731666681" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1731666681" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731666681" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1731666681" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1731666681" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1731666681" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1731666681" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1731666681" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1731666681" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1731666681" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1731666681"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
@@ -120,9 +120,10 @@ Use CSVLoader to load the CSV file and include only the specified columns in the
 </span></span><span style="display:flex;"><span>                   metadata_columns<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;ticket_number&#34;</span>, <span style="color:#e6db74">&#34;date&#34;</span>, <span style="color:#e6db74">&#34;caller&#34;</span>, <span style="color:#e6db74">&#34;responder&#34;</span>, <span style="color:#e6db74">&#34;timestamp&#34;</span>])
 </span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> loader<span style="color:#f92672">.</span>load()</span></span></code></pre></div>
 <p>Define embedding model</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.embeddings <span style="color:#f92672">import</span> HuggingFaceEmbeddings
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_huggingface.embeddings <span style="color:#f92672">import</span> HuggingFaceEmbeddings
 </span></span><span style="display:flex;"><span>embedding <span style="color:#f92672">=</span> HuggingFaceEmbeddings(
-</span></span><span style="display:flex;"><span>    model_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;</span>)</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>    model_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;</span>
+</span></span><span style="display:flex;"><span>)</span></span></code></pre></div>
 <p>Embed the selected data into VectorStore and create the base retriever. Note that the <code>top_k</code> is set to <code>4</code> which is the default value. 4 entries mostly closed to searched string will be printed out.</p>
 <div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.vectorstores <span style="color:#f92672">import</span> FAISS
 </span></span><span style="display:flex;"><span>retriever <span style="color:#f92672">=</span> FAISS<span style="color:#f92672">.</span>from_documents(data, embedding)<span style="color:#f92672">.</span>as_retriever(
@@ -131,17 +132,21 @@ Use CSVLoader to load the CSV file and include only the specified columns in the
 </span></span><span style="display:flex;"><span>query <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;if i forget the password, how to resolve the problem?&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">## the following snippet shows the result of similarity_search</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># docs = retriever.get_relevant_documents(query)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># docs = retriever.invoke(query)</span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># pprint(docs)</span></span></span></code></pre></div>
-<p>Define and load LLM with GPT4All</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.llms <span style="color:#f92672">import</span> GPT4All
-</span></span><span style="display:flex;"><span>llm <span style="color:#f92672">=</span> GPT4All(
-</span></span><span style="display:flex;"><span>    model<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;./models/gpt4all/mistral-7b-openorca.gguf2.Q4_0.gguf&#34;</span>,
-</span></span><span style="display:flex;"><span>    device<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;gpu&#39;</span>,
-</span></span><span style="display:flex;"><span>    n_threads<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span>)</span></span></code></pre></div>
-<blockquote>
-<p>Note: the <code>gguf</code> model should be downloaded prior to this step.</p>
-</blockquote>
+<p>Define and load LLM with <code>HuggingFaceEndpoint</code></p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span>HUGGINGFACEHUB_API_TOKEN <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>getenv(<span style="color:#e6db74">&#34;HUGGINGFACEHUB_API_TOKEN&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_huggingface <span style="color:#f92672">import</span> HuggingFaceEndpoint
+</span></span><span style="display:flex;"><span>repo_id <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;mistralai/Mistral-7B-Instruct-v0.2&#34;</span>
+</span></span><span style="display:flex;"><span>llm <span style="color:#f92672">=</span> HuggingFaceEndpoint(
+</span></span><span style="display:flex;"><span>    repo_id <span style="color:#f92672">=</span> repo_id,
+</span></span><span style="display:flex;"><span>    temperature <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.5</span>,
+</span></span><span style="display:flex;"><span>    huggingfacehub_api_token<span style="color:#f92672">=</span>HUGGINGFACEHUB_API_TOKEN,
+</span></span><span style="display:flex;"><span>    max_new_tokens <span style="color:#f92672">=</span> <span style="color:#ae81ff">250</span>,
+</span></span><span style="display:flex;"><span>)</span></span></code></pre></div>
+<!-- raw HTML omitted -->
 <p>Define Contextual Compression Retriever. The <code>LLMChainExtractor</code> uses an <code>LLMChain</code> to extract from each document only the statements that are relevant to the query.</p>
 <div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.retrievers.contextual_compression <span style="color:#f92672">import</span> ContextualCompressionRetriever
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.retrievers.document_compressors <span style="color:#f92672">import</span> LLMChainExtractor
@@ -149,29 +154,22 @@ Use CSVLoader to load the CSV file and include only the specified columns in the
 </span></span><span style="display:flex;"><span>compression_retriever <span style="color:#f92672">=</span> ContextualCompressionRetriever(
 </span></span><span style="display:flex;"><span>    base_compressor<span style="color:#f92672">=</span>compressor, base_retriever<span style="color:#f92672">=</span>retriever
 </span></span><span style="display:flex;"><span>)
-</span></span><span style="display:flex;"><span>compressed_docs <span style="color:#f92672">=</span> compression_retriever<span style="color:#f92672">.</span>get_relevant_documents(query)
+</span></span><span style="display:flex;"><span>compressed_docs <span style="color:#f92672">=</span> compression_retriever<span style="color:#f92672">.</span>invoke(query)
 </span></span><span style="display:flex;"><span>pprint(compressed_docs)</span></span></code></pre></div>
 <p>Generate chain with <code>compression_retriever</code></p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.chains <span style="color:#f92672">import</span> RetrievalQAWithSourcesChain
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.chains.qa_with_sources.retrieval <span style="color:#f92672">import</span> RetrievalQAWithSourcesChain
 </span></span><span style="display:flex;"><span>chain <span style="color:#f92672">=</span> RetrievalQAWithSourcesChain<span style="color:#f92672">.</span>from_chain_type(
-</span></span><span style="display:flex;"><span>    llm<span style="color:#f92672">=</span>llm, retriever<span style="color:#f92672">=</span>compression_retriever
-</span></span><span style="display:flex;"><span>    )
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">## the following code works too without source</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># from langchain.chains import RetrievalQA</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># chain = RetrievalQA.from_chain_type(llm=llm, retriever=compression_retriever)</span>
-</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    llm<span style="color:#f92672">=</span>llm, 
+</span></span><span style="display:flex;"><span>    retriever<span style="color:#f92672">=</span>compression_retriever,
+</span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span>pprint(chain<span style="color:#f92672">.</span>invoke(query))</span></span></code></pre></div>
 <p>The output looks like this:</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>llama_new_context_with_model: max tensor size <span style="color:#f92672">=</span>   <span style="color:#ae81ff">102.55</span> MB
-</span></span><span style="display:flex;"><span>llama<span style="color:#f92672">.</span>cpp: using Vulkan on NVIDIA GeForce RTX <span style="color:#ae81ff">4090</span> Laptop GPU
-</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#39;answer&#39;</span>: <span style="color:#e6db74">&#39; If you forget your password, you can usually reset it by &#39;</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#39;following the &#34;Forgot Password&#34; link on the login page of the &#39;</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#39;website or application where the account is registered. This will &#39;</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#39;typically prompt a recovery process involving entering an email &#39;</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#39;address associated with the account and receiving a temporary &#39;</span>
-</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#39;password via email to log in and set a new permanent password.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,
-</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#39;question&#39;</span>: <span style="color:#e6db74">&#39;if i forget the password, how to resolve the problem?&#39;</span>,
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>{<span style="color:#e6db74">&#39;answer&#39;</span>: <span style="color:#e6db74">&#39; To reset a forgotten password for an email client, follow the &#39;</span>
+</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#39;steps provided in the context: click the &#34;Forgot Password&#34; link on &#39;</span>
+</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#39;the login page, enter your email address, check your email for a &#39;</span>
+</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#39;password reset link, and click on the link to create a new &#39;</span>
+</span></span><span style="display:flex;"><span>           <span style="color:#e6db74">&#39;password.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>,
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#39;question&#39;</span>: <span style="color:#e6db74">&#39;if i forgot the password, how to resolve the problem?&#39;</span>,
 </span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#39;sources&#39;</span>: <span style="color:#e6db74">&#39;./reranker_sample.csv&#39;</span>}</span></span></code></pre></div>
 
   <footer class="footline">
@@ -189,7 +187,7 @@ LangChain AI
           </a>
         </div>
         <script>
-          window.index_js_url="/langchain_project_book/searchindex.js?1731636524";
+          window.index_js_url="/langchain_project_book/searchindex.js?1731666681";
         </script>
         <search><form action="/langchain_project_book/search/index.html" method="get">
           <div class="searchbox default-animation">
@@ -202,12 +200,12 @@ LangChain AI
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/langchain_project_book/js/auto-complete.js?1731636524" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.min.js?1731636524" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1731636524" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1731636524" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1731636524" defer></script>
-        <script src="/langchain_project_book/js/search.js?1731636524" defer></script>
+        <script src="/langchain_project_book/js/auto-complete.js?1731666681" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1731666681" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1731666681" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1731666681" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1731666681" defer></script>
+        <script src="/langchain_project_book/js/search.js?1731666681" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -284,8 +282,8 @@ LangChain AI
         </div>
       </div>
     </aside>
-    <script src="/langchain_project_book/js/clipboard.min.js?1731636524" defer></script>
-    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1731636524" defer></script>
-    <script src="/langchain_project_book/js/theme.js?1731636524" defer></script>
+    <script src="/langchain_project_book/js/clipboard.min.js?1731666681" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1731666681" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1731666681" defer></script>
   </body>
 </html>

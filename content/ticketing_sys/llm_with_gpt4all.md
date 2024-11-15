@@ -99,12 +99,22 @@ llm = HuggingFacePipeline(pipeline=pipe)
 
 > Reference > https://python.langchain.com/docs/integrations/llms/huggingface_pipelines/
 
-#### Leverage the LLM Remotely
+#### Leverage the LLM Remotely through `HuggingFaceEndpoint`
 
 If you do not have an environment with enough capacity, you can simply leverage free API on Hugging Face, with `HuggingFaceEndpoint` class. In this case, nothing is downloaded locally.
 
 ```python
-from langchain_community.llms import HuggingFaceEndpoint
+import os
+HUGGINGFACEHUB_API_TOKEN = os.getenv("HUGGINGFACEHUB_API_TOKEN")
+
+from langchain_huggingface import HuggingFaceEndpoint
 repo_id = "mistralai/Mistral-7B-Instruct-v0.2"
-llm = HuggingFaceEndpoint(repo_id=repo_id, max_new_tokens=1024, temperature=0.5)
+llm = HuggingFaceEndpoint(
+    repo_id = repo_id,
+    temperature = 0.5,
+    huggingfacehub_api_token=HUGGINGFACEHUB_API_TOKEN,
+    max_new_tokens = 250,
+)
 ```
+
+This the most easiest way to call an LLM from Hugging Face.
