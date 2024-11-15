@@ -28,7 +28,7 @@ docker run -p 6333:6333 -p 6334:6334 \
 ```
 
 After Qdrant is launched completely, you can browse https://localhost:6333/dashboard and view the following or similar.
-![](images/2024-03-25-18-35-14.png)
+![](images/2024-11-15-11-05-21.png)
 Figure 4.2 Qdrant Dashboard Sample
 <br>
 
