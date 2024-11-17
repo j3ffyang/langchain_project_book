@@ -124,6 +124,16 @@ while True:
         pprint(process_question(user_input))
 ```
 
+This implementation allows for multi-turn conversations where each subsequent question can reference information from previous exchanges.
+Best Practices
+
+- Use LangChain's built-in functions (`create_history_aware_retriever`, `create_stuff_documents_chain`, `create_retrieval_chain`) to streamline the process.
+- Implement proper error handling and edge cases (e.g., empty chat history).
+- Consider using a database or persistent storage for managing chat history in production environments.
+- Test the system with various scenarios, including long conversations and complex queries.
+
+By following these steps and best practices, you can create a robust system that supports multi-round conversations while maintaining context throughout the interaction.
+
 
 
 <!-- 
