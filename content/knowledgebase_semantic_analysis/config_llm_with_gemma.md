@@ -12,8 +12,11 @@ The model we're utilizing has a limitation: it is quantized, which reduces accur
 
 
 ```py
-from langchain_community.llms import Ollama
-llm = Ollama(model="gemma:2b")
+from langchain_ollama import ChatOllama
+llm = ChatOllama(
+    model="mistral",
+    temperature=0.5,
+)
 ```
 
 If you haven't set up Ollama yet, you can refer to the "Book Summarization" chapter for guidance. However, I've outlined several straightforward steps for quick reference:

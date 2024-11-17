@@ -65,15 +65,17 @@ The code utilized in this chapter has specific dependencies. It is crucial to in
 ```py
 pip list | grep -i 'langchain\|supabase'
 
-langchain                                0.3.4
-langchain-chroma                         0.1.2
-langchain-community                      0.2.1
-langchain-core                           0.3.13
-langchain-experimental                   0.0.59
-langchain-huggingface                    0.1.0
-langchain-openai                         0.2.3
-langchain-text-splitters                 0.3.0
-supabase                                 2.9.1
+langchain                                0.3.7
+langchain-chroma                         0.1.4
+langchain-community                      0.3.5
+langchain-core                           0.3.15
+langchain-experimental                   0.3.3
+langchain-huggingface                    0.1.2
+langchain-ollama                         0.2.0
+langchain-openai                         0.2.6
+langchain-qdrant                         0.2.0
+langchain-text-splitters                 0.3.2
+supabase                                 2.10.0
 ```
 
 Remember the rapid pace of development within the open-source community, which leads to frequent updates, sometimes even daily. Ensure to regularly update your packages and consult the associated documentation for the most current information.
