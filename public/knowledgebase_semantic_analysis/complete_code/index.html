@@ -6,17 +6,17 @@
     <meta name="generator" content="Hugo 0.134.2">
     <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
     <meta name="description" content="I’ve divided the code into two sections because the data source is loaded into the vector store only once. After this initial load, queries can be executed against the existing vector store.
-Load the data into the vector store Query against the vector store Loading the Data from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents) from langchain_community.embeddings import HuggingFaceEmbeddings embeddings = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;) import os import getpass os.environ[&#34;SUPABASE_URL&#34;] = getpass.getpass(&#34;Supabase URL: &#34;) os.environ[&#34;SUPABASE_SERVICE_KEY&#34;] = getpass.getpass(&#34;Supabase Svc Key: &#34;) from langchain_community.vectorstores import SupabaseVectorStore from supabase.client import Client, create_client supabase_url = os.environ.get(&#34;SUPABASE_URL&#34;) supabase_key = os.environ.get(&#34;SUPABASE_SERVICE_KEY&#34;) supabase: Client = create_client(supabase_url, supabase_key) vectorstore = SupabaseVectorStore.from_documents( chunks, embeddings, client=supabase, table_name=&#34;documents&#34;, query_name=&#34;match_documents&#34;, chunk_size=500, ) Querying For convenience, I’ve included the values of supabase_url and supabase_key directly in the code to bypass the need for manual input during queries. However, it’s crucial to ensure these keys are not exposed when sharing the code with others or when pushing it to a public GitHub repository.">
+Load the data into the vector store Query against the vector store Loading the Data and Creating VectorStore import bs4 from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader( web_paths=(&#34;https://andersen.sdu.dk/vaerk/hersholt/TheEmperorsNewClothes_e.html&#34;,), bs_kwargs=dict( parse_only=bs4.SoupStrainer( class_=(&#34;post-content&#34;, &#34;post-title&#34;, &#34;post-header&#34;) ) ), ) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents) from langchain_huggingface.embeddings import HuggingFaceEmbeddings embedding = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34; ) import os import getpass SUPABASE_URL = os.getenv(&#34;SUPABASE_URL&#34;) SUPABASE_SERVICE_KEY = os.getenv(&#34;SUPABASE_SERVICE_KEY&#34;) from langchain_community.vectorstores import SupabaseVectorStore from supabase.client import Client, create_client supabase_url = SUPABASE_URL supabase_key = SUPABASE_SERVICE_KEY supabase_client = create_client(supabase_url, supabase_key) # create a new collection vectorstore = SupabaseVectorStore.from_documents( chunks, embedding = embedding, client = supabase_client, table_name = &#34;documents&#34;, query_name = &#34;match_documents&#34;, chunk_size = 500, ) Querying For convenience, I’ve included the values of supabase_url and supabase_key directly in the code to bypass the need for manual input during queries. However, it’s crucial to ensure these keys are not exposed when sharing the code with others or when pushing it to a public GitHub repository.">
     <meta name="author" content="">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Complete Code :: LangChain AI">
     <meta name="twitter:description" content="I’ve divided the code into two sections because the data source is loaded into the vector store only once. After this initial load, queries can be executed against the existing vector store.
-Load the data into the vector store Query against the vector store Loading the Data from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents) from langchain_community.embeddings import HuggingFaceEmbeddings embeddings = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;) import os import getpass os.environ[&#34;SUPABASE_URL&#34;] = getpass.getpass(&#34;Supabase URL: &#34;) os.environ[&#34;SUPABASE_SERVICE_KEY&#34;] = getpass.getpass(&#34;Supabase Svc Key: &#34;) from langchain_community.vectorstores import SupabaseVectorStore from supabase.client import Client, create_client supabase_url = os.environ.get(&#34;SUPABASE_URL&#34;) supabase_key = os.environ.get(&#34;SUPABASE_SERVICE_KEY&#34;) supabase: Client = create_client(supabase_url, supabase_key) vectorstore = SupabaseVectorStore.from_documents( chunks, embeddings, client=supabase, table_name=&#34;documents&#34;, query_name=&#34;match_documents&#34;, chunk_size=500, ) Querying For convenience, I’ve included the values of supabase_url and supabase_key directly in the code to bypass the need for manual input during queries. However, it’s crucial to ensure these keys are not exposed when sharing the code with others or when pushing it to a public GitHub repository.">
+Load the data into the vector store Query against the vector store Loading the Data and Creating VectorStore import bs4 from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader( web_paths=(&#34;https://andersen.sdu.dk/vaerk/hersholt/TheEmperorsNewClothes_e.html&#34;,), bs_kwargs=dict( parse_only=bs4.SoupStrainer( class_=(&#34;post-content&#34;, &#34;post-title&#34;, &#34;post-header&#34;) ) ), ) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents) from langchain_huggingface.embeddings import HuggingFaceEmbeddings embedding = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34; ) import os import getpass SUPABASE_URL = os.getenv(&#34;SUPABASE_URL&#34;) SUPABASE_SERVICE_KEY = os.getenv(&#34;SUPABASE_SERVICE_KEY&#34;) from langchain_community.vectorstores import SupabaseVectorStore from supabase.client import Client, create_client supabase_url = SUPABASE_URL supabase_key = SUPABASE_SERVICE_KEY supabase_client = create_client(supabase_url, supabase_key) # create a new collection vectorstore = SupabaseVectorStore.from_documents( chunks, embedding = embedding, client = supabase_client, table_name = &#34;documents&#34;, query_name = &#34;match_documents&#34;, chunk_size = 500, ) Querying For convenience, I’ve included the values of supabase_url and supabase_key directly in the code to bypass the need for manual input during queries. However, it’s crucial to ensure these keys are not exposed when sharing the code with others or when pushing it to a public GitHub repository.">
     <meta property="og:url" content="http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html">
     <meta property="og:site_name" content="LangChain AI">
     <meta property="og:title" content="Complete Code :: LangChain AI">
     <meta property="og:description" content="I’ve divided the code into two sections because the data source is loaded into the vector store only once. After this initial load, queries can be executed against the existing vector store.
-Load the data into the vector store Query against the vector store Loading the Data from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents) from langchain_community.embeddings import HuggingFaceEmbeddings embeddings = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;) import os import getpass os.environ[&#34;SUPABASE_URL&#34;] = getpass.getpass(&#34;Supabase URL: &#34;) os.environ[&#34;SUPABASE_SERVICE_KEY&#34;] = getpass.getpass(&#34;Supabase Svc Key: &#34;) from langchain_community.vectorstores import SupabaseVectorStore from supabase.client import Client, create_client supabase_url = os.environ.get(&#34;SUPABASE_URL&#34;) supabase_key = os.environ.get(&#34;SUPABASE_SERVICE_KEY&#34;) supabase: Client = create_client(supabase_url, supabase_key) vectorstore = SupabaseVectorStore.from_documents( chunks, embeddings, client=supabase, table_name=&#34;documents&#34;, query_name=&#34;match_documents&#34;, chunk_size=500, ) Querying For convenience, I’ve included the values of supabase_url and supabase_key directly in the code to bypass the need for manual input during queries. However, it’s crucial to ensure these keys are not exposed when sharing the code with others or when pushing it to a public GitHub repository.">
+Load the data into the vector store Query against the vector store Loading the Data and Creating VectorStore import bs4 from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader( web_paths=(&#34;https://andersen.sdu.dk/vaerk/hersholt/TheEmperorsNewClothes_e.html&#34;,), bs_kwargs=dict( parse_only=bs4.SoupStrainer( class_=(&#34;post-content&#34;, &#34;post-title&#34;, &#34;post-header&#34;) ) ), ) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents) from langchain_huggingface.embeddings import HuggingFaceEmbeddings embedding = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34; ) import os import getpass SUPABASE_URL = os.getenv(&#34;SUPABASE_URL&#34;) SUPABASE_SERVICE_KEY = os.getenv(&#34;SUPABASE_SERVICE_KEY&#34;) from langchain_community.vectorstores import SupabaseVectorStore from supabase.client import Client, create_client supabase_url = SUPABASE_URL supabase_key = SUPABASE_SERVICE_KEY supabase_client = create_client(supabase_url, supabase_key) # create a new collection vectorstore = SupabaseVectorStore.from_documents( chunks, embedding = embedding, client = supabase_client, table_name = &#34;documents&#34;, query_name = &#34;match_documents&#34;, chunk_size = 500, ) Querying For convenience, I’ve included the values of supabase_url and supabase_key directly in the code to bypass the need for manual input during queries. However, it’s crucial to ensure these keys are not exposed when sharing the code with others or when pushing it to a public GitHub repository.">
     <meta property="og:locale" content="en_us">
     <meta property="og:type" content="article">
     <meta property="article:section" content="KnowledgeBase Semantic Analysis">
@@ -24,21 +24,21 @@ Load the data into the vector store Query against the vector store Loading the D
     <meta property="article:modified_time" content="2024-10-28T22:36:51+08:00">
     <meta itemprop="name" content="Complete Code :: LangChain AI">
     <meta itemprop="description" content="I’ve divided the code into two sections because the data source is loaded into the vector store only once. After this initial load, queries can be executed against the existing vector store.
-Load the data into the vector store Query against the vector store Loading the Data from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents) from langchain_community.embeddings import HuggingFaceEmbeddings embeddings = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;) import os import getpass os.environ[&#34;SUPABASE_URL&#34;] = getpass.getpass(&#34;Supabase URL: &#34;) os.environ[&#34;SUPABASE_SERVICE_KEY&#34;] = getpass.getpass(&#34;Supabase Svc Key: &#34;) from langchain_community.vectorstores import SupabaseVectorStore from supabase.client import Client, create_client supabase_url = os.environ.get(&#34;SUPABASE_URL&#34;) supabase_key = os.environ.get(&#34;SUPABASE_SERVICE_KEY&#34;) supabase: Client = create_client(supabase_url, supabase_key) vectorstore = SupabaseVectorStore.from_documents( chunks, embeddings, client=supabase, table_name=&#34;documents&#34;, query_name=&#34;match_documents&#34;, chunk_size=500, ) Querying For convenience, I’ve included the values of supabase_url and supabase_key directly in the code to bypass the need for manual input during queries. However, it’s crucial to ensure these keys are not exposed when sharing the code with others or when pushing it to a public GitHub repository.">
+Load the data into the vector store Query against the vector store Loading the Data and Creating VectorStore import bs4 from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader( web_paths=(&#34;https://andersen.sdu.dk/vaerk/hersholt/TheEmperorsNewClothes_e.html&#34;,), bs_kwargs=dict( parse_only=bs4.SoupStrainer( class_=(&#34;post-content&#34;, &#34;post-title&#34;, &#34;post-header&#34;) ) ), ) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents) from langchain_huggingface.embeddings import HuggingFaceEmbeddings embedding = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34; ) import os import getpass SUPABASE_URL = os.getenv(&#34;SUPABASE_URL&#34;) SUPABASE_SERVICE_KEY = os.getenv(&#34;SUPABASE_SERVICE_KEY&#34;) from langchain_community.vectorstores import SupabaseVectorStore from supabase.client import Client, create_client supabase_url = SUPABASE_URL supabase_key = SUPABASE_SERVICE_KEY supabase_client = create_client(supabase_url, supabase_key) # create a new collection vectorstore = SupabaseVectorStore.from_documents( chunks, embedding = embedding, client = supabase_client, table_name = &#34;documents&#34;, query_name = &#34;match_documents&#34;, chunk_size = 500, ) Querying For convenience, I’ve included the values of supabase_url and supabase_key directly in the code to bypass the need for manual input during queries. However, it’s crucial to ensure these keys are not exposed when sharing the code with others or when pushing it to a public GitHub repository.">
     <meta itemprop="datePublished" content="2024-10-28T22:36:51+08:00">
     <meta itemprop="dateModified" content="2024-10-28T22:36:51+08:00">
-    <meta itemprop="wordCount" content="675">
+    <meta itemprop="wordCount" content="779">
     <title>Complete Code :: LangChain AI</title>
-    <link href="/langchain_project_book/css/fontawesome-all.min.css?1731748674" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731748674" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/nucleus.css?1731748674" rel="stylesheet">
-    <link href="/langchain_project_book/css/auto-complete.css?1731748674" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731748674" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1731748674" rel="stylesheet">
-    <link href="/langchain_project_book/css/fonts.css?1731748674" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1731748674" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/theme.css?1731748674" rel="stylesheet">
-    <link href="/langchain_project_book/css/theme-auto.css?1731748674" rel="stylesheet" id="R-variant-style">
-    <link href="/langchain_project_book/css/chroma-auto.css?1731748674" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/langchain_project_book/css/print.css?1731748674" rel="stylesheet" media="print">
-    <script src="/langchain_project_book/js/variant.js?1731748674"></script>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1731849699" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731849699" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1731849699" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1731849699" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731849699" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1731849699" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1731849699" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1731849699" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1731849699" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1731849699" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1731849699" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1731849699" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1731849699"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
@@ -81,7 +81,7 @@ Load the data into the vector store Query against the vector store Loading the D
             itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Complete Code</span><meta itemprop="position" content="3"></li>
           </ol>
           <div class="topbar-area topbar-area-end" data-area="end">
-            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html" title="Conversation History as a Memory with Retriever (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/knowledgebase_semantic_analysis/enable_multiconv_with_history/index.html" title="Enable Multi-Round Conversations with Chat History (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
             </div>
             <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html" title="Summary (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
             </div>
@@ -110,93 +110,144 @@ Load the data into the vector store Query against the vector store Loading the D
 <li>Load the data into the vector store</li>
 <li>Query against the vector store</li>
 </ul>
-<h4 id="loading-the-data">Loading the Data</h4>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.document_loaders <span style="color:#f92672">import</span> WebBaseLoader
-</span></span><span style="display:flex;"><span>loader <span style="color:#f92672">=</span> WebBaseLoader(<span style="color:#e6db74">&#34;https://en.wikisource.org/wiki/Hans_Andersen</span><span style="color:#e6db74">%27s</span><span style="color:#e6db74">_Fairy_Tales/The_Emperor</span><span style="color:#e6db74">%27s</span><span style="color:#e6db74">_New_Clothes&#34;</span>)
+<h4 id="loading-the-data-and-creating-vectorstore">Loading the Data and Creating VectorStore</h4>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> bs4
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.document_loaders <span style="color:#f92672">import</span> WebBaseLoader
+</span></span><span style="display:flex;"><span>loader <span style="color:#f92672">=</span> WebBaseLoader(
+</span></span><span style="display:flex;"><span>    web_paths<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#34;https://andersen.sdu.dk/vaerk/hersholt/TheEmperorsNewClothes_e.html&#34;</span>,),
+</span></span><span style="display:flex;"><span>    bs_kwargs<span style="color:#f92672">=</span>dict(
+</span></span><span style="display:flex;"><span>        parse_only<span style="color:#f92672">=</span>bs4<span style="color:#f92672">.</span>SoupStrainer(
+</span></span><span style="display:flex;"><span>            class_<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#34;post-content&#34;</span>, <span style="color:#e6db74">&#34;post-title&#34;</span>, <span style="color:#e6db74">&#34;post-header&#34;</span>)
+</span></span><span style="display:flex;"><span>        )
+</span></span><span style="display:flex;"><span>    ),
+</span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span>documents <span style="color:#f92672">=</span> loader<span style="color:#f92672">.</span>load()
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.text_splitter <span style="color:#f92672">import</span> RecursiveCharacterTextSplitter
 </span></span><span style="display:flex;"><span>splitter <span style="color:#f92672">=</span> RecursiveCharacterTextSplitter(chunk_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>, chunk_overlap<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
 </span></span><span style="display:flex;"><span>chunks <span style="color:#f92672">=</span> splitter<span style="color:#f92672">.</span>split_documents(documents)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.embeddings <span style="color:#f92672">import</span> HuggingFaceEmbeddings
-</span></span><span style="display:flex;"><span>embeddings <span style="color:#f92672">=</span> HuggingFaceEmbeddings(
-</span></span><span style="display:flex;"><span>    model_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_huggingface.embeddings <span style="color:#f92672">import</span> HuggingFaceEmbeddings
+</span></span><span style="display:flex;"><span>embedding <span style="color:#f92672">=</span> HuggingFaceEmbeddings(
+</span></span><span style="display:flex;"><span>    model_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
 </span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> getpass
-</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#34;SUPABASE_URL&#34;</span>] <span style="color:#f92672">=</span> getpass<span style="color:#f92672">.</span>getpass(<span style="color:#e6db74">&#34;Supabase URL: &#34;</span>)
-</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#34;SUPABASE_SERVICE_KEY&#34;</span>] <span style="color:#f92672">=</span> getpass<span style="color:#f92672">.</span>getpass(<span style="color:#e6db74">&#34;Supabase Svc Key: &#34;</span>)
+</span></span><span style="display:flex;"><span>SUPABASE_URL <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>getenv(<span style="color:#e6db74">&#34;SUPABASE_URL&#34;</span>)
+</span></span><span style="display:flex;"><span>SUPABASE_SERVICE_KEY <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>getenv(<span style="color:#e6db74">&#34;SUPABASE_SERVICE_KEY&#34;</span>)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.vectorstores <span style="color:#f92672">import</span> SupabaseVectorStore
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> supabase.client <span style="color:#f92672">import</span> Client, create_client
-</span></span><span style="display:flex;"><span>supabase_url <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>environ<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;SUPABASE_URL&#34;</span>)
-</span></span><span style="display:flex;"><span>supabase_key <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>environ<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;SUPABASE_SERVICE_KEY&#34;</span>)
-</span></span><span style="display:flex;"><span>supabase: Client <span style="color:#f92672">=</span> create_client(supabase_url, supabase_key)
+</span></span><span style="display:flex;"><span>supabase_url <span style="color:#f92672">=</span> SUPABASE_URL
+</span></span><span style="display:flex;"><span>supabase_key <span style="color:#f92672">=</span> SUPABASE_SERVICE_KEY
+</span></span><span style="display:flex;"><span>supabase_client <span style="color:#f92672">=</span> create_client(supabase_url, supabase_key)
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># create a new collection</span>
 </span></span><span style="display:flex;"><span>vectorstore <span style="color:#f92672">=</span> SupabaseVectorStore<span style="color:#f92672">.</span>from_documents(
 </span></span><span style="display:flex;"><span>    chunks,
-</span></span><span style="display:flex;"><span>    embeddings,
-</span></span><span style="display:flex;"><span>    client<span style="color:#f92672">=</span>supabase,
-</span></span><span style="display:flex;"><span>    table_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;documents&#34;</span>,
-</span></span><span style="display:flex;"><span>    query_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;match_documents&#34;</span>,
-</span></span><span style="display:flex;"><span>    chunk_size<span style="color:#f92672">=</span><span style="color:#ae81ff">500</span>,
+</span></span><span style="display:flex;"><span>    embedding <span style="color:#f92672">=</span> embedding,
+</span></span><span style="display:flex;"><span>    client <span style="color:#f92672">=</span> supabase_client,
+</span></span><span style="display:flex;"><span>    table_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;documents&#34;</span>,
+</span></span><span style="display:flex;"><span>    query_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;match_documents&#34;</span>,
+</span></span><span style="display:flex;"><span>    chunk_size <span style="color:#f92672">=</span> <span style="color:#ae81ff">500</span>,
 </span></span><span style="display:flex;"><span>)</span></span></code></pre></div>
 <h4 id="querying">Querying</h4>
 <p>For convenience, I&rsquo;ve included the values of <code>supabase_url</code> and <code>supabase_key</code> directly in the code to bypass the need for manual input during queries. However, it&rsquo;s crucial to ensure these keys are not exposed when sharing the code with others or when pushing it to a public GitHub repository.</p>
-<p>The definition of <code>vectorstore</code> differs from its counterpart in the loading section because, during querying, there&rsquo;s no need to insert chunks into the vector store.</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.embeddings <span style="color:#f92672">import</span> HuggingFaceEmbeddings
-</span></span><span style="display:flex;"><span>embeddings <span style="color:#f92672">=</span> HuggingFaceEmbeddings(
-</span></span><span style="display:flex;"><span>    model_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;</span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># import getpass</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># os.environ[&#34;SUPABASE_URL&#34;] = getpass.getpass(&#34;Supabase URL: &#34;)</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># os.environ[&#34;SUPABASE_SERVICE_KEY&#34;] = getpass.getpass(&#34;Supabase Svc Key: &#34;)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.vectorstores <span style="color:#f92672">import</span> SupabaseVectorStore
+<p>The definition of <code>vectorstore</code> differs a little from its counterpart in the loading section because, during <strong>querying</strong>, there&rsquo;s no need to insert chunks into the vector store.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.vectorstores <span style="color:#f92672">import</span> SupabaseVectorStore
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> supabase.client <span style="color:#f92672">import</span> Client, create_client
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># supabase_url = os.environ.get(&#34;SUPABASE_URL&#34;)</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># supabase_key = os.environ.get(&#34;SUPABASE_SERVICE_KEY&#34;)</span>
 </span></span><span style="display:flex;"><span>supabase_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://127.0.0.1:8000&#34;</span>
 </span></span><span style="display:flex;"><span>supabase_key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE&#34;</span>
-</span></span><span style="display:flex;"><span>supabase: Client <span style="color:#f92672">=</span> create_client(supabase_url, supabase_key)
+</span></span><span style="display:flex;"><span>supabase_client <span style="color:#f92672">=</span> create_client(supabase_url, supabase_key)
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>vectorstore <span style="color:#f92672">=</span> SupabaseVectorStore(
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># chunks,</span>
-</span></span><span style="display:flex;"><span>    embedding<span style="color:#f92672">=</span>embeddings,
-</span></span><span style="display:flex;"><span>    client<span style="color:#f92672">=</span>supabase,
+</span></span><span style="display:flex;"><span>    embedding<span style="color:#f92672">=</span>embedding,
+</span></span><span style="display:flex;"><span>    client<span style="color:#f92672">=</span>supabase_client,
 </span></span><span style="display:flex;"><span>    table_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;documents&#34;</span>,
 </span></span><span style="display:flex;"><span>    query_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;match_documents&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># chunk_size=500,</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>retriever <span style="color:#f92672">=</span> vectorstore<span style="color:#f92672">.</span>as_retriever()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_ollama <span style="color:#f92672">import</span> ChatOllama
+</span></span><span style="display:flex;"><span>llm <span style="color:#f92672">=</span> ChatOllama(
+</span></span><span style="display:flex;"><span>    model<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;gemma:2b&#34;</span>,
+</span></span><span style="display:flex;"><span>    temperature<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>,
 </span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_core.prompts <span style="color:#f92672">import</span> PromptTemplate
-</span></span><span style="display:flex;"><span>template <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;&#34;You are a chatbot having a conversation with a human.
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Given the following extracted parts of a long document and a question, create a final answer.
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"></span><span style="color:#e6db74">{context}</span><span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"></span><span style="color:#e6db74">{chat_history}</span><span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Human :</span><span style="color:#e6db74">{human_input}</span><span style="color:#e6db74">
-</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Chatbot:&#34;&#34;&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>prompt <span style="color:#f92672">=</span> PromptTemplate(
-</span></span><span style="display:flex;"><span>    input_variables<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;chat_history&#34;</span>, <span style="color:#e6db74">&#34;human_input&#34;</span>, <span style="color:#e6db74">&#34;context&#34;</span>],
-</span></span><span style="display:flex;"><span>    template<span style="color:#f92672">=</span>template
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_core.prompts.chat <span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>    ChatPromptTemplate,
+</span></span><span style="display:flex;"><span>    HumanMessagePromptTemplate,
+</span></span><span style="display:flex;"><span>    MessagesPlaceholder,
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.chains.history_aware_retriever <span style="color:#f92672">import</span> create_history_aware_retriever
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>contextualize_q_system_prompt <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Given a chat history and the latest user question &#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;which might reference context in the chat history, &#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;formulate a standalone question which can be understood &#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;without the chat history. Do NOT answer the question, &#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;just reformulate it if needed and otherwise return it as is.&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>contextualize_q_prompt <span style="color:#f92672">=</span> ChatPromptTemplate(
+</span></span><span style="display:flex;"><span>    [
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;system&#34;</span>, contextualize_q_system_prompt),
+</span></span><span style="display:flex;"><span>        MessagesPlaceholder(<span style="color:#e6db74">&#34;chat_history&#34;</span>),
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;human&#34;</span>, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{input}</span><span style="color:#e6db74">&#34;</span>),
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>history_aware_retriever <span style="color:#f92672">=</span> create_history_aware_retriever(
+</span></span><span style="display:flex;"><span>    llm, retriever, contextualize_q_prompt
 </span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.llms <span style="color:#f92672">import</span> Ollama
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># llm = Ollama(model=&#34;mistral&#34;)</span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># llm = Ollama(model=&#34;llama3&#34;)</span>
-</span></span><span style="display:flex;"><span>llm <span style="color:#f92672">=</span> Ollama(model<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;gemma:2b&#34;</span>)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.memory <span style="color:#f92672">import</span> ConversationBufferMemory
-</span></span><span style="display:flex;"><span>memory <span style="color:#f92672">=</span> ConversationBufferMemory(memory_key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;chat_history&#34;</span>, input_key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;human_input&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.chains.retrieval <span style="color:#f92672">import</span> create_retrieval_chain
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.chains.combine_documents <span style="color:#f92672">import</span> create_stuff_documents_chain
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.chains.question_answering <span style="color:#f92672">import</span> load_qa_chain
-</span></span><span style="display:flex;"><span>chain <span style="color:#f92672">=</span> load_qa_chain(llm, chain_type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stuff&#34;</span>, memory<span style="color:#f92672">=</span>memory, prompt<span style="color:#f92672">=</span>prompt)
+</span></span><span style="display:flex;"><span>system_prompt <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;You are an assistant for question-answering tasks. &#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Use the following pieces of retrieved context to answer &#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;the question. If you don&#39;t know the answer, say that you &#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;don&#39;t know. Use three sentences maximum and keep the &#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;answer concise.&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{context}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>qa_prompt <span style="color:#f92672">=</span> ChatPromptTemplate(
+</span></span><span style="display:flex;"><span>    [
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;system&#34;</span>, system_prompt),
+</span></span><span style="display:flex;"><span>        MessagesPlaceholder(<span style="color:#e6db74">&#34;chat_history&#34;</span>),
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#34;human&#34;</span>, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{input}</span><span style="color:#e6db74">&#34;</span>),
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>question_answer_chain <span style="color:#f92672">=</span> create_stuff_documents_chain(llm, qa_prompt)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>rag_chain <span style="color:#f92672">=</span> create_retrieval_chain(history_aware_retriever, question_answer_chain)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.globals <span style="color:#f92672">import</span> set_debug, set_verbose
+</span></span><span style="display:flex;"><span>set_debug(<span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>set_verbose(<span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_core.messages <span style="color:#f92672">import</span> AIMessage, HumanMessage
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>chat_history <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">process_question</span>(question):
+</span></span><span style="display:flex;"><span>    ai_msg <span style="color:#f92672">=</span> rag_chain<span style="color:#f92672">.</span>invoke({<span style="color:#e6db74">&#34;input&#34;</span>: question, <span style="color:#e6db74">&#34;chat_history&#34;</span>: chat_history})
+</span></span><span style="display:flex;"><span>    chat_history<span style="color:#f92672">.</span>extend(
+</span></span><span style="display:flex;"><span>       [
+</span></span><span style="display:flex;"><span>           HumanMessage(content<span style="color:#f92672">=</span>question),
+</span></span><span style="display:flex;"><span>           AIMessage(content<span style="color:#f92672">=</span>ai_msg[<span style="color:#e6db74">&#34;answer&#34;</span>]),
+</span></span><span style="display:flex;"><span>       ]
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ai_msg[<span style="color:#e6db74">&#34;answer&#34;</span>]
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pprint <span style="color:#f92672">import</span> pprint
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> <span style="color:#66d9ef">True</span>:
@@ -204,8 +255,7 @@ Load the data into the vector store Query against the vector store Loading the D
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> user_input <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;exit&#34;</span>:
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
-</span></span><span style="display:flex;"><span>        retriever <span style="color:#f92672">=</span> vectorstore<span style="color:#f92672">.</span>similarity_search(user_input)
-</span></span><span style="display:flex;"><span>        pprint(chain<span style="color:#f92672">.</span>invoke({<span style="color:#e6db74">&#34;input_documents&#34;</span>: retriever, <span style="color:#e6db74">&#34;human_input&#34;</span>: user_input}, return_only_outputs<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>))</span></span></code></pre></div>
+</span></span><span style="display:flex;"><span>        pprint(process_question(user_input))</span></span></code></pre></div>
 <p>The output is like</p>
 <div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>Enter your question: how does the emperor think about his cloth
 </span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#39;output_text&#39;</span>: <span style="color:#e6db74">&#39;The emperor thinks about his cloth as he admires it and wants &#39;</span>
@@ -256,7 +306,7 @@ LangChain AI
           </a>
         </div>
         <script>
-          window.index_js_url="/langchain_project_book/searchindex.js?1731748674";
+          window.index_js_url="/langchain_project_book/searchindex.js?1731849699";
         </script>
         <search><form action="/langchain_project_book/search/index.html" method="get">
           <div class="searchbox default-animation">
@@ -269,12 +319,12 @@ LangChain AI
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/langchain_project_book/js/auto-complete.js?1731748674" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.min.js?1731748674" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1731748674" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1731748674" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1731748674" defer></script>
-        <script src="/langchain_project_book/js/search.js?1731748674" defer></script>
+        <script src="/langchain_project_book/js/auto-complete.js?1731849699" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1731849699" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1731849699" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1731849699" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1731849699" defer></script>
+        <script src="/langchain_project_book/js/search.js?1731849699" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -292,12 +342,11 @@ LangChain AI
             <li class="" data-nav-id="/langchain_project_book/ticketing_sys/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/index.html">Ticketing System</a><ul id="R-subsections-eaa6b154ff31d8e1af72e9555a67f96a" class="collapsible-menu"></ul></li>
             <li class="parent " data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/index.html">KnowledgeBase Semantic Analysis</a><ul id="R-subsections-c718aa372d1e4f26c29659df75d5d07f" class="collapsible-menu">
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/arch_n_workflow/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/arch_n_workflow/index.html">Architecture and Workflow</a></li>
-            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/pareparing_data/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/pareparing_data/index.html">Preparing Data</a></li>
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/preparing_data/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/preparing_data/index.html">Preparing Data</a></li>
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/select_embed_model/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/select_embed_model/index.html">Selecting the Embedding Model</a></li>
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/index.html">Supabase as VectorStore</a></li>
-            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/defining_prompt_n_prompttemplate/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/defining_prompt_n_prompttemplate/index.html">Defining Prompt and PromptTemplate</a></li>
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/config_llm_with_gemma/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/config_llm_with_gemma/index.html">Configuring LLM with Google Gemma</a></li>
-            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html">Conversation History as a Memory with Retriever</a></li>
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/enable_multiconv_with_history/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/enable_multiconv_with_history/index.html">Enable Multi-Round Conversations with Chat History</a></li>
             <li class="active " data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html">Complete Code</a></li>
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html">Summary</a></li></ul></li>
           </ul>
@@ -352,8 +401,8 @@ LangChain AI
         </div>
       </div>
     </aside>
-    <script src="/langchain_project_book/js/clipboard.min.js?1731748674" defer></script>
-    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1731748674" defer></script>
-    <script src="/langchain_project_book/js/theme.js?1731748674" defer></script>
+    <script src="/langchain_project_book/js/clipboard.min.js?1731849699" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1731849699" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1731849699" defer></script>
   </body>
 </html>

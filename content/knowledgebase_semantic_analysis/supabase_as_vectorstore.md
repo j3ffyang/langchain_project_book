@@ -219,16 +219,29 @@ from langchain_community.vectorstores import SupabaseVectorStore
 from supabase.client import Client, create_client
 supabase_url = os.environ.get("SUPABASE_URL")
 supabase_key = os.environ.get("SUPABASE_SERVICE_KEY")
-supabase: Client = create_client(supabase_url, supabase_key)
+supabase_client = create_client(supabase_url, supabase_key)
 
+# create a new collection if it doesn't exist
 vectorstore = SupabaseVectorStore.from_documents(
     chunks,
-    embeddings,
-    client=supabase,
+    embedding = embedding,
+    client=supabase_client,
     table_name="documents",
     query_name="match_documents",
     chunk_size=500,
 )
+retriever = vectorstore.as_retriever()
 ```
 
 Once the embedded data has been loaded, you can execute queries against the vector store using the `SupabaseVectorStore` function, instead of `SupabaseVectorStore.from_documents`, without the need to reload the data into the vector store. We'll see the code below.
+
+```py
+# query an existing collection
+vectorstore = SupabaseVectorStore(
+    embedding = embedding,
+    client = supabase_client,
+    table_name = "documents",
+    query_name = "match_documents",
+)
+retriever = vectorstore.as_retriever()
+```

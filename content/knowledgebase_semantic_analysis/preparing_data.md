@@ -13,6 +13,6 @@ loader = WebBaseLoader("https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_T
 documents = loader.load()
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
+splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
 chunks = splitter.split_documents(documents)
 ```

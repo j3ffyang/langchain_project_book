@@ -2,7 +2,7 @@
 title = 'Configuring LLM with Google Gemma'
 date = 2024-10-28T22:31:49+08:00
 draft = false
-weight = 6
+weight = 5
 +++
 
 
@@ -24,3 +24,4 @@ If you haven't set up Ollama yet, you can refer to the "Book Summarization" chap
 - Follow the instructions provided at https://ollama.com
 - To start the Ollama server, on Linux, execute `systemctl start ollama`, and on macOS, navigate to Finder > Applications > Ollama.
 - Execute `ollama pull gemma:2b` to download the model.
+- All the downloaded models reside in `/usr/share/ollama/.ollama`

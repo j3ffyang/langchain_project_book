@@ -17,17 +17,17 @@
     </item>
     <item>
       <title>Preparing Data</title>
-      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/pareparing_data/index.html</link>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/preparing_data/index.html</link>
       <pubDate>Mon, 28 Oct 2024 22:21:47 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/pareparing_data/index.html</guid>
-      <description>This part is the same as our previous discussion, with text loading from internet or you can load from either PDF with PyPDFLoader or Microsoft Word document, with Docx2txtLoader, split into smaller chunks, then get ready to insert into the VectorStore.&#xA;from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50) chunks = splitter.split_documents(documents)</description>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/preparing_data/index.html</guid>
+      <description>This part is the same as our previous discussion, with text loading from internet or you can load from either PDF with PyPDFLoader or Microsoft Word document, with Docx2txtLoader, split into smaller chunks, then get ready to insert into the VectorStore.&#xA;from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents)</description>
     </item>
     <item>
       <title>Selecting the Embedding Model</title>
       <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/select_embed_model/index.html</link>
       <pubDate>Mon, 28 Oct 2024 22:23:54 +0800</pubDate>
       <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/select_embed_model/index.html</guid>
-      <description>We continue to utilize this embedding model. It’s important to note that the dense vector space of this model has a dimensionality of 384, which must be specified when setting up the vector database with Supabase.&#xA;from langchain_community.embeddings import HuggingFaceEmbeddings embeddings = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34;) You can find the details of “dimensional dense vector space” from Hugging Face at https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2</description>
+      <description>We continue to utilize this embedding model. It’s important to note that the dense vector space of this model has a dimensionality of 384, which must be specified when setting up the vector database with Supabase.&#xA;from langchain_huggingface.embeddings import HuggingFaceEmbeddings embedding = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34; ) You can find the details of “dimensional dense vector space” from Hugging Face at https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2</description>
     </item>
     <item>
       <title>Supabase as VectorStore</title>
@@ -35,13 +35,6 @@
       <pubDate>Mon, 28 Oct 2024 22:26:09 +0800</pubDate>
       <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/index.html</guid>
       <description>We will introduce Supabase as a vector store and walk through the process of storing various embeddings in Supabase Vector, a combination of PostgreSQL and pgVector, aimed at facilitating semantic search.&#xA;Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL, a robust SQL database suitable for production environments. Given that Supabase Vector is built on pgVector, it allows for the storage of embeddings alongside other application data within the same database. This integration with pgvector’s indexing algorithms ensures that vector searches remain efficient even at large scales.</description>
-    </item>
-    <item>
-      <title>Defining Prompt and PromptTemplate</title>
-      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/defining_prompt_n_prompttemplate/index.html</link>
-      <pubDate>Mon, 28 Oct 2024 22:29:49 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/defining_prompt_n_prompttemplate/index.html</guid>
-      <description>This is the standard PromptTemplate designed to merge context, chat_history, and human_input, where the context is derived from the similarity_search results obtained from the vector store.&#xA;from langchain_core.prompts import PromptTemplate template = &#34;&#34;&#34;You are a chatbot having a conversation with a human. Given the following extracted parts of a long document and a question, create a final answer. {context} {chat_history} Human :{human_input} Chatbot:&#34;&#34;&#34; prompt = PromptTemplate( input_variables=[&#34;chat_history&#34;, &#34;human_input&#34;, &#34;context&#34;], template=template )</description>
     </item>
     <item>
       <title>Configuring LLM with Google Gemma</title>
@@ -52,9 +45,9 @@
     </item>
     <item>
       <title>Conversation History as a Memory with Retriever</title>
-      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html</link>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/enable_multiconv_with_history/index.html</link>
       <pubDate>Mon, 28 Oct 2024 22:33:54 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/conv_hist_as_mem_with_retriever/index.html</guid>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/enable_multiconv_with_history/index.html</guid>
       <description>This segment highlights the innovative feature of utilizing ConversationBufferMemory. This component merges human_input and chat_history into a unified memory, which is part of the load_qa_chain process. The prompt incorporates chat_history and context derived from the similarity_search output of the retriever. The technical procedure is depicted in the subsequent diagram.&#xA;rectangle ConversationBufferMemory { file chat_history file human_input } rectangle load_qa_chain { file llm file chain_type file memory rectangle prompt { file &#34;chat_history&#34; as ch file &#34;human_input&#34; as hi file context ch -[hidden]-&gt; hi hi -[hidden]-&gt; context } memory -[hidden]l- llm chain_type -[hidden]r- prompt llm -[hidden]d-&gt; chain_type memory -[hidden]d-&gt; prompt } rectangle retriever { database vectorstore } retriever -[hidden]l- human_input hi -l-&gt; vectorstore: similarity_search retriever -r-&gt; context ConversationBufferMemory -d-&gt; memory Figure 6.4 Memory in a Chain</description>
     </item>
     <item>

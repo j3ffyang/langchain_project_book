@@ -5,34 +5,30 @@
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.134.2">
     <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
-    <meta name="description" content="The technical process generally follows this sequence:
-Load the CSV file. Embed the selected data into a vector database. Create a compression_retriever that I’ll introduce in details Perform a similarity_search. Generate a prompt based on previous conversations. Define a chain with source data using RetrievalQAWithSourcesChain Send the output to the LLM for semantic optimization. The following diagram illustrates the main work flow of the data processing.
-file CSVLoader file embedding database vectorstore file base_retriever file compression_retriever file llm file result CSVLoader -&gt; embedding embedding -&gt; vectorstore vectorstore --&gt; base_retriever compression_retriever &lt;- base_retriever compression_retriever --&gt; llm: prompt llm -&gt; result Figure 5.1 Work Flow">
+    <meta name="description" content="This part is the same as our previous discussion, with text loading from internet or you can load from either PDF with PyPDFLoader or Microsoft Word document, with Docx2txtLoader, split into smaller chunks, then get ready to insert into the VectorStore.
+from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents)">
     <meta name="author" content="">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Technical Process :: LangChain AI">
-    <meta name="twitter:description" content="The technical process generally follows this sequence:
-Load the CSV file. Embed the selected data into a vector database. Create a compression_retriever that I’ll introduce in details Perform a similarity_search. Generate a prompt based on previous conversations. Define a chain with source data using RetrievalQAWithSourcesChain Send the output to the LLM for semantic optimization. The following diagram illustrates the main work flow of the data processing.
-file CSVLoader file embedding database vectorstore file base_retriever file compression_retriever file llm file result CSVLoader -&gt; embedding embedding -&gt; vectorstore vectorstore --&gt; base_retriever compression_retriever &lt;- base_retriever compression_retriever --&gt; llm: prompt llm -&gt; result Figure 5.1 Work Flow">
-    <meta property="og:url" content="http://localhost:1313/langchain_project_book/ticketing_sys/tech_proc/index.html">
+    <meta name="twitter:title" content="Preparing Data :: LangChain AI">
+    <meta name="twitter:description" content="This part is the same as our previous discussion, with text loading from internet or you can load from either PDF with PyPDFLoader or Microsoft Word document, with Docx2txtLoader, split into smaller chunks, then get ready to insert into the VectorStore.
+from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents)">
+    <meta property="og:url" content="http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/preparing_data/index.html">
     <meta property="og:site_name" content="LangChain AI">
-    <meta property="og:title" content="Technical Process :: LangChain AI">
-    <meta property="og:description" content="The technical process generally follows this sequence:
-Load the CSV file. Embed the selected data into a vector database. Create a compression_retriever that I’ll introduce in details Perform a similarity_search. Generate a prompt based on previous conversations. Define a chain with source data using RetrievalQAWithSourcesChain Send the output to the LLM for semantic optimization. The following diagram illustrates the main work flow of the data processing.
-file CSVLoader file embedding database vectorstore file base_retriever file compression_retriever file llm file result CSVLoader -&gt; embedding embedding -&gt; vectorstore vectorstore --&gt; base_retriever compression_retriever &lt;- base_retriever compression_retriever --&gt; llm: prompt llm -&gt; result Figure 5.1 Work Flow">
+    <meta property="og:title" content="Preparing Data :: LangChain AI">
+    <meta property="og:description" content="This part is the same as our previous discussion, with text loading from internet or you can load from either PDF with PyPDFLoader or Microsoft Word document, with Docx2txtLoader, split into smaller chunks, then get ready to insert into the VectorStore.
+from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents)">
     <meta property="og:locale" content="en_us">
     <meta property="og:type" content="article">
-    <meta property="article:section" content="Ticketing System">
-    <meta property="article:published_time" content="2024-10-28T21:18:01+08:00">
-    <meta property="article:modified_time" content="2024-10-28T21:18:01+08:00">
-    <meta itemprop="name" content="Technical Process :: LangChain AI">
-    <meta itemprop="description" content="The technical process generally follows this sequence:
-Load the CSV file. Embed the selected data into a vector database. Create a compression_retriever that I’ll introduce in details Perform a similarity_search. Generate a prompt based on previous conversations. Define a chain with source data using RetrievalQAWithSourcesChain Send the output to the LLM for semantic optimization. The following diagram illustrates the main work flow of the data processing.
-file CSVLoader file embedding database vectorstore file base_retriever file compression_retriever file llm file result CSVLoader -&gt; embedding embedding -&gt; vectorstore vectorstore --&gt; base_retriever compression_retriever &lt;- base_retriever compression_retriever --&gt; llm: prompt llm -&gt; result Figure 5.1 Work Flow">
-    <meta itemprop="datePublished" content="2024-10-28T21:18:01+08:00">
-    <meta itemprop="dateModified" content="2024-10-28T21:18:01+08:00">
-    <meta itemprop="wordCount" content="103">
-    <title>Technical Process :: LangChain AI</title>
+    <meta property="article:section" content="KnowledgeBase Semantic Analysis">
+    <meta property="article:published_time" content="2024-10-28T22:21:47+08:00">
+    <meta property="article:modified_time" content="2024-10-28T22:21:47+08:00">
+    <meta itemprop="name" content="Preparing Data :: LangChain AI">
+    <meta itemprop="description" content="This part is the same as our previous discussion, with text loading from internet or you can load from either PDF with PyPDFLoader or Microsoft Word document, with Docx2txtLoader, split into smaller chunks, then get ready to insert into the VectorStore.
+from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents)">
+    <meta itemprop="datePublished" content="2024-10-28T22:21:47+08:00">
+    <meta itemprop="dateModified" content="2024-10-28T22:21:47+08:00">
+    <meta itemprop="wordCount" content="62">
+    <title>Preparing Data :: LangChain AI</title>
     <link href="/langchain_project_book/css/fontawesome-all.min.css?1731839885" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731839885" rel="stylesheet"></noscript>
     <link href="/langchain_project_book/css/nucleus.css?1731839885" rel="stylesheet">
     <link href="/langchain_project_book/css/auto-complete.css?1731839885" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731839885" rel="stylesheet"></noscript>
@@ -63,7 +59,7 @@ file CSVLoader file embedding database vectorstore file base_retriever file comp
       window.T_N_results_found = `{1} results found for "{0}"`;
     </script>
   </head>
-  <body class="mobile-support html" data-url="/langchain_project_book/ticketing_sys/tech_proc/index.html">
+  <body class="mobile-support html" data-url="/langchain_project_book/knowledgebase_semantic_analysis/preparing_data/index.html">
     <div id="R-body" class="default-animation">
       <div id="R-body-overlay"></div>
       <nav id="R-topbar">
@@ -81,13 +77,13 @@ file CSVLoader file embedding database vectorstore file base_retriever file comp
           </div>
           <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
             itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/index.html"><span itemprop="name">LangChain Project Handbook</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
-            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/ticketing_sys/index.html"><span itemprop="name">Ticketing System</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
-            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Technical Process</span><meta itemprop="position" content="3"></li>
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/knowledgebase_semantic_analysis/index.html"><span itemprop="name">KnowledgeBase Semantic Analysis</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
+            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Preparing Data</span><meta itemprop="position" content="3"></li>
           </ol>
           <div class="topbar-area topbar-area-end" data-area="end">
-            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/ticketing_sys/index.html" title="Ticketing System (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
+            <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/knowledgebase_semantic_analysis/arch_n_workflow/index.html" title="Architecture and Workflow (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
             </div>
-            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/ticketing_sys/architecture/index.html" title="Architecture (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
+            <div class="topbar-button topbar-button-next" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/knowledgebase_semantic_analysis/select_embed_model/index.html" title="Selecting the Embedding Model (🡒)"><i class="fa-fw fas fa-chevron-right"></i></a>
             </div>
             <div class="topbar-button topbar-button-more" data-content-empty="hide" data-width-s="show" data-width-m="show" data-width-l="show"><button class="topbar-control" onclick="toggleTopbarFlyout(this)" type="button" title="More"><i class="fa-fw fas fa-ellipsis-v"></i></button>
               <div class="topbar-content">
@@ -101,68 +97,22 @@ file CSVLoader file embedding database vectorstore file base_retriever file comp
         </div>
       </nav>
       <div id="R-main-overlay"></div>
-      <main id="R-body-inner" class="highlightable ticketing_sys" tabindex="-1">
+      <main id="R-body-inner" class="highlightable knowledgebase_semantic_analysis" tabindex="-1">
         <div class="flex-block-wrapper">
 <article class="default">
   <header class="headline">
   </header>
 
-<h1 id="technical-process">Technical Process</h1>
+<h1 id="preparing-data">Preparing Data</h1>
 
-<p>The technical process generally follows this sequence:</p>
-<ul>
-<li>Load the CSV file.</li>
-<li>Embed the selected data into a vector database.</li>
-<li>Create a <code>compression_retriever</code> that I&rsquo;ll introduce in details</li>
-<li>Perform a <code>similarity_search</code>.</li>
-<li>Generate a prompt based on previous conversations.</li>
-<li>Define a chain with source data using <code>RetrievalQAWithSourcesChain</code></li>
-<li>Send the output to the LLM for semantic optimization.</li>
-</ul>
-<p>The following diagram illustrates the main work flow of the data processing.</p>
-<head>
-    <script src="https://cdn.jsdelivr.net/gh/jmnote/plantuml-encoder@1.2.4/dist/plantuml-encoder.min.js" integrity="sha256-Qsk2KRBCN5qVZX7B+8+2IvQl1Aqc723qV1tBCQaVoqo=" crossorigin="anonymous"></script>
-</head>
-<body>
-    <pre class="language-plantuml">
-    
-file CSVLoader
-file embedding
-database vectorstore
-file base_retriever
-file compression_retriever
-file llm
-file result
-
-CSVLoader -> embedding
-embedding -> vectorstore
-vectorstore --> base_retriever
-compression_retriever <- base_retriever
-compression_retriever --> llm: prompt
-llm -> result
-
-    </pre>
-    <script>
-    (function(){
-      let plantumlPrefix = "language-plantuml";
-      Array.prototype.forEach.call(document.querySelectorAll("[class^=" + plantumlPrefix + "]"), function(code){
-        
-        if (!code.previousElementSibling || !code.previousElementSibling.classList.contains('plantuml-image')) {
-          let image = document.createElement("IMG");
-          image.loading = 'lazy'; 
-          image.className = 'plantuml-image'; 
-          image.src = 'http://www.plantuml.com/plantuml/svg/~1' + plantumlEncoder.encode(code.innerText);
-          code.parentNode.insertBefore(image, code);
-          code.style.display = 'none';
-        }
-      });
-    })();
-    </script>
-</body>
-</html>
-
-
-<p>Figure 5.1 Work Flow</p>
+<p>This part is the same as our previous discussion, with text loading from internet or you can load from either PDF with <code>PyPDFLoader</code> or Microsoft Word document, with <code>Docx2txtLoader</code>, split into smaller chunks, then get ready to insert into the VectorStore.</p>
+<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.document_loaders <span style="color:#f92672">import</span> WebBaseLoader
+</span></span><span style="display:flex;"><span>loader <span style="color:#f92672">=</span> WebBaseLoader(<span style="color:#e6db74">&#34;https://en.wikisource.org/wiki/Hans_Andersen</span><span style="color:#e6db74">%27s</span><span style="color:#e6db74">_Fairy_Tales/The_Emperor</span><span style="color:#e6db74">%27s</span><span style="color:#e6db74">_New_Clothes&#34;</span>)
+</span></span><span style="display:flex;"><span>documents <span style="color:#f92672">=</span> loader<span style="color:#f92672">.</span>load()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.text_splitter <span style="color:#f92672">import</span> RecursiveCharacterTextSplitter
+</span></span><span style="display:flex;"><span>splitter <span style="color:#f92672">=</span> RecursiveCharacterTextSplitter(chunk_size<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>, chunk_overlap<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
+</span></span><span style="display:flex;"><span>chunks <span style="color:#f92672">=</span> splitter<span style="color:#f92672">.</span>split_documents(documents)</span></span></code></pre></div>
 
   <footer class="footline">
   </footer>
@@ -212,16 +162,16 @@ LangChain AI
             <li class="" data-nav-id="/langchain_project_book/fundamentals/index.html"><a class="padding" href="/langchain_project_book/fundamentals/index.html">LangChain Fundamentals</a><ul id="R-subsections-c6757c34957c6808b13ecd5148aeca96" class="collapsible-menu"></ul></li>
             <li class="" data-nav-id="/langchain_project_book/tools_n_lib/index.html"><a class="padding" href="/langchain_project_book/tools_n_lib/index.html">Tools and Libraries</a><ul id="R-subsections-cc34bf23dab60f9112ee939495610dcf" class="collapsible-menu"></ul></li>
             <li class="" data-nav-id="/langchain_project_book/doc_sum/index.html"><a class="padding" href="/langchain_project_book/doc_sum/index.html">Document Summarization</a><ul id="R-subsections-76bbd5376befb633d2052d0ea4508ef3" class="collapsible-menu"></ul></li>
-            <li class="parent " data-nav-id="/langchain_project_book/ticketing_sys/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/index.html">Ticketing System</a><ul id="R-subsections-eaa6b154ff31d8e1af72e9555a67f96a" class="collapsible-menu">
-            <li class="active " data-nav-id="/langchain_project_book/ticketing_sys/tech_proc/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/tech_proc/index.html">Technical Process</a></li>
-            <li class="" data-nav-id="/langchain_project_book/ticketing_sys/architecture/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/architecture/index.html">Architecture</a></li>
-            <li class="" data-nav-id="/langchain_project_book/ticketing_sys/llm_with_gpt4all/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/llm_with_gpt4all/index.html">LLM with GPT4All</a></li>
-            <li class="" data-nav-id="/langchain_project_book/ticketing_sys/data_processing/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/data_processing/index.html">Data Processing</a></li>
-            <li class="" data-nav-id="/langchain_project_book/ticketing_sys/define_embed_model_n_vector_with_faiss/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/define_embed_model_n_vector_with_faiss/index.html">Define Embedding Model and VectorStore with FAISS</a></li>
-            <li class="" data-nav-id="/langchain_project_book/ticketing_sys/complete_code/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/complete_code/index.html">Complete Code</a></li>
-            <li class="" data-nav-id="/langchain_project_book/ticketing_sys/summary/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/summary/index.html">Summary</a></li>
-            <li class="" data-nav-id="/langchain_project_book/ticketing_sys/appendix/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/appendix/index.html">Appendix</a></li></ul></li>
-            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/index.html">KnowledgeBase Semantic Analysis</a><ul id="R-subsections-c718aa372d1e4f26c29659df75d5d07f" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/ticketing_sys/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/index.html">Ticketing System</a><ul id="R-subsections-eaa6b154ff31d8e1af72e9555a67f96a" class="collapsible-menu"></ul></li>
+            <li class="parent " data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/index.html">KnowledgeBase Semantic Analysis</a><ul id="R-subsections-c718aa372d1e4f26c29659df75d5d07f" class="collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/arch_n_workflow/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/arch_n_workflow/index.html">Architecture and Workflow</a></li>
+            <li class="active " data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/preparing_data/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/preparing_data/index.html">Preparing Data</a></li>
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/select_embed_model/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/select_embed_model/index.html">Selecting the Embedding Model</a></li>
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/index.html">Supabase as VectorStore</a></li>
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/config_llm_with_gemma/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/config_llm_with_gemma/index.html">Configuring LLM with Google Gemma</a></li>
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/enable_multiconv_with_history/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/enable_multiconv_with_history/index.html">Conversation History as a Memory with Retriever</a></li>
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html">Complete Code</a></li>
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html">Summary</a></li></ul></li>
           </ul>
         </div>
         <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter"></div>
@@ -236,7 +186,7 @@ LangChain AI
                   <div class="control-style">
                     <label class="a11y-only" for="R-select-language">Language</label>
                     <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
-                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/langchain_project_book/ticketing_sys/tech_proc/index.html" lang="en-us" selected></option>
+                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/langchain_project_book/knowledgebase_semantic_analysis/preparing_data/index.html" lang="en-us" selected></option>
                     </select>
                   </div>
                   <div class="clear"></div>

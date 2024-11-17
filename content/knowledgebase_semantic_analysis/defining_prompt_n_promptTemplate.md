@@ -1,8 +1,8 @@
 +++
 title = 'Defining Prompt and PromptTemplate'
 date = 2024-10-28T22:29:49+08:00
-draft = false
-weight = 5
+draft = true
+weight = 6
 +++
 
 
