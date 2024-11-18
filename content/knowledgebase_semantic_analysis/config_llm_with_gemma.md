@@ -14,7 +14,7 @@ The model we're utilizing has a limitation: it is quantized, which reduces accur
 ```py
 from langchain_ollama import ChatOllama
 llm = ChatOllama(
-    model="mistral",
+    model="gemma:2b",
     temperature=0.5,
 )
 ```
@@ -25,3 +25,5 @@ If you haven't set up Ollama yet, you can refer to the "Book Summarization" chap
 - To start the Ollama server, on Linux, execute `systemctl start ollama`, and on macOS, navigate to Finder > Applications > Ollama.
 - Execute `ollama pull gemma:2b` to download the model.
 - All the downloaded models reside in `/usr/share/ollama/.ollama`
+
+Based on my personal experience with real-world projects, I firmly believe that the `Mistral` LLM stands out as the top choice in terms of **open-source**, performance and accuracy.

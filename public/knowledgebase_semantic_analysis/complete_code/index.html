@@ -27,18 +27,18 @@ Load the data into the vector store Query against the vector store Loading the D
 Load the data into the vector store Query against the vector store Loading the Data and Creating VectorStore import bs4 from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader( web_paths=(&#34;https://andersen.sdu.dk/vaerk/hersholt/TheEmperorsNewClothes_e.html&#34;,), bs_kwargs=dict( parse_only=bs4.SoupStrainer( class_=(&#34;post-content&#34;, &#34;post-title&#34;, &#34;post-header&#34;) ) ), ) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents) from langchain_huggingface.embeddings import HuggingFaceEmbeddings embedding = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34; ) import os import getpass SUPABASE_URL = os.getenv(&#34;SUPABASE_URL&#34;) SUPABASE_SERVICE_KEY = os.getenv(&#34;SUPABASE_SERVICE_KEY&#34;) from langchain_community.vectorstores import SupabaseVectorStore from supabase.client import Client, create_client supabase_url = SUPABASE_URL supabase_key = SUPABASE_SERVICE_KEY supabase_client = create_client(supabase_url, supabase_key) # create a new collection vectorstore = SupabaseVectorStore.from_documents( chunks, embedding = embedding, client = supabase_client, table_name = &#34;documents&#34;, query_name = &#34;match_documents&#34;, chunk_size = 500, ) Querying For convenience, I’ve included the values of supabase_url and supabase_key directly in the code to bypass the need for manual input during queries. However, it’s crucial to ensure these keys are not exposed when sharing the code with others or when pushing it to a public GitHub repository.">
     <meta itemprop="datePublished" content="2024-10-28T22:36:51+08:00">
     <meta itemprop="dateModified" content="2024-10-28T22:36:51+08:00">
-    <meta itemprop="wordCount" content="779">
+    <meta itemprop="wordCount" content="721">
     <title>Complete Code :: LangChain AI</title>
-    <link href="/langchain_project_book/css/fontawesome-all.min.css?1731892548" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731892548" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/nucleus.css?1731892548" rel="stylesheet">
-    <link href="/langchain_project_book/css/auto-complete.css?1731892548" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731892548" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1731892548" rel="stylesheet">
-    <link href="/langchain_project_book/css/fonts.css?1731892548" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1731892548" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/theme.css?1731892548" rel="stylesheet">
-    <link href="/langchain_project_book/css/theme-auto.css?1731892548" rel="stylesheet" id="R-variant-style">
-    <link href="/langchain_project_book/css/chroma-auto.css?1731892548" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/langchain_project_book/css/print.css?1731892548" rel="stylesheet" media="print">
-    <script src="/langchain_project_book/js/variant.js?1731892548"></script>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1731908859" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731908859" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1731908859" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1731908859" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731908859" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1731908859" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1731908859" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1731908859" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1731908859" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1731908859" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1731908859" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1731908859" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1731908859"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
@@ -175,6 +175,7 @@ Load the data into the vector store Query against the vector store Loading the D
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_ollama <span style="color:#f92672">import</span> ChatOllama
 </span></span><span style="display:flex;"><span>llm <span style="color:#f92672">=</span> ChatOllama(
 </span></span><span style="display:flex;"><span>    model<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;gemma:2b&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># model=&#34;mistral&#34;,</span>
 </span></span><span style="display:flex;"><span>    temperature<span style="color:#f92672">=</span><span style="color:#ae81ff">0.5</span>,
 </span></span><span style="display:flex;"><span>)
 </span></span><span style="display:flex;"><span>
@@ -258,25 +259,22 @@ Load the data into the vector store Query against the vector store Loading the D
 </span></span><span style="display:flex;"><span>        pprint(process_question(user_input))</span></span></code></pre></div>
 <p>The output is like</p>
 <div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>Enter your question: how does the emperor think about his cloth
-</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#39;output_text&#39;</span>: <span style="color:#e6db74">&#39;The emperor thinks about his cloth as he admires it and wants &#39;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;to see it appear as though it is in his pretty finery. He &#39;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;wishes it to appear that he is admiring it in his pretty &#39;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;finery.&#39;</span>}
+</span></span><span style="display:flex;"><span>[outputs]
+</span></span><span style="display:flex;"><span>(<span style="color:#e6db74">&#39; order?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#39;Assistant: The emperor believes that wearing such special clothes will help &#39;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#34;him identify the capable and incapable men in his empire. He&#39;s convinced &#34;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#39;that this material will distinguish the clever from the stupid, and so he &#39;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#39;urgently orders the weavers to begin making the cloth for him.&#39;</span>)
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Enter your question: how do the emperor<span style="color:#e6db74">&#39;s people think about the emperor</span>
-</span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#39;output_text&#39;</span>: <span style="color:#e6db74">&#34;Sure, here&#39;s the answer to the question:</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#34;The emperor&#39;s people thought about the emperor as he admired &#34;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;his cloth and wanted to see it appear as though it was in his &#39;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;pretty finery. They were up and about all night before the &#39;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;day of the grand procession, and moved their hands as if they &#39;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;were taking the cloth from the loom; they cut with their &#39;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;great scissors in the air, and sewed with needles that held &#39;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;no thread, and said, at last, &#34;See, now, the clothes are &#39;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;quite ready.&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;The emperor approached the looms at which the two artful &#39;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;impostors were working with all their might, although there &#39;</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;was not a single thread on the looms.&#39;</span>}
+</span></span><span style="display:flex;"><span>[outputs]
+</span></span><span style="display:flex;"><span>(<span style="color:#e6db74">&#34;&#39;s cloth?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#39;AI:  desire and curiosity.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#34;Assistant: The people in the emperor&#39;s city are intrigued and excited about &#34;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#34;the new fabric. They&#39;ve heard stories about its beauty and the emperor&#39;s &#34;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#39;desire to see it firsthand. This has created a buzz in the community, and &#39;</span>
+</span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#39;many are eager to witness the cloth for themselves.&#39;</span>)
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>Enter your question: what was my first question
 </span></span><span style="display:flex;"><span>{<span style="color:#e6db74">&#39;output_text&#39;</span>: <span style="color:#e6db74">&#39;The question is: How does the emperor think about his cloth?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
 </span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
@@ -306,7 +304,7 @@ LangChain AI
           </a>
         </div>
         <script>
-          window.index_js_url="/langchain_project_book/searchindex.js?1731892548";
+          window.index_js_url="/langchain_project_book/searchindex.js?1731908859";
         </script>
         <search><form action="/langchain_project_book/search/index.html" method="get">
           <div class="searchbox default-animation">
@@ -319,12 +317,12 @@ LangChain AI
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/langchain_project_book/js/auto-complete.js?1731892548" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.min.js?1731892548" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1731892548" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1731892548" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1731892548" defer></script>
-        <script src="/langchain_project_book/js/search.js?1731892548" defer></script>
+        <script src="/langchain_project_book/js/auto-complete.js?1731908859" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1731908859" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1731908859" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1731908859" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1731908859" defer></script>
+        <script src="/langchain_project_book/js/search.js?1731908859" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -401,8 +399,8 @@ LangChain AI
         </div>
       </div>
     </aside>
-    <script src="/langchain_project_book/js/clipboard.min.js?1731892548" defer></script>
-    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1731892548" defer></script>
-    <script src="/langchain_project_book/js/theme.js?1731892548" defer></script>
+    <script src="/langchain_project_book/js/clipboard.min.js?1731908859" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1731908859" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1731908859" defer></script>
   </body>
 </html>

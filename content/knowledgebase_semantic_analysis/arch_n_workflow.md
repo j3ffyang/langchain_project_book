@@ -26,23 +26,44 @@ rectangle vectorstore {
     note right of supabase: pgVector
 }
 
-rectangle load_qa_chain {
-    rectangle ConversationBufferMemory {
-        file chat_history
-        file human_input
+rectangle rag_chain {
+    rectangle history_aware_retriever {
+        file retriever as retriever0
+        rectangle contextualize_q_prompt {
+            file contextualize_q_system_prompt
+            file chat_history as chat_history0
+                note right of chat_history0: MessagePlaceholder
+            file human_input as human_input0
+
+            contextualize_q_system_prompt -[hidden]-> chat_history0
+            chat_history0 -[hidden]-> human_input0
         }
-
-    note bottom of ConversationBufferMemory: including chat_history\nwithin the conversation
-
-    rectangle llm {
-        file ollama
+        database llm as llm0
+        note right of retriever0: retriever = vectorstore.as_retriever()
     }
-    note bottom of llm: switchable to other\nLLMs simply with Ollama
 
-    rectangle prompt {
-        file template
+    rectangle question_answer_chain {
+        rectangle create_stuff_documents_chain {
+            rectangle qa_prompt {
+                file system_prompt 
+                file chat_history 
+                note right of chat_history: MessagePlaceholder
+                file human_input
+
+                system_prompt -[hidden]- chat_history
+            }
+            database llm as llm1
+        }
     }
 }
+
+
+vectorstore --> retriever0
+
+history_aware_retriever -[hidden]-> question_answer_chain
+
+retriever0 -[hidden]-> contextualize_q_prompt
+contextualize_q_prompt -[hidden]> llm0
 
 documents --> text_splitter
 user -r-> query
@@ -50,7 +71,7 @@ query -r-> supabase
 vectorstore -[hidden]l-> query
 text_splitter -> embedding
 embedding --> supabase
-vectorstore --> load_qa_chain
+vectorstore --> rag_chain
 
 chat_history -[hidden]d- human_input
 {{< /plantuml >}}

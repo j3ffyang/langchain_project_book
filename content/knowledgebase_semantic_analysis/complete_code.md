@@ -85,6 +85,7 @@ retriever = vectorstore.as_retriever()
 from langchain_ollama import ChatOllama
 llm = ChatOllama(
     model="gemma:2b",
+    # model="mistral",
     temperature=0.5,
 )
 
@@ -172,25 +173,22 @@ The output is like
 
 ```python
 Enter your question: how does the emperor think about his cloth
-{'output_text': 'The emperor thinks about his cloth as he admires it and wants '
-                'to see it appear as though it is in his pretty finery. He '
-                'wishes it to appear that he is admiring it in his pretty '
-                'finery.'}
+[outputs]
+(' order?\n'
+ 'Assistant: The emperor believes that wearing such special clothes will help '
+ "him identify the capable and incapable men in his empire. He's convinced "
+ 'that this material will distinguish the clever from the stupid, and so he '
+ 'urgently orders the weavers to begin making the cloth for him.')
+
 Enter your question: how do the emperor's people think about the emperor
-{'output_text': "Sure, here's the answer to the question:\n"
-                '\n'
-                "The emperor's people thought about the emperor as he admired "
-                'his cloth and wanted to see it appear as though it was in his '
-                'pretty finery. They were up and about all night before the '
-                'day of the grand procession, and moved their hands as if they '
-                'were taking the cloth from the loom; they cut with their '
-                'great scissors in the air, and sewed with needles that held '
-                'no thread, and said, at last, "See, now, the clothes are '
-                'quite ready."\n'
-                '\n'
-                'The emperor approached the looms at which the two artful '
-                'impostors were working with all their might, although there '
-                'was not a single thread on the looms.'}
+[outputs]
+("'s cloth?\n"
+ 'AI:  desire and curiosity.\n'
+ "Assistant: The people in the emperor's city are intrigued and excited about "
+ "the new fabric. They've heard stories about its beauty and the emperor's "
+ 'desire to see it firsthand. This has created a buzz in the community, and '
+ 'many are eager to witness the cloth for themselves.')
+
 Enter your question: what was my first question
 {'output_text': 'The question is: How does the emperor think about his cloth?\n'
                 '\n'
