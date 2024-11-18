@@ -1,5 +1,5 @@
 +++
-title = 'Define Embedding Model and VectorStore with FAISS'
+title = 'Defining Embedding Model and VectorStore with FAISS'
 date = 2024-10-28T21:27:58+08:00
 draft = false
 weight = 5
