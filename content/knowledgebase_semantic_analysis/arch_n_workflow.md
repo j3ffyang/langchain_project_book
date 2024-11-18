@@ -5,7 +5,7 @@ draft = false
 weight = 1
 +++
 
-The data preparation process in this chapter is comparable to that of the previous chapter. After embedding the data chunks, we will utilize Supabase as our VectorStore. Supabase is set up with `pgvector`, which is based on PostgreSQL, an open-source SQL database. A notable feature we introduce here is the inclusion of both `chat_history` and `human_input` in the `ConversationBufferMemory`, enabling the history to be utilized in multi-round conversations. For the LLM operator, we continue to employ Ollama in conjunction with Google's Gemma model.
+The data preparation process in this chapter is comparable to that of the previous chapter. After embedding the data chunks, we will utilize Supabase as our VectorStore. Supabase is set up with `pgvector`, which is based on PostgreSQL, an open-source SQL database. A notable feature we introduce here is the inclusion of both `chat_history` and `human_input` in the `history_aware_retriever`, enabling the history to be utilized in multi-round conversations. For the LLM operator, we continue to employ Ollama in conjunction with Google's Gemma or Mistral model.
 
 The architecture is highly modular, allowing each module to be interchangeable. This modularity is how LangChain integrates all components seamlessly.
 

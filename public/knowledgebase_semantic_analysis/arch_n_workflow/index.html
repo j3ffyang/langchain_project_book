@@ -5,36 +5,36 @@
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.134.2">
     <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
-    <meta name="description" content="The data preparation process in this chapter is comparable to that of the previous chapter. After embedding the data chunks, we will utilize Supabase as our VectorStore. Supabase is set up with pgvector, which is based on PostgreSQL, an open-source SQL database. A notable feature we introduce here is the inclusion of both chat_history and human_input in the ConversationBufferMemory, enabling the history to be utilized in multi-round conversations. For the LLM operator, we continue to employ Ollama in conjunction with Google’s Gemma model.">
+    <meta name="description" content="The data preparation process in this chapter is comparable to that of the previous chapter. After embedding the data chunks, we will utilize Supabase as our VectorStore. Supabase is set up with pgvector, which is based on PostgreSQL, an open-source SQL database. A notable feature we introduce here is the inclusion of both chat_history and human_input in the history_aware_retriever, enabling the history to be utilized in multi-round conversations. For the LLM operator, we continue to employ Ollama in conjunction with Google’s Gemma or Mistral model.">
     <meta name="author" content="">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Architecture and Workflow :: LangChain AI">
-    <meta name="twitter:description" content="The data preparation process in this chapter is comparable to that of the previous chapter. After embedding the data chunks, we will utilize Supabase as our VectorStore. Supabase is set up with pgvector, which is based on PostgreSQL, an open-source SQL database. A notable feature we introduce here is the inclusion of both chat_history and human_input in the ConversationBufferMemory, enabling the history to be utilized in multi-round conversations. For the LLM operator, we continue to employ Ollama in conjunction with Google’s Gemma model.">
+    <meta name="twitter:description" content="The data preparation process in this chapter is comparable to that of the previous chapter. After embedding the data chunks, we will utilize Supabase as our VectorStore. Supabase is set up with pgvector, which is based on PostgreSQL, an open-source SQL database. A notable feature we introduce here is the inclusion of both chat_history and human_input in the history_aware_retriever, enabling the history to be utilized in multi-round conversations. For the LLM operator, we continue to employ Ollama in conjunction with Google’s Gemma or Mistral model.">
     <meta property="og:url" content="http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/arch_n_workflow/index.html">
     <meta property="og:site_name" content="LangChain AI">
     <meta property="og:title" content="Architecture and Workflow :: LangChain AI">
-    <meta property="og:description" content="The data preparation process in this chapter is comparable to that of the previous chapter. After embedding the data chunks, we will utilize Supabase as our VectorStore. Supabase is set up with pgvector, which is based on PostgreSQL, an open-source SQL database. A notable feature we introduce here is the inclusion of both chat_history and human_input in the ConversationBufferMemory, enabling the history to be utilized in multi-round conversations. For the LLM operator, we continue to employ Ollama in conjunction with Google’s Gemma model.">
+    <meta property="og:description" content="The data preparation process in this chapter is comparable to that of the previous chapter. After embedding the data chunks, we will utilize Supabase as our VectorStore. Supabase is set up with pgvector, which is based on PostgreSQL, an open-source SQL database. A notable feature we introduce here is the inclusion of both chat_history and human_input in the history_aware_retriever, enabling the history to be utilized in multi-round conversations. For the LLM operator, we continue to employ Ollama in conjunction with Google’s Gemma or Mistral model.">
     <meta property="og:locale" content="en_us">
     <meta property="og:type" content="article">
     <meta property="article:section" content="KnowledgeBase Semantic Analysis">
     <meta property="article:published_time" content="2024-10-28T22:17:37+08:00">
     <meta property="article:modified_time" content="2024-10-28T22:17:37+08:00">
     <meta itemprop="name" content="Architecture and Workflow :: LangChain AI">
-    <meta itemprop="description" content="The data preparation process in this chapter is comparable to that of the previous chapter. After embedding the data chunks, we will utilize Supabase as our VectorStore. Supabase is set up with pgvector, which is based on PostgreSQL, an open-source SQL database. A notable feature we introduce here is the inclusion of both chat_history and human_input in the ConversationBufferMemory, enabling the history to be utilized in multi-round conversations. For the LLM operator, we continue to employ Ollama in conjunction with Google’s Gemma model.">
+    <meta itemprop="description" content="The data preparation process in this chapter is comparable to that of the previous chapter. After embedding the data chunks, we will utilize Supabase as our VectorStore. Supabase is set up with pgvector, which is based on PostgreSQL, an open-source SQL database. A notable feature we introduce here is the inclusion of both chat_history and human_input in the history_aware_retriever, enabling the history to be utilized in multi-round conversations. For the LLM operator, we continue to employ Ollama in conjunction with Google’s Gemma or Mistral model.">
     <meta itemprop="datePublished" content="2024-10-28T22:17:37+08:00">
     <meta itemprop="dateModified" content="2024-10-28T22:17:37+08:00">
-    <meta itemprop="wordCount" content="353">
+    <meta itemprop="wordCount" content="355">
     <title>Architecture and Workflow :: LangChain AI</title>
-    <link href="/langchain_project_book/css/fontawesome-all.min.css?1731908859" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731908859" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/nucleus.css?1731908859" rel="stylesheet">
-    <link href="/langchain_project_book/css/auto-complete.css?1731908859" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731908859" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1731908859" rel="stylesheet">
-    <link href="/langchain_project_book/css/fonts.css?1731908859" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1731908859" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/theme.css?1731908859" rel="stylesheet">
-    <link href="/langchain_project_book/css/theme-auto.css?1731908859" rel="stylesheet" id="R-variant-style">
-    <link href="/langchain_project_book/css/chroma-auto.css?1731908859" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/langchain_project_book/css/print.css?1731908859" rel="stylesheet" media="print">
-    <script src="/langchain_project_book/js/variant.js?1731908859"></script>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1731909436" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731909436" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1731909436" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1731909436" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731909436" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1731909436" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1731909436" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1731909436" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1731909436" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1731909436" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1731909436" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1731909436" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1731909436"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
@@ -110,7 +110,7 @@
 
 <h1 id="architecture-and-workflow">Architecture and Workflow</h1>
 
-<p>The data preparation process in this chapter is comparable to that of the previous chapter. After embedding the data chunks, we will utilize Supabase as our VectorStore. Supabase is set up with <code>pgvector</code>, which is based on PostgreSQL, an open-source SQL database. A notable feature we introduce here is the inclusion of both <code>chat_history</code> and <code>human_input</code> in the <code>ConversationBufferMemory</code>, enabling the history to be utilized in multi-round conversations. For the LLM operator, we continue to employ Ollama in conjunction with Google&rsquo;s Gemma model.</p>
+<p>The data preparation process in this chapter is comparable to that of the previous chapter. After embedding the data chunks, we will utilize Supabase as our VectorStore. Supabase is set up with <code>pgvector</code>, which is based on PostgreSQL, an open-source SQL database. A notable feature we introduce here is the inclusion of both <code>chat_history</code> and <code>human_input</code> in the <code>history_aware_retriever</code>, enabling the history to be utilized in multi-round conversations. For the LLM operator, we continue to employ Ollama in conjunction with Google&rsquo;s Gemma or Mistral model.</p>
 <p>The architecture is highly modular, allowing each module to be interchangeable. This modularity is how LangChain integrates all components seamlessly.</p>
 <head>
     <script src="https://cdn.jsdelivr.net/gh/jmnote/plantuml-encoder@1.2.4/dist/plantuml-encoder.min.js" integrity="sha256-Qsk2KRBCN5qVZX7B+8+2IvQl1Aqc723qV1tBCQaVoqo=" crossorigin="anonymous"></script>
@@ -239,7 +239,7 @@ LangChain AI
           </a>
         </div>
         <script>
-          window.index_js_url="/langchain_project_book/searchindex.js?1731908859";
+          window.index_js_url="/langchain_project_book/searchindex.js?1731909436";
         </script>
         <search><form action="/langchain_project_book/search/index.html" method="get">
           <div class="searchbox default-animation">
@@ -252,12 +252,12 @@ LangChain AI
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/langchain_project_book/js/auto-complete.js?1731908859" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.min.js?1731908859" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1731908859" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1731908859" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1731908859" defer></script>
-        <script src="/langchain_project_book/js/search.js?1731908859" defer></script>
+        <script src="/langchain_project_book/js/auto-complete.js?1731909436" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1731909436" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1731909436" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1731909436" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1731909436" defer></script>
+        <script src="/langchain_project_book/js/search.js?1731909436" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -334,8 +334,8 @@ LangChain AI
         </div>
       </div>
     </aside>
-    <script src="/langchain_project_book/js/clipboard.min.js?1731908859" defer></script>
-    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1731908859" defer></script>
-    <script src="/langchain_project_book/js/theme.js?1731908859" defer></script>
+    <script src="/langchain_project_book/js/clipboard.min.js?1731909436" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1731909436" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1731909436" defer></script>
   </body>
 </html>
