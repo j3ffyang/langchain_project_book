@@ -1,5 +1,8 @@
 # LangChain Project Handbook
-# This project has been moved to https://github.com/esseai/langchain_project_handbook
+# This project has been moved to 
+https://github.com/esseai/langchain_project_handbook
+and 
+https://esseai.github.io/langchain_project_handbook/index.html
 
 Welcome to the [LangChain Project Handbook](https://j3ffyang.github.io/langchain_project_book)! This document serves as a comprehensive guide to the LangChain framework, detailing its features, functionalities, and my personal experiences with real-world applications.
 <!-- Table of Contents
