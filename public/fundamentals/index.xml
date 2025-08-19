@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>LangChain Fundamentals :: LangChain AI</title>
-    <link>http://localhost:1313/langchain_project_book/fundamentals/index.html</link>
-    <description>The fundamental ideas and elements of LangChain, a framework for creating language-model-powered applications, are covered in this chapter. LangChain aims to develop data-aware and agentic applications that enable language models to communicate with their surroundings and establish connections with other data sources, rather than only calling out to a language model via an API.&#xA;At the heart of LangChain are two key components. The first one is the modular abstractions provided by LangChain, which are essential for working with language models.</description>
+    <title>LangChain Fundamentals on LangChain AI</title>
+    <link>http://localhost:1313/langchain_project_book/fundamentals/</link>
+    <description>Recent content in LangChain Fundamentals on LangChain AI</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 28 Oct 2024 18:56:59 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/langchain_project_book/fundamentals/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>LangChain Architecture</title>
-      <link>http://localhost:1313/langchain_project_book/fundamentals/architecture/index.html</link>
+      <link>http://localhost:1313/langchain_project_book/fundamentals/architecture/</link>
       <pubDate>Thu, 24 Oct 2024 00:10:48 -0400</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/fundamentals/architecture/index.html</guid>
+      <guid>http://localhost:1313/langchain_project_book/fundamentals/architecture/</guid>
       <description>The architectural components of LangChain, illustrated in Figure 2.1, will be thoroughly explored and discussed in detail throughout the book.&#xA;package LangChain { package Agent_Tooling { agent Tools agent Toolkits } package Models_IO { agent Model agent Prompt agent Output_Parser } package Chain_and_Retrieval { agent Retriever agent Document_Loaders agent VectorStore agent TextSplitter agent Embedding_Model } } Chain_and_Retrieval -[hidden] Models_IO Models_IO -[hidden] Agent_Tooling Model -[hidden]- Prompt Prompt -[hidden]- Output_Parser Retriever -[hidden] Document_Loaders Document_Loaders -[hidden]- VectorStore VectorStore -[hidden] TextSplitter TextSplitter -[hidden]- Embedding_Model Tools -[hidden]- Toolkits Figure 2.</description>
     </item>
     <item>
       <title>Select a Right Language Model</title>
-      <link>http://localhost:1313/langchain_project_book/fundamentals/select_a_right_lm/index.html</link>
+      <link>http://localhost:1313/langchain_project_book/fundamentals/select_a_right_lm/</link>
       <pubDate>Mon, 28 Oct 2024 17:52:48 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/fundamentals/select_a_right_lm/index.html</guid>
+      <guid>http://localhost:1313/langchain_project_book/fundamentals/select_a_right_lm/</guid>
       <description>When selecting a language model and an embedding model in LangChain technology, there are several things to consider:&#xA;Primary Task: Identify the core functions of the language model (LLM), which include tasks like text generation, summarization, translation, and answering queries. A valuable resource to explore these tasks is https://huggingface.co/models covering a wide range from Multimodal to Computer Vision (CV) and Natural Language Processing (NLP). Common examples in this context involve Summarization, Text Generation, and Question Answering within NLP.</description>
     </item>
     <item>
       <title>LLM Settings and Limits</title>
-      <link>http://localhost:1313/langchain_project_book/fundamentals/llm_settings_n_limits/index.html</link>
+      <link>http://localhost:1313/langchain_project_book/fundamentals/llm_settings_n_limits/</link>
       <pubDate>Mon, 28 Oct 2024 17:58:27 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/fundamentals/llm_settings_n_limits/index.html</guid>
+      <guid>http://localhost:1313/langchain_project_book/fundamentals/llm_settings_n_limits/</guid>
       <description>LLM Settings When working with prompts, you can communicate directly or through an API with the LLM. A few parameters can be set to get different outcomes for your prompts.&#xA;temperature: In other words, results are more deterministic when the temperature is lower because the next most likely token is always selected. A higher temperature may cause more unpredictability, which promotes more varied or imaginative results. In essence, you are making the other potential tokens heavier.</description>
     </item>
     <item>
       <title>Thoughts on Prompt Engineering</title>
-      <link>http://localhost:1313/langchain_project_book/fundamentals/thoughts_on_prompt/index.html</link>
+      <link>http://localhost:1313/langchain_project_book/fundamentals/thoughts_on_prompt/</link>
       <pubDate>Mon, 28 Oct 2024 18:10:58 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/fundamentals/thoughts_on_prompt/index.html</guid>
-      <description>The process of creating meaningful prompts or instructions for an AI system or language model is known as “prompt engineering”. The model’s responses and behaviors are greatly influenced by these cues. Prompts with a good design facilitate researchers and developers to modify the output of AI systems to accomplish desired results and enhance the model’s functionality.&#xA;folder INSTRUCTION { artifact &#34;&#34;&#34;&#34;Answer the question based on the context below.\nIf the question cannot be answer using the \ninformation provided answer with &#34;</description>
+      <guid>http://localhost:1313/langchain_project_book/fundamentals/thoughts_on_prompt/</guid>
+      <description>The process of creating meaningful prompts or instructions for an AI system or language model is known as &amp;ldquo;prompt engineering&amp;rdquo;. The model&amp;rsquo;s responses and behaviors are greatly influenced by these cues. Prompts with a good design facilitate researchers and developers to modify the output of AI systems to accomplish desired results and enhance the model&amp;rsquo;s functionality.&#xA;folder INSTRUCTION { artifact &#34;&#34;&#34;&#34;Answer the question based on the context below.\nIf the question cannot be answer using the \ninformation provided answer with &#34;</description>
     </item>
     <item>
       <title>Embeddings and VectorStore</title>
-      <link>http://localhost:1313/langchain_project_book/fundamentals/embedding_n_vectorstore/index.html</link>
+      <link>http://localhost:1313/langchain_project_book/fundamentals/embedding_n_vectorstore/</link>
       <pubDate>Mon, 28 Oct 2024 18:17:09 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/fundamentals/embedding_n_vectorstore/index.html</guid>
+      <guid>http://localhost:1313/langchain_project_book/fundamentals/embedding_n_vectorstore/</guid>
       <description>In LangChain, a Python library designed to simplify the process of building Natural Language Processing (NLP) applications using LLMs, embeddings and VectorStore play a crucial role in enhancing the accuracy and efficiency of these applications.&#xA;Understanding Embeddings In the realm of LLMs, embeddings serve as numeric depictions of words, phrases, or sentences, encapsulating their semantic meaning and context. These embeddings facilitate text representation in a machine-learning-friendly format, supporting a range of NLP endeavors.</description>
     </item>
     <item>
       <title>Chains and Retriever</title>
-      <link>http://localhost:1313/langchain_project_book/fundamentals/chains_n_retriever/index.html</link>
+      <link>http://localhost:1313/langchain_project_book/fundamentals/chains_n_retriever/</link>
       <pubDate>Mon, 28 Oct 2024 18:49:37 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/fundamentals/chains_n_retriever/index.html</guid>
-      <description>LangChain can easily orchestrate interactions with language models, chain together various components, and incorporate resources like databases and APIs. We will examine two fundamental ideas in LangChain in this chapter: Chain and Retriever.&#xA;Understanding Chains LangChain relies heavily on chains. The core of LangChain’s operation is these logical relationships among one or more LLMs. Depending on the requirements and LLMs involved, chains might be simple or complex. An LLM model, an output parser that is optional, and a PromptTemplate are all part of its organized configuration.</description>
+      <guid>http://localhost:1313/langchain_project_book/fundamentals/chains_n_retriever/</guid>
+      <description>LangChain can easily orchestrate interactions with language models, chain together various components, and incorporate resources like databases and APIs. We will examine two fundamental ideas in LangChain in this chapter: Chain and Retriever.&#xA;Understanding Chains LangChain relies heavily on chains. The core of LangChain&amp;rsquo;s operation is these logical relationships among one or more LLMs. Depending on the requirements and LLMs involved, chains might be simple or complex. An LLM model, an output parser that is optional, and a PromptTemplate are all part of its organized configuration.</description>
     </item>
     <item>
       <title>Document and Debugging</title>
-      <link>http://localhost:1313/langchain_project_book/fundamentals/document_n_debugging/index.html</link>
+      <link>http://localhost:1313/langchain_project_book/fundamentals/document_n_debugging/</link>
       <pubDate>Mon, 28 Oct 2024 18:54:03 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/fundamentals/document_n_debugging/index.html</guid>
-      <description>Understanding LangChain’s API offers the following advantages:&#xA;Facilitating application development. Assisting in debugging by enabling verbose mode to provide more detailed traces. API Document in LangChain LangChain provides an API that enables developers to easily interact with LLM and other computational resources or knowledge sources. This makes it easier to build applications such as question answering systems, chatbots, and intelligent agents.&#xA;I advise you to often check out the latest LangChain API reference, where you may examine incredibly thorough API logic at https://api.</description>
+      <guid>http://localhost:1313/langchain_project_book/fundamentals/document_n_debugging/</guid>
+      <description>Understanding LangChain&amp;rsquo;s API offers the following advantages:&#xA;Facilitating application development. Assisting in debugging by enabling verbose mode to provide more detailed traces. API Document in LangChain LangChain provides an API that enables developers to easily interact with LLM and other computational resources or knowledge sources. This makes it easier to build applications such as question answering systems, chatbots, and intelligent agents.&#xA;I advise you to often check out the latest LangChain API reference, where you may examine incredibly thorough API logic at https://api.</description>
     </item>
     <item>
       <title>Summary</title>
-      <link>http://localhost:1313/langchain_project_book/fundamentals/summary/index.html</link>
+      <link>http://localhost:1313/langchain_project_book/fundamentals/summary/</link>
       <pubDate>Mon, 28 Oct 2024 18:56:59 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/fundamentals/summary/index.html</guid>
-      <description>Throughout this chapter, we have acquired proficiency in the following key areas:&#xA;LangChain Architecture and Workflow: Grasping the structure and operational flow of LangChain for efficient application development. Models: Selecting appropriate language and embedding models for content embedding and generation. Prompt and Prompt Template: Introducing the use of prompts and templates to guide interactions with models, providing various examples to demonstrate their impact on the chain’s outcomes. Chain: Comprehending the sequential procedures within the system to uphold a coherent data operation flow and acknowledging the chain’s role in the comprehensive retrieval-augmented generation (RAG) process.</description>
+      <guid>http://localhost:1313/langchain_project_book/fundamentals/summary/</guid>
+      <description>Throughout this chapter, we have acquired proficiency in the following key areas:&#xA;LangChain Architecture and Workflow: Grasping the structure and operational flow of LangChain for efficient application development. Models: Selecting appropriate language and embedding models for content embedding and generation. Prompt and Prompt Template: Introducing the use of prompts and templates to guide interactions with models, providing various examples to demonstrate their impact on the chain&amp;rsquo;s outcomes. Chain: Comprehending the sequential procedures within the system to uphold a coherent data operation flow and acknowledging the chain&amp;rsquo;s role in the comprehensive retrieval-augmented generation (RAG) process.</description>
     </item>
   </channel>
 </rss>
