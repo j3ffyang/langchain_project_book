@@ -1,67 +1,67 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>KnowledgeBase Semantic Analysis on LangChain AI</title>
-    <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/</link>
-    <description>Recent content in KnowledgeBase Semantic Analysis on LangChain AI</description>
+    <title>KnowledgeBase Semantic Analysis :: LangChain AI</title>
+    <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/index.html</link>
+    <description>A knowledge base acts as a centralized hub for all essential information, streamlining the organization and standardization of knowledge within a company. This not only enhances internal efficiency by providing employees with quick access to necessary details but also projects the company as modern, professional, and up-to-date. Moreover, it facilitates direct engagement with stakeholders, fostering a feedback loop that can significantly improve relationships and customer loyalty. By adopting a knowledge base, enterprises can significantly enhance their operational efficiency, reduce customer support costs through self-service solutions, and ultimately boost their overall business performance.</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 28 Oct 2024 22:39:33 +0800</lastBuildDate>
     <atom:link href="http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Architecture and Workflow</title>
-      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/arch_n_workflow/</link>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/arch_n_workflow/index.html</link>
       <pubDate>Mon, 28 Oct 2024 22:17:37 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/arch_n_workflow/</guid>
-      <description>The data preparation process in this chapter is comparable to that of the previous chapter. After embedding the data chunks, we will utilize Supabase as our VectorStore. Supabase is set up with pgvector, which is based on PostgreSQL, an open-source SQL database. A notable feature we introduce here is the inclusion of both chat_history and human_input in the history_aware_retriever, enabling the history to be utilized in multi-round conversations. For the LLM operator, we continue to employ Ollama in conjunction with Google&amp;rsquo;s Gemma or Mistral model.</description>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/arch_n_workflow/index.html</guid>
+      <description>The data preparation process in this chapter is comparable to that of the previous chapter. After embedding the data chunks, we will utilize Supabase as our VectorStore. Supabase is set up with pgvector, which is based on PostgreSQL, an open-source SQL database. A notable feature we introduce here is the inclusion of both chat_history and human_input in the history_aware_retriever, enabling the history to be utilized in multi-round conversations. For the LLM operator, we continue to employ Ollama in conjunction with Google’s Gemma or Mistral model.</description>
     </item>
     <item>
       <title>Preparing Data</title>
-      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/preparing_data/</link>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/preparing_data/index.html</link>
       <pubDate>Mon, 28 Oct 2024 22:21:47 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/preparing_data/</guid>
-      <description>This part is the same as our previous discussion, with text loading from internet or you can load from either PDF with PyPDFLoader or Microsoft Word document, with Docx2txtLoader, split into smaller chunks, then get ready to insert into the VectorStore.&#xA;from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&amp;#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&amp;#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents) </description>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/preparing_data/index.html</guid>
+      <description>This part is the same as our previous discussion, with text loading from internet or you can load from either PDF with PyPDFLoader or Microsoft Word document, with Docx2txtLoader, split into smaller chunks, then get ready to insert into the VectorStore.&#xA;from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader(&#34;https://en.wikisource.org/wiki/Hans_Andersen%27s_Fairy_Tales/The_Emperor%27s_New_Clothes&#34;) documents = loader.load() from langchain.text_splitter import RecursiveCharacterTextSplitter splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100) chunks = splitter.split_documents(documents)</description>
     </item>
     <item>
       <title>Selecting the Embedding Model</title>
-      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/select_embed_model/</link>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/select_embed_model/index.html</link>
       <pubDate>Mon, 28 Oct 2024 22:23:54 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/select_embed_model/</guid>
-      <description>We continue to utilize this embedding model. It&amp;rsquo;s important to note that the dense vector space of this model has a dimensionality of 384, which must be specified when setting up the vector database with Supabase.&#xA;from langchain_huggingface.embeddings import HuggingFaceEmbeddings embedding = HuggingFaceEmbeddings( model_name=&amp;#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&amp;#34; ) You can find the details of &amp;ldquo;dimensional dense vector space&amp;rdquo; from Hugging Face at https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2</description>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/select_embed_model/index.html</guid>
+      <description>We continue to utilize this embedding model. It’s important to note that the dense vector space of this model has a dimensionality of 384, which must be specified when setting up the vector database with Supabase.&#xA;from langchain_huggingface.embeddings import HuggingFaceEmbeddings embedding = HuggingFaceEmbeddings( model_name=&#34;sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2&#34; ) You can find the details of “dimensional dense vector space” from Hugging Face at https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2</description>
     </item>
     <item>
       <title>Supabase as VectorStore</title>
-      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/</link>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/index.html</link>
       <pubDate>Mon, 28 Oct 2024 22:26:09 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/</guid>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/index.html</guid>
       <description>We will introduce Supabase as a vector store and walk through the process of storing various embeddings in Supabase Vector, a combination of PostgreSQL and pgVector, aimed at facilitating semantic search.&#xA;Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL, a robust SQL database suitable for production environments. Given that Supabase Vector is built on pgVector, it allows for the storage of embeddings alongside other application data within the same database.</description>
     </item>
     <item>
       <title>Configuring LLM with Google Gemma</title>
-      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/config_llm_with_gemma/</link>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/config_llm_with_gemma/index.html</link>
       <pubDate>Mon, 28 Oct 2024 22:31:49 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/config_llm_with_gemma/</guid>
-      <description>Gemma is a collection of lightweight, open-source generative AI models, primarily designed for developers and researchers. Developed by Google DeepMind, the same team behind the closed-source Gemini, Gemma is engineered to be compatible with a wide array of developer tools and Google Cloud services. The name Gemma is inspired from the Latin term for precious stone, underscoring its high value within the AI development community.&#xA;The model we&amp;rsquo;re utilizing has a limitation: it is quantized, which reduces accuracy to enhance performance and maintain a compact size suitable for local execution, especially when there&amp;rsquo;s insufficient capacity.</description>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/config_llm_with_gemma/index.html</guid>
+      <description>Gemma is a collection of lightweight, open-source generative AI models, primarily designed for developers and researchers. Developed by Google DeepMind, the same team behind the closed-source Gemini, Gemma is engineered to be compatible with a wide array of developer tools and Google Cloud services. The name Gemma is inspired from the Latin term for precious stone, underscoring its high value within the AI development community.&#xA;The model we’re utilizing has a limitation: it is quantized, which reduces accuracy to enhance performance and maintain a compact size suitable for local execution, especially when there’s insufficient capacity.</description>
     </item>
     <item>
       <title>Enabling Multi-Round Conversations with Chat History</title>
-      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/enable_multiconv_with_history/</link>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/enable_multiconv_with_history/index.html</link>
       <pubDate>Mon, 28 Oct 2024 22:33:54 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/enable_multiconv_with_history/</guid>
-      <description>In this scenario, we&amp;rsquo;re implementing a system that facilitates multiple-round conversations while maintaining context throughout the interaction. To achieve this, we&amp;rsquo;ll utilize LangChain&amp;rsquo;s built-in chain constructors: create_stuff_documents_chain and create_retrieval_chain.&#xA;The core logic involves adding the chat history as an input, creating a history-aware retriever, and combining these elements into a robust question-answering pipeline. Let&amp;rsquo;s break down the process:&#xA;Contextualizing the Question We start by defining a sub-chain that processes historical messages and the latest user question.</description>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/enable_multiconv_with_history/index.html</guid>
+      <description>In this scenario, we’re implementing a system that facilitates multiple-round conversations while maintaining context throughout the interaction. To achieve this, we’ll utilize LangChain’s built-in chain constructors: create_stuff_documents_chain and create_retrieval_chain.&#xA;The core logic involves adding the chat history as an input, creating a history-aware retriever, and combining these elements into a robust question-answering pipeline. Let’s break down the process:&#xA;Contextualizing the Question We start by defining a sub-chain that processes historical messages and the latest user question.</description>
     </item>
     <item>
       <title>Complete Code</title>
-      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/complete_code/</link>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html</link>
       <pubDate>Mon, 28 Oct 2024 22:36:51 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/complete_code/</guid>
-      <description>I&amp;rsquo;ve divided the code into two sections because the data source is loaded into the vector store only once. After this initial load, queries can be executed against the existing vector store.&#xA;Load the data into the vector store Query against the vector store Loading the Data and Creating VectorStore import bs4 from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader( web_paths=(&amp;#34;https://andersen.sdu.dk/vaerk/hersholt/TheEmperorsNewClothes_e.html&amp;#34;,), bs_kwargs=dict( parse_only=bs4.SoupStrainer( class_=(&amp;#34;post-content&amp;#34;, &amp;#34;post-title&amp;#34;, &amp;#34;post-header&amp;#34;) ) ), ) documents = loader.</description>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html</guid>
+      <description>I’ve divided the code into two sections because the data source is loaded into the vector store only once. After this initial load, queries can be executed against the existing vector store.&#xA;Load the data into the vector store Query against the vector store Loading the Data and Creating VectorStore import bs4 from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader( web_paths=(&#34;https://andersen.sdu.dk/vaerk/hersholt/TheEmperorsNewClothes_e.html&#34;,), bs_kwargs=dict( parse_only=bs4.SoupStrainer( class_=(&#34;post-content&#34;, &#34;post-title&#34;, &#34;post-header&#34;) ) ), ) documents = loader.</description>
     </item>
     <item>
       <title>Summary</title>
-      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/summary/</link>
+      <link>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html</link>
       <pubDate>Mon, 28 Oct 2024 22:39:33 +0800</pubDate>
-      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/summary/</guid>
+      <guid>http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html</guid>
       <description>Key takeaways from this chapter:&#xA;All components are open-source. The source data is loaded from a website. Supabase, a platform built on PostgreSQL with vector extensions enabled, offers a user-friendly interface for managing data. This interface allows for the manipulation and management of embedded data according to business needs, including updating, modifying, and deleting incorrect data. A memory system that supports multiple inputs with Retriever for multi-round conversations is implemented. The code is divided into two sections: loading and querying.</description>
     </item>
   </channel>

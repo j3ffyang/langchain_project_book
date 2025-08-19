@@ -29,26 +29,26 @@ Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL
     <meta itemprop="dateModified" content="2024-10-28T22:26:09+08:00">
     <meta itemprop="wordCount" content="1202">
     <title>Supabase as VectorStore :: LangChain AI</title>
-    <link href="/langchain_project_book/css/auto-complete/auto-complete.min.css?1755623690" rel="stylesheet">
-    <script src="/langchain_project_book/js/auto-complete/auto-complete.min.js?1755623690" defer></script>
-    <script src="/langchain_project_book/js/search-lunr.js?1755623690" defer></script>
-    <script src="/langchain_project_book/js/search.js?1755623690" defer></script>
+    <link href="/langchain_project_book/css/auto-complete/auto-complete.min.css?1755628295" rel="stylesheet">
+    <script src="/langchain_project_book/js/auto-complete/auto-complete.min.js?1755628295" defer></script>
+    <script src="/langchain_project_book/js/search-lunr.js?1755628295" defer></script>
+    <script src="/langchain_project_book/js/search.js?1755628295" defer></script>
     <script>
       window.relearn = window.relearn || {};
-      window.relearn.index_js_url="/langchain_project_book/searchindex.en.js?1755623690";
+      window.relearn.index_js_url="/langchain_project_book/searchindex.en.js?1755628295";
     </script>
-    <script src="/langchain_project_book/js/lunr/lunr.min.js?1755623690" defer></script>
-    <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1755623690" defer></script>
-    <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1755623690" defer></script>
-    <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/lunr/lunr.min.js?1755628295" defer></script>
+    <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1755628295" defer></script>
+    <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1755628295" defer></script>
+    <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1755628295" defer></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.contentLangs=['en'];
     </script>
-    <link href="/langchain_project_book/fonts/fontawesome/css/fontawesome-all.min.css?1755623690" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/fonts/fontawesome/css/fontawesome-all.min.css?1755623690" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/perfect-scrollbar/perfect-scrollbar.min.css?1755623690" rel="stylesheet">
-    <link href="/langchain_project_book/css/theme.css?1755623690" rel="stylesheet">
-    <link href="/langchain_project_book/css/format-html.css?1755623690" rel="stylesheet" id="R-format-style">
+    <link href="/langchain_project_book/fonts/fontawesome/css/fontawesome-all.min.css?1755628295" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/fonts/fontawesome/css/fontawesome-all.min.css?1755628295" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar/perfect-scrollbar.min.css?1755628295" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme.css?1755628295" rel="stylesheet">
+    <link href="/langchain_project_book/css/format-html.css?1755628295" rel="stylesheet" id="R-format-style">
     <script>
       window.relearn = window.relearn || {};
       // configuration
@@ -207,8 +207,8 @@ Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL
 <p>Security Warning: The IP address on port 8000 is intended to be accessible from anywhere on the network. Therefore, it is not advisable to expose this directly to the internet without first setting up a proper firewall configuration.</p>
 </blockquote>
 <p>After you successfully log into the portal, you can see</p>
-<p><a href="#R-image-b09c0dd4f2e86b2e8b5873b1b6184e28" class="lightbox-link"><img class="lazy lightbox figure-image" loading="lazy" src="/langchain_project_book/images/2024-05-01-21-22-34.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-b09c0dd4f2e86b2e8b5873b1b6184e28"><img class="lazy lightbox lightbox-image" loading="lazy" src="/langchain_project_book/images/2024-05-01-21-22-34.png"></a></p>
+<p><a href="#R-image-a04d1d8aad205fccf734d008690a108a" class="lightbox-link"><img class="lazy lightbox figure-image" loading="lazy" src="/langchain_project_book/images/2024-05-01-21-22-34.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-a04d1d8aad205fccf734d008690a108a"><img class="lazy lightbox lightbox-image" loading="lazy" src="/langchain_project_book/images/2024-05-01-21-22-34.png"></a></p>
 <p>Figure 6.2 Supabase Dashboard</p>
 <!-- raw HTML omitted -->
 <p>Select <code>SQL Editor</code> from navigation panel, copy and paste the following SQL into <code>SQL Query</code>, then click <code>Run</code>. The SQL code creates an extension of <code>vector</code> and a table called <code>documents</code> which will be used to store the embedded documents.</p>
@@ -261,8 +261,8 @@ Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL
 <!-- raw HTML omitted -->
 <p>On macOS, you may experience an issue where the containers <code>supabase-meta</code> and <code>supabase-studio</code> continuously restart. This problem can be resolved by disabling the &ldquo;Use Virtualization Framework&rdquo; option and changing the file sharing implementation from &ldquo;VirtioFS&rdquo; to &ldquo;gRPC FUSE&rdquo;. This solution applies to Docker Desktop version <code>v4.29.0</code>.</p>
 <p>Settings &gt; General &gt; Use Virtualization framework &gt; select &ldquo;gRPC FUSE&rdquo; then un-check &ldquo;Use Virtualization framework&rdquo;</p>
-<p><a href="#R-image-8c12e3050ad99e3ef23f6cbf42ada668" class="lightbox-link"><img class="lazy lightbox figure-image" loading="lazy" src="/langchain_project_book/images/2024-05-07-11-29-17.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-8c12e3050ad99e3ef23f6cbf42ada668"><img class="lazy lightbox lightbox-image" loading="lazy" src="/langchain_project_book/images/2024-05-07-11-29-17.png"></a></p>
+<p><a href="#R-image-d6d80972916947023a6b6f043c3d050e" class="lightbox-link"><img class="lazy lightbox figure-image" loading="lazy" src="/langchain_project_book/images/2024-05-07-11-29-17.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-d6d80972916947023a6b6f043c3d050e"><img class="lazy lightbox lightbox-image" loading="lazy" src="/langchain_project_book/images/2024-05-07-11-29-17.png"></a></p>
 <p>Figure 6.3 Change Virtualization framework for Supabase on macOS</p>
 <blockquote>
 <p>Reference &gt; <a href="https://github.com/supabase/cli/issues/1724" rel="external" target="_blank">https://github.com/supabase/cli/issues/1724</a></p>
@@ -400,8 +400,8 @@ Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL
 <div id="R-footer"><p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p></div>
       </div>
     </aside>
-    <script src="/langchain_project_book/js/clipboard/clipboard.min.js?1755623690" defer></script>
-    <script src="/langchain_project_book/js/perfect-scrollbar/perfect-scrollbar.min.js?1755623690" defer></script>
-    <script src="/langchain_project_book/js/theme.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/clipboard/clipboard.min.js?1755628295" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar/perfect-scrollbar.min.js?1755628295" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1755628295" defer></script>
   </body>
 </html>

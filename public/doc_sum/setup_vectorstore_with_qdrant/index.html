@@ -29,26 +29,26 @@ In this book, we’re going to cover the 4 open-source vector databases: Qdrant,
     <meta itemprop="dateModified" content="2024-10-28T21:06:19+08:00">
     <meta itemprop="wordCount" content="324">
     <title>Setting up Vectorstore with Qdrant :: LangChain AI</title>
-    <link href="/langchain_project_book/css/auto-complete/auto-complete.min.css?1755623690" rel="stylesheet">
-    <script src="/langchain_project_book/js/auto-complete/auto-complete.min.js?1755623690" defer></script>
-    <script src="/langchain_project_book/js/search-lunr.js?1755623690" defer></script>
-    <script src="/langchain_project_book/js/search.js?1755623690" defer></script>
+    <link href="/langchain_project_book/css/auto-complete/auto-complete.min.css?1755628295" rel="stylesheet">
+    <script src="/langchain_project_book/js/auto-complete/auto-complete.min.js?1755628295" defer></script>
+    <script src="/langchain_project_book/js/search-lunr.js?1755628295" defer></script>
+    <script src="/langchain_project_book/js/search.js?1755628295" defer></script>
     <script>
       window.relearn = window.relearn || {};
-      window.relearn.index_js_url="/langchain_project_book/searchindex.en.js?1755623690";
+      window.relearn.index_js_url="/langchain_project_book/searchindex.en.js?1755628295";
     </script>
-    <script src="/langchain_project_book/js/lunr/lunr.min.js?1755623690" defer></script>
-    <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1755623690" defer></script>
-    <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1755623690" defer></script>
-    <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/lunr/lunr.min.js?1755628295" defer></script>
+    <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1755628295" defer></script>
+    <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1755628295" defer></script>
+    <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1755628295" defer></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.contentLangs=['en'];
     </script>
-    <link href="/langchain_project_book/fonts/fontawesome/css/fontawesome-all.min.css?1755623690" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/fonts/fontawesome/css/fontawesome-all.min.css?1755623690" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/perfect-scrollbar/perfect-scrollbar.min.css?1755623690" rel="stylesheet">
-    <link href="/langchain_project_book/css/theme.css?1755623690" rel="stylesheet">
-    <link href="/langchain_project_book/css/format-html.css?1755623690" rel="stylesheet" id="R-format-style">
+    <link href="/langchain_project_book/fonts/fontawesome/css/fontawesome-all.min.css?1755628295" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/fonts/fontawesome/css/fontawesome-all.min.css?1755628295" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar/perfect-scrollbar.min.css?1755628295" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme.css?1755628295" rel="stylesheet">
+    <link href="/langchain_project_book/css/format-html.css?1755628295" rel="stylesheet" id="R-format-style">
     <script>
       window.relearn = window.relearn || {};
       // configuration
@@ -162,8 +162,8 @@ In this book, we’re going to cover the 4 open-source vector databases: Qdrant,
 </span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -v /$DIR/qdrant_storage:/qdrant/storage:z <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -td qdrant/qdrant</span></span></code></pre></div>
 <p>After Qdrant is launched completely, you can browse https://localhost:6333/dashboard and view the following or similar.
-<a href="#R-image-6a1023338b8659b39a757b1ea627cccb" class="lightbox-link"><img class="lazy lightbox figure-image" loading="lazy" src="/langchain_project_book/images/2024-11-15-11-05-21.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-6a1023338b8659b39a757b1ea627cccb"><img class="lazy lightbox lightbox-image" loading="lazy" src="/langchain_project_book/images/2024-11-15-11-05-21.png"></a>
+<a href="#R-image-bc247a4abe8d6de10ffaa09b2f095f97" class="lightbox-link"><img class="lazy lightbox figure-image" loading="lazy" src="/langchain_project_book/images/2024-11-15-11-05-21.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-bc247a4abe8d6de10ffaa09b2f095f97"><img class="lazy lightbox lightbox-image" loading="lazy" src="/langchain_project_book/images/2024-11-15-11-05-21.png"></a>
 Figure 4.2 Qdrant Dashboard Sample
 <!-- raw HTML omitted --></p>
 <p>Please be aware that this service is accessible to anyone within the same network. This means that anyone who can access the URL has the ability to view and potentially delete your data. Therefore, it is essential to implement HTTP Basic Authentication to restrict access. For example, if using Nginx, refer to the documentation &gt; <a href="https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/" rel="external" target="_blank">https://docs.nginx.com/nginx/admin-guide/security-controls/configuring-http-basic-authentication/</a></p>
@@ -244,8 +244,8 @@ Figure 4.2 Qdrant Dashboard Sample
 <div id="R-footer"><p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p></div>
       </div>
     </aside>
-    <script src="/langchain_project_book/js/clipboard/clipboard.min.js?1755623690" defer></script>
-    <script src="/langchain_project_book/js/perfect-scrollbar/perfect-scrollbar.min.js?1755623690" defer></script>
-    <script src="/langchain_project_book/js/theme.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/clipboard/clipboard.min.js?1755628295" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar/perfect-scrollbar.min.js?1755628295" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1755628295" defer></script>
   </body>
 </html>
