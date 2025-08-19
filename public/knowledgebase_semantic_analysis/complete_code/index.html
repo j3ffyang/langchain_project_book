@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
   <head><script src="/langchain_project_book/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=langchain_project_book/livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.131.0">
-    <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
+    <meta name="generator" content="Relearn 8.0.0+9803d5122ebb3276acea823f476e9eb44f607862">
     <meta name="description" content="I’ve divided the code into two sections because the data source is loaded into the vector store only once. After this initial load, queries can be executed against the existing vector store.
 Load the data into the vector store Query against the vector store Loading the Data and Creating VectorStore import bs4 from langchain_community.document_loaders import WebBaseLoader loader = WebBaseLoader( web_paths=(&#34;https://andersen.sdu.dk/vaerk/hersholt/TheEmperorsNewClothes_e.html&#34;,), bs_kwargs=dict( parse_only=bs4.SoupStrainer( class_=(&#34;post-content&#34;, &#34;post-title&#34;, &#34;post-header&#34;) ) ), ) documents = loader.">
     <meta name="author" content="">
@@ -29,25 +29,42 @@ Load the data into the vector store Query against the vector store Loading the D
     <meta itemprop="dateModified" content="2024-10-28T22:36:51+08:00">
     <meta itemprop="wordCount" content="721">
     <title>Complete Code :: LangChain AI</title>
-    <link href="/langchain_project_book/css/fontawesome-all.min.css?1755622507" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1755622507" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/nucleus.css?1755622507" rel="stylesheet">
-    <link href="/langchain_project_book/css/auto-complete.css?1755622507" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1755622507" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1755622507" rel="stylesheet">
-    <link href="/langchain_project_book/css/fonts.css?1755622507" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1755622507" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/theme.css?1755622507" rel="stylesheet">
-    <link href="/langchain_project_book/css/theme-auto.css?1755622507" rel="stylesheet" id="R-variant-style">
-    <link href="/langchain_project_book/css/chroma-auto.css?1755622507" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/langchain_project_book/css/print.css?1755622507" rel="stylesheet" media="print">
-    <script src="/langchain_project_book/js/variant.js?1755622507"></script>
+    <link href="/langchain_project_book/css/auto-complete/auto-complete.min.css?1755623690" rel="stylesheet">
+    <script src="/langchain_project_book/js/auto-complete/auto-complete.min.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/search-lunr.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/search.js?1755623690" defer></script>
     <script>
       window.relearn = window.relearn || {};
+      window.relearn.index_js_url="/langchain_project_book/searchindex.en.js?1755623690";
+    </script>
+    <script src="/langchain_project_book/js/lunr/lunr.min.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1755623690" defer></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.contentLangs=['en'];
+    </script>
+    <link href="/langchain_project_book/fonts/fontawesome/css/fontawesome-all.min.css?1755623690" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/fonts/fontawesome/css/fontawesome-all.min.css?1755623690" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar/perfect-scrollbar.min.css?1755623690" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme.css?1755623690" rel="stylesheet">
+    <link href="/langchain_project_book/css/format-html.css?1755623690" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      // configuration
+      window.relearn.min = ``;
+      window.relearn.path='\/knowledgebase_semantic_analysis\/complete_code\/index.html';
       window.relearn.relBasePath='..\/..';
       window.relearn.relBaseUri='..\/..\/..';
       window.relearn.absBaseUri='http:\/\/localhost:1313\/langchain_project_book';
       window.relearn.disableAnchorCopy=false;
       window.relearn.disableAnchorScrolling=false;
-      // variant stuff
-      window.variants && variants.init( [ 'auto' ] );
+      window.relearn.disableInlineCopyToClipboard=false;
+      window.relearn.enableBlockCodeWrap=true;
+      // legal
+      window.relearn.getItem = (s,n) => {return s.getItem(n)};
+      window.relearn.setItem = (s,n,v) => {return s.setItem(n,v)};
+      window.relearn.removeItem = (s,n) => {return s.removeItem(n)};
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
       window.T_Copied_to_clipboard = `Copied to clipboard!`;
@@ -57,6 +74,33 @@ Load the data into the vector store Query against the vector store Loading the D
       window.T_View_reset = `View reset!`;
       window.T_No_results_found = `No results found for "{0}"`;
       window.T_N_results_found = `{1} results found for "{0}"`;
+      // variant stuff
+      window.relearn.themevariants = [ 'auto' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.relearn.setItem(window.localStorage, window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+          window.relearn.markVariant();
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.relearn.getItem(window.localStorage, window.relearn.absBaseUri + "/variant");
+        document.querySelectorAll(".R-variantswitcher select").forEach((select) => {select.value = variant;});
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.relearn.getItem(window.localStorage, window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.relearn.setItem(window.localStorage, window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
     </script>
   </head>
   <body class="mobile-support html" data-url="/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html">
@@ -75,10 +119,7 @@ Load the data into the vector store Query against the vector store Loading the D
               </div>
             </div>
           </div>
-          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
-            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/index.html"><span itemprop="name">LangChain Project Handbook</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
-            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/knowledgebase_semantic_analysis/index.html"><span itemprop="name">KnowledgeBase Semantic Analysis</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
-            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Complete Code</span><meta itemprop="position" content="3"></li>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/langchain_project_book/index.html"><span itemprop="name">LangChain Project Handbook</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/langchain_project_book/knowledgebase_semantic_analysis/index.html"><span itemprop="name">KnowledgeBase Semantic Analysis</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><span itemprop="name">Complete Code</span><meta itemprop="position" content="3"></li>
           </ol>
           <div class="topbar-area topbar-area-end" data-area="end">
             <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/knowledgebase_semantic_analysis/enable_multiconv_with_history/index.html" title="Enabling Multi-Round Conversations with Chat History (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
@@ -111,7 +152,7 @@ Load the data into the vector store Query against the vector store Loading the D
 <li>Query against the vector store</li>
 </ul>
 <h4 id="loading-the-data-and-creating-vectorstore">Loading the Data and Creating VectorStore</h4>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> bs4
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> bs4
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.document_loaders <span style="color:#f92672">import</span> WebBaseLoader
 </span></span><span style="display:flex;"><span>loader <span style="color:#f92672">=</span> WebBaseLoader(
 </span></span><span style="display:flex;"><span>    web_paths<span style="color:#f92672">=</span>(<span style="color:#e6db74">&#34;https://andersen.sdu.dk/vaerk/hersholt/TheEmperorsNewClothes_e.html&#34;</span>,),
@@ -157,7 +198,7 @@ Load the data into the vector store Query against the vector store Loading the D
 <h4 id="querying">Querying</h4>
 <p>For convenience, I&rsquo;ve included the values of <code>supabase_url</code> and <code>supabase_key</code> directly in the code to bypass the need for manual input during queries. However, it&rsquo;s crucial to ensure these keys are not exposed when sharing the code with others or when pushing it to a public GitHub repository.</p>
 <p>The definition of <code>vectorstore</code> differs a little from its counterpart in the loading section because, during <strong>querying</strong>, there&rsquo;s no need to insert chunks into the vector store.</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.vectorstores <span style="color:#f92672">import</span> SupabaseVectorStore
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain_community.vectorstores <span style="color:#f92672">import</span> SupabaseVectorStore
 </span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> supabase.client <span style="color:#f92672">import</span> Client, create_client
 </span></span><span style="display:flex;"><span>supabase_url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;http://127.0.0.1:8000&#34;</span>
 </span></span><span style="display:flex;"><span>supabase_key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyAgCiAgICAicm9sZSI6ICJhbm9uIiwKICAgICJpc3MiOiAic3VwYWJhc2UtZGVtbyIsCiAgICAiaWF0IjogMTY0MTc2OTIwMCwKICAgICJleHAiOiAxNzk5NTM1NjAwCn0.dc_X5iR_VP_qT0zsiyj_I_OZ2T9FtRU2BBNWN8Bu4GE&#34;</span>
@@ -258,7 +299,7 @@ Load the data into the vector store Query against the vector store Loading the D
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>:
 </span></span><span style="display:flex;"><span>        pprint(process_question(user_input))</span></span></code></pre></div>
 <p>The output is like</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>Enter your question: how does the emperor think about his cloth
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>Enter your question: how does the emperor think about his cloth
 </span></span><span style="display:flex;"><span>[outputs]
 </span></span><span style="display:flex;"><span>(<span style="color:#e6db74">&#39; order?</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>
 </span></span><span style="display:flex;"><span> <span style="color:#e6db74">&#39;Assistant: The emperor believes that wearing such special clothes will help &#39;</span>
@@ -283,13 +324,14 @@ Load the data into the vector store Query against the vector store Loading the D
 </span></span><span style="display:flex;"><span>Enter your question:</span></span></code></pre></div>
 <p>The application retains a record of past conversations and accurately responds to inquiries regarding the initial question posed.</p>
 <p>In case you receive the following message:</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#f92672">{</span><span style="color:#e6db74">&#39;output_text&#39;</span>: <span style="color:#e6db74">&#39;The passage does not specify how the emperor thinks about his &#39;</span>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#f92672">{</span><span style="color:#e6db74">&#39;output_text&#39;</span>: <span style="color:#e6db74">&#39;The passage does not specify how the emperor thinks about his &#39;</span>
 </span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;cloth, so I cannot answer this question from the provided &#39;</span>
 </span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;context.&#39;</span><span style="color:#f92672">}</span></span></span></code></pre></div>
 <p>You can run the model with <code>ollama</code>, to trigger the model.</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ollama run gemma:2b</span></span></code></pre></div>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>ollama run gemma:2b</span></span></code></pre></div>
 
   <footer class="footline">
+              <i class='fa-fw fas fa-calendar'></i> Oct 28, 2024
   </footer>
 </article>
         </div>
@@ -300,12 +342,9 @@ Load the data into the vector store Query against the vector store Loading the D
       <div id="R-header-wrapper" class="default-animation">
         <div id="R-header" class="default-animation">
           <a id="R-logo" class="R-default" href="/langchain_project_book/index.html">
-LangChain AI
+            <div class="logo-title">LangChain AI</div>
           </a>
         </div>
-        <script>
-          window.index_js_url="/langchain_project_book/searchindex.js?1755622507";
-        </script>
         <search><form action="/langchain_project_book/search/index.html" method="get">
           <div class="searchbox default-animation">
             <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
@@ -314,31 +353,36 @@ LangChain AI
             <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
           </div>
         </form></search>
-        <script>
-          var contentLangs=['en'];
-        </script>
-        <script src="/langchain_project_book/js/auto-complete.js?1755622507" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.min.js?1755622507" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1755622507" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1755622507" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1755622507" defer></script>
-        <script src="/langchain_project_book/js/search.js?1755622507" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
-        <ul>
-          <li><a class="padding" href="/langchain_project_book/index.html"><i class="fa-fw fas fa-home"></i> Home</a></li>
-        </ul>
-        <hr class="padding">
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-homelinks">
+          <ul class="space collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/index.html"><a class="padding" href="/langchain_project_book/index.html"><i class="fa-fw fas fa-home"></i> Home</a></li>
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-headercontrols">
+          <ul class="">
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
       </div>
       <div id="R-content-wrapper" class="highlightable">
-        <div id="R-topics">
+        <div class="R-sidebarmenu R-shortcutmenu-main">
           <ul class="enlarge morespace collapsible-menu">
             <li class="" data-nav-id="/langchain_project_book/preface/index.html"><a class="padding" href="/langchain_project_book/preface/index.html">Preface</a></li>
-            <li class="" data-nav-id="/langchain_project_book/fundamentals/index.html"><a class="padding" href="/langchain_project_book/fundamentals/index.html">LangChain Fundamentals</a><ul id="R-subsections-c6757c34957c6808b13ecd5148aeca96" class="collapsible-menu"></ul></li>
-            <li class="" data-nav-id="/langchain_project_book/tools_n_lib/index.html"><a class="padding" href="/langchain_project_book/tools_n_lib/index.html">Tools and Libraries</a><ul id="R-subsections-cc34bf23dab60f9112ee939495610dcf" class="collapsible-menu"></ul></li>
-            <li class="" data-nav-id="/langchain_project_book/doc_sum/index.html"><a class="padding" href="/langchain_project_book/doc_sum/index.html">Document Summarization</a><ul id="R-subsections-76bbd5376befb633d2052d0ea4508ef3" class="collapsible-menu"></ul></li>
-            <li class="" data-nav-id="/langchain_project_book/ticketing_sys/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/index.html">Ticketing System</a><ul id="R-subsections-eaa6b154ff31d8e1af72e9555a67f96a" class="collapsible-menu"></ul></li>
-            <li class="parent " data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/index.html">KnowledgeBase Semantic Analysis</a><ul id="R-subsections-c718aa372d1e4f26c29659df75d5d07f" class="collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/index.html"><a class="padding" href="/langchain_project_book/fundamentals/index.html">LangChain Fundamentals</a><ul id="R-subsections-0784c4bcc83cbdf0ace68502ac3215e0" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/tools_n_lib/index.html"><a class="padding" href="/langchain_project_book/tools_n_lib/index.html">Tools and Libraries</a><ul id="R-subsections-fec951202c7c0f845b2452661e4af48e" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/doc_sum/index.html"><a class="padding" href="/langchain_project_book/doc_sum/index.html">Document Summarization</a><ul id="R-subsections-c75a3cc5095251ebcf3be162192ea6c9" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/ticketing_sys/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/index.html">Ticketing System</a><ul id="R-subsections-3f5863c85ccf3c65e662463e67f08191" class="collapsible-menu"></ul></li>
+            <li class="parent " data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/index.html">KnowledgeBase Semantic Analysis</a><ul id="R-subsections-c498a6349176744d42feaf82a24933fb" class="collapsible-menu">
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/arch_n_workflow/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/arch_n_workflow/index.html">Architecture and Workflow</a></li>
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/preparing_data/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/preparing_data/index.html">Preparing Data</a></li>
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/select_embed_model/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/select_embed_model/index.html">Selecting the Embedding Model</a></li>
@@ -349,58 +393,23 @@ LangChain AI
             <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/summary/index.html">Summary</a></li></ul></li>
           </ul>
         </div>
-        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter"></div>
-        <div id="R-menu-footer">
-          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter">
-          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks">
-            <ul>
-              <li id="R-select-language-container" class="footerLangSwitch">
-                <div class="padding menu-control">
-                  <i class="fa-fw fas fa-language"></i>
-                  <span>&nbsp;</span>
-                  <div class="control-style">
-                    <label class="a11y-only" for="R-select-language">Language</label>
-                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
-                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/langchain_project_book/knowledgebase_semantic_analysis/complete_code/index.html" lang="en-us" selected></option>
-                    </select>
-                  </div>
-                  <div class="clear"></div>
-                </div>
-              </li>
-              <li id="R-select-variant-container" class="footerVariantSwitch">
-                <div class="padding menu-control">
-                  <i class="fa-fw fas fa-paint-brush"></i>
-                  <span>&nbsp;</span>
-                  <div class="control-style">
-                    <label class="a11y-only" for="R-select-variant">Theme</label>
-                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
-                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
-                    </select>
-                  </div>
-                  <div class="clear"></div>
-                </div>
-                <script>window.variants && variants.markSelectedVariant();</script>
-              </li>
-              <li class="footerVisitedLinks">
-                <div class="padding menu-control">
-                  <i class="fa-fw fas fa-history"></i>
-                  <span>&nbsp;</span>
-                  <div class="control-style">
-                    <button onclick="clearHistory();">Clear History</button>
-                  </div>
-                  <div class="clear"></div>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div id="R-footer" class="footerFooter showFooter">
-        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
-          </div>
+        <div class="R-sidebarmenu R-shortcutmenu-shortcuts">
+          <ul class="space collapsible-menu">
+          </ul>
         </div>
+        <div id="R-footer-margin"></div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-footercontrols">
+          <ul class="">
+          </ul>
+        </div>
+<div id="R-footer"><p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p></div>
       </div>
     </aside>
-    <script src="/langchain_project_book/js/clipboard.min.js?1755622507" defer></script>
-    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1755622507" defer></script>
-    <script src="/langchain_project_book/js/theme.js?1755622507" defer></script>
+    <script src="/langchain_project_book/js/clipboard/clipboard.min.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar/perfect-scrollbar.min.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1755623690" defer></script>
   </body>
 </html>

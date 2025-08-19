@@ -1,6 +1,9 @@
 [Reading-direction]
 other = "ltr"
 
+[Versioning-warning]
+other = 'Du liest gerade die Version {{.pageVersion.title}} dieser Seite. Die aktuelle Version finden Sie <a href="{{.latestUrl}}">hier</a>.'
+
 [Search]
 other = "Suchen"
 
@@ -37,8 +40,17 @@ other = "Huch. Diese Seite scheint nicht zu existieren ¯\\_(ツ)_/¯."
 [Go-to-homepage]
 other = "Gehe zur Homepage"
 
+[home-button]
+other = "Home"
+
 [Edit-this-page]
 other = "Bearbeiten"
+
+[Show-Markdown]
+other = "Markdown anzeigen"
+
+[Show-source]
+other = "Quelldatei anzeigen"
 
 [Print-this-chapter]
 other = "Ganzes Kapitel drucken"
@@ -46,7 +58,7 @@ other = "Ganzes Kapitel drucken"
 [More-action]
 other = "Mehr"
 
-[Shortcuts-Title]
+[shortcuts-menuTitle]
 other = "Mehr"
 
 [Expand-title]
@@ -123,3 +135,6 @@ other = "Kategorien"
 
 [category]
 other = "Kategorie"
+
+[Details]
+other = "Details"

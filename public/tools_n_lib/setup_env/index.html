@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article">
+<html lang="en-us" dir="ltr" itemscope itemtype="http://schema.org/Article" data-r-output-format="html">
   <head><script src="/langchain_project_book/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=langchain_project_book/livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="generator" content="Hugo 0.131.0">
-    <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
+    <meta name="generator" content="Relearn 8.0.0+9803d5122ebb3276acea823f476e9eb44f607862">
     <meta name="description" content="In LangChain, when accessing a model from a remote platform, it is necessary to provide an API token (aka access token). For example, as demonstrated in the previous chapter using HuggingFaceEndpoint to utilize mistralai/Mistral-7B-Instruct-v0.2 model from Hugging Face platform, you will be required to generate a HuggingFace access token by following up the instruction at https://huggingface.co/docs/hub/en/security-tokens . You will be able to find your access token at https://huggingface.co/settings/tokens .
 After generating the access token, you can proceed to set up and configure the token within the environment based on the following options.">
     <meta name="author" content="">
@@ -29,25 +29,42 @@ After generating the access token, you can proceed to set up and configure the t
     <meta itemprop="dateModified" content="2024-10-28T20:04:51+08:00">
     <meta itemprop="wordCount" content="525">
     <title>Set up your Environment :: LangChain AI</title>
-    <link href="/langchain_project_book/css/fontawesome-all.min.css?1755622507" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1755622507" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/nucleus.css?1755622507" rel="stylesheet">
-    <link href="/langchain_project_book/css/auto-complete.css?1755622507" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1755622507" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1755622507" rel="stylesheet">
-    <link href="/langchain_project_book/css/fonts.css?1755622507" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1755622507" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/theme.css?1755622507" rel="stylesheet">
-    <link href="/langchain_project_book/css/theme-auto.css?1755622507" rel="stylesheet" id="R-variant-style">
-    <link href="/langchain_project_book/css/chroma-auto.css?1755622507" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/langchain_project_book/css/print.css?1755622507" rel="stylesheet" media="print">
-    <script src="/langchain_project_book/js/variant.js?1755622507"></script>
+    <link href="/langchain_project_book/css/auto-complete/auto-complete.min.css?1755623690" rel="stylesheet">
+    <script src="/langchain_project_book/js/auto-complete/auto-complete.min.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/search-lunr.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/search.js?1755623690" defer></script>
     <script>
       window.relearn = window.relearn || {};
+      window.relearn.index_js_url="/langchain_project_book/searchindex.en.js?1755623690";
+    </script>
+    <script src="/langchain_project_book/js/lunr/lunr.min.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1755623690" defer></script>
+    <script>
+      window.relearn = window.relearn || {};
+      window.relearn.contentLangs=['en'];
+    </script>
+    <link href="/langchain_project_book/fonts/fontawesome/css/fontawesome-all.min.css?1755623690" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/fonts/fontawesome/css/fontawesome-all.min.css?1755623690" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar/perfect-scrollbar.min.css?1755623690" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme.css?1755623690" rel="stylesheet">
+    <link href="/langchain_project_book/css/format-html.css?1755623690" rel="stylesheet" id="R-format-style">
+    <script>
+      window.relearn = window.relearn || {};
+      // configuration
+      window.relearn.min = ``;
+      window.relearn.path='\/tools_n_lib\/setup_env\/index.html';
       window.relearn.relBasePath='..\/..';
       window.relearn.relBaseUri='..\/..\/..';
       window.relearn.absBaseUri='http:\/\/localhost:1313\/langchain_project_book';
       window.relearn.disableAnchorCopy=false;
       window.relearn.disableAnchorScrolling=false;
-      // variant stuff
-      window.variants && variants.init( [ 'auto' ] );
+      window.relearn.disableInlineCopyToClipboard=false;
+      window.relearn.enableBlockCodeWrap=true;
+      // legal
+      window.relearn.getItem = (s,n) => {return s.getItem(n)};
+      window.relearn.setItem = (s,n,v) => {return s.setItem(n,v)};
+      window.relearn.removeItem = (s,n) => {return s.removeItem(n)};
       // translations
       window.T_Copy_to_clipboard = `Copy to clipboard`;
       window.T_Copied_to_clipboard = `Copied to clipboard!`;
@@ -57,6 +74,33 @@ After generating the access token, you can proceed to set up and configure the t
       window.T_View_reset = `View reset!`;
       window.T_No_results_found = `No results found for "{0}"`;
       window.T_N_results_found = `{1} results found for "{0}"`;
+      // variant stuff
+      window.relearn.themevariants = [ 'auto' ];
+      window.relearn.customvariantname = "my-custom-variant";
+      window.relearn.changeVariant = function(variant) {
+        var oldVariant = document.documentElement.dataset.rThemeVariant;
+        window.relearn.setItem(window.localStorage, window.relearn.absBaseUri + "/variant", variant);
+        document.documentElement.dataset.rThemeVariant = variant;
+        if (oldVariant != variant) {
+          document.dispatchEvent( new CustomEvent('themeVariantLoaded', { detail: { variant, oldVariant } }) );
+          window.relearn.markVariant();
+        }
+      }
+      window.relearn.markVariant = function() {
+        var variant = window.relearn.getItem(window.localStorage, window.relearn.absBaseUri + "/variant");
+        document.querySelectorAll(".R-variantswitcher select").forEach((select) => {select.value = variant;});
+      }
+      window.relearn.initVariant = function() {
+        var variant = window.relearn.getItem(window.localStorage, window.relearn.absBaseUri + "/variant") ?? "";
+        if( variant == window.relearn.customvariantname ){
+        }else if( !variant || !window.relearn.themevariants.includes(variant) ){
+          variant = window.relearn.themevariants[0];
+          window.relearn.setItem(window.localStorage, window.relearn.absBaseUri + "/variant", variant);
+        }
+        document.documentElement.dataset.rThemeVariant = variant;
+      }
+      window.relearn.initVariant();
+      window.relearn.markVariant();
     </script>
   </head>
   <body class="mobile-support html" data-url="/langchain_project_book/tools_n_lib/setup_env/index.html">
@@ -85,10 +129,7 @@ After generating the access token, you can proceed to set up and configure the t
               </div>
             </div>
           </div>
-          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li
-            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/index.html"><span itemprop="name">LangChain Project Handbook</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li
-            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><a itemprop="item" href="/langchain_project_book/tools_n_lib/index.html"><span itemprop="name">Tools and Libraries</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li
-            itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement"><span itemprop="name">Set up your Environment</span><meta itemprop="position" content="3"></li>
+          <ol class="topbar-breadcrumbs breadcrumbs highlightable" itemscope itemtype="http://schema.org/BreadcrumbList"><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/langchain_project_book/index.html"><span itemprop="name">LangChain Project Handbook</span></a><meta itemprop="position" content="1">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><a itemprop="item" href="/langchain_project_book/tools_n_lib/index.html"><span itemprop="name">Tools and Libraries</span></a><meta itemprop="position" content="2">&nbsp;>&nbsp;</li><li itemscope itemtype="https://schema.org/ListItem" itemprop="itemListElement" class=""><span itemprop="name">Set up your Environment</span><meta itemprop="position" content="3"></li>
           </ol>
           <div class="topbar-area topbar-area-end" data-area="end">
             <div class="topbar-button topbar-button-prev" data-content-empty="disable" data-width-s="show" data-width-m="show" data-width-l="show"><a class="topbar-control" href="/langchain_project_book/tools_n_lib/install_lc/index.html" title="Install LangChain (🡐)"><i class="fa-fw fas fa-chevron-left"></i></a>
@@ -119,7 +160,7 @@ After generating the access token, you can proceed to set up and configure the t
 <p>After generating the access token, you can proceed to set up and configure the token within the environment based on the following options.</p>
 <h4 id="set-the-environment-variable">Set the environment variable</h4>
 <p>To set the environment variable in the terminal, consider adding the following to <code>~/.bashrc</code> or a similar file. This approach ensures the access token is available for all projects within your environment. Additionally, I will provide guidance on configuring both the OpenAI API key and Hugging Face&rsquo;s API token.</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>export OPENAI_API_KEY<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sk-YOUR_API_KEY&#34;</span>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>export OPENAI_API_KEY<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sk-YOUR_API_KEY&#34;</span>
 </span></span><span style="display:flex;"><span>export HUGGINGFACEHUB_API_TOKEN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hf_YOUR_API_TOKEN&#34;</span></span></span></code></pre></div>
 <p>My preferred way for storing API token is to use environment variables. This way offers both convenience and security outside of your source code. Storing API token directly in code is not recommended due to potential security risks.</p>
 <p><strong>Important note</strong>:</p>
@@ -127,15 +168,15 @@ After generating the access token, you can proceed to set up and configure the t
 <p>It is important to avoid exposing your any secret key to version control, as unauthorized individuals could potentially impersonate you and gain access to your resources on remote platforms.</p>
 </blockquote>
 <p>You also have the option to store your access token in a <code>.env</code> file located within your Python code directory. The <code>.env</code> file should look like the following:</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>HUGGINGFACEHUB_API_TOKEN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hf_YOUR_API_TOKEN&#34;</span></span></span></code></pre></div>
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>HUGGINGFACEHUB_API_TOKEN<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hf_YOUR_API_TOKEN&#34;</span></span></span></code></pre></div>
 <p>Your <code>HUGGINGFACEHUB_API_TOKEN</code> is also stored at <code>~/.cache/huggingface/token</code>, on Linux system.</p>
 <h4 id="in-jupyter-notebook-or-python-code">In Jupyter notebook or Python code</h4>
 <p>Additionally, you can do this from inside the Jupyter notebook or Python code</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>import os
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>import os
 </span></span><span style="display:flex;"><span>os.environ<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;OPENAI_API_KEY&#34;</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;sk-YOUR_API_KEY&#34;</span>
 </span></span><span style="display:flex;"><span>os.environ<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;HUGGINGFACEHUB_API_TOKEN&#34;</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hf_YOUR_API_TOKEN&#34;</span></span></span></code></pre></div>
 <p>Or</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.llms <span style="color:#f92672">import</span> OpenAI
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> langchain.llms <span style="color:#f92672">import</span> OpenAI
 </span></span><span style="display:flex;"><span>llm <span style="color:#f92672">=</span> OpenAI(openai_api_key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;OPENAI_API_KEY&#34;</span>)</span></span></code></pre></div>
 <p><strong>Important note</strong></p>
 <blockquote>
@@ -147,13 +188,13 @@ After generating the access token, you can proceed to set up and configure the t
 <h3 id="cache-setup">Cache setup</h3>
 <p>If you have enough computing resources and opt to execute all tasks locally, including loading the LLM and smaller embedding models, all downloaded models will be stored in the default directory on Linux, at <code>~/.cache/huggingface/hub/</code>.</p>
 <p>The default directory can be altered either <code>HF_HOME</code> or <code>HF_HUB_CACHE</code> environment variable. Example for Python:</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
 </span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;HF_HOME&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/PATH/cache/&#39;</span>
 </span></span><span style="display:flex;"><span>And example <span style="color:#66d9ef">for</span> Bash on Linux:
 </span></span><span style="display:flex;"><span>export HF_HOME<span style="color:#f92672">=/</span>PATH<span style="color:#f92672">/</span>cache<span style="color:#f92672">/</span></span></span></code></pre></div>
 <p>At the same time, PyTorch models like sentence-transformers will be stored in the directory <code>~/.cache/torch</code>.</p>
 <p>Here is an example on my machine with several LLMs installed.</p>
-<div class="highlight wrap-code"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#f92672">(</span>gpt<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>jeff@manjaro hub<span style="color:#f92672">]</span>$ pwd
+<div class="highlight wrap-code" dir="auto"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#f92672">(</span>gpt<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>jeff@manjaro hub<span style="color:#f92672">]</span>$ pwd
 </span></span><span style="display:flex;"><span>/home/jeff/.cache/huggingface/hub
 </span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>gpt<span style="color:#f92672">)</span> <span style="color:#f92672">[</span>jeff@manjaro hub<span style="color:#f92672">]</span>$ ls
 </span></span><span style="display:flex;"><span>codellama-7b-python.Q4_0.gguf
@@ -168,6 +209,7 @@ After generating the access token, you can proceed to set up and configure the t
 <p>This is the location where the embedding and LLM models are downloaded and installed locally. At times, LLM models like Mistral and Falcon can be quite large, with each potentially exceeding 10GB in size. Consequently, this folder may significantly expand in size, potentially consuming a considerable amount of storage space. It is advisable to monitor the folder&rsquo;s space periodically to manage storage efficiently.</p>
 
   <footer class="footline">
+              <i class='fa-fw fas fa-calendar'></i> Oct 28, 2024
   </footer>
 </article>
         </div>
@@ -178,12 +220,9 @@ After generating the access token, you can proceed to set up and configure the t
       <div id="R-header-wrapper" class="default-animation">
         <div id="R-header" class="default-animation">
           <a id="R-logo" class="R-default" href="/langchain_project_book/index.html">
-LangChain AI
+            <div class="logo-title">LangChain AI</div>
           </a>
         </div>
-        <script>
-          window.index_js_url="/langchain_project_book/searchindex.js?1755622507";
-        </script>
         <search><form action="/langchain_project_book/search/index.html" method="get">
           <div class="searchbox default-animation">
             <button class="search-detail" type="submit" title="Search (CTRL+ALT+f)"><i class="fas fa-search"></i></button>
@@ -192,90 +231,60 @@ LangChain AI
             <button class="search-clear" type="button" data-search-clear="" title="Clear search"><i class="fas fa-times" title="Clear search"></i></button>
           </div>
         </form></search>
-        <script>
-          var contentLangs=['en'];
-        </script>
-        <script src="/langchain_project_book/js/auto-complete.js?1755622507" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.min.js?1755622507" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1755622507" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1755622507" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1755622507" defer></script>
-        <script src="/langchain_project_book/js/search.js?1755622507" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
-        <ul>
-          <li><a class="padding" href="/langchain_project_book/index.html"><i class="fa-fw fas fa-home"></i> Home</a></li>
-        </ul>
-        <hr class="padding">
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-homelinks">
+          <ul class="space collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/index.html"><a class="padding" href="/langchain_project_book/index.html"><i class="fa-fw fas fa-home"></i> Home</a></li>
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-headercontrols">
+          <ul class="">
+          </ul>
+        </div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
       </div>
       <div id="R-content-wrapper" class="highlightable">
-        <div id="R-topics">
+        <div class="R-sidebarmenu R-shortcutmenu-main">
           <ul class="enlarge morespace collapsible-menu">
             <li class="" data-nav-id="/langchain_project_book/preface/index.html"><a class="padding" href="/langchain_project_book/preface/index.html">Preface</a></li>
-            <li class="" data-nav-id="/langchain_project_book/fundamentals/index.html"><a class="padding" href="/langchain_project_book/fundamentals/index.html">LangChain Fundamentals</a><ul id="R-subsections-c6757c34957c6808b13ecd5148aeca96" class="collapsible-menu"></ul></li>
-            <li class="parent " data-nav-id="/langchain_project_book/tools_n_lib/index.html"><a class="padding" href="/langchain_project_book/tools_n_lib/index.html">Tools and Libraries</a><ul id="R-subsections-cc34bf23dab60f9112ee939495610dcf" class="collapsible-menu">
+            <li class="" data-nav-id="/langchain_project_book/fundamentals/index.html"><a class="padding" href="/langchain_project_book/fundamentals/index.html">LangChain Fundamentals</a><ul id="R-subsections-0784c4bcc83cbdf0ace68502ac3215e0" class="collapsible-menu"></ul></li>
+            <li class="parent " data-nav-id="/langchain_project_book/tools_n_lib/index.html"><a class="padding" href="/langchain_project_book/tools_n_lib/index.html">Tools and Libraries</a><ul id="R-subsections-fec951202c7c0f845b2452661e4af48e" class="collapsible-menu">
             <li class="" data-nav-id="/langchain_project_book/tools_n_lib/install_lc/index.html"><a class="padding" href="/langchain_project_book/tools_n_lib/install_lc/index.html">Install LangChain</a></li>
             <li class="active " data-nav-id="/langchain_project_book/tools_n_lib/setup_env/index.html"><a class="padding" href="/langchain_project_book/tools_n_lib/setup_env/index.html">Set up your Environment</a></li>
             <li class="" data-nav-id="/langchain_project_book/tools_n_lib/install_ide/index.html"><a class="padding" href="/langchain_project_book/tools_n_lib/install_ide/index.html">Install an IDE</a></li>
             <li class="" data-nav-id="/langchain_project_book/tools_n_lib/config_model/index.html"><a class="padding" href="/langchain_project_book/tools_n_lib/config_model/index.html">Configure Models</a></li>
             <li class="" data-nav-id="/langchain_project_book/tools_n_lib/summary/index.html"><a class="padding" href="/langchain_project_book/tools_n_lib/summary/index.html">Summary</a></li></ul></li>
-            <li class="" data-nav-id="/langchain_project_book/doc_sum/index.html"><a class="padding" href="/langchain_project_book/doc_sum/index.html">Document Summarization</a><ul id="R-subsections-76bbd5376befb633d2052d0ea4508ef3" class="collapsible-menu"></ul></li>
-            <li class="" data-nav-id="/langchain_project_book/ticketing_sys/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/index.html">Ticketing System</a><ul id="R-subsections-eaa6b154ff31d8e1af72e9555a67f96a" class="collapsible-menu"></ul></li>
-            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/index.html">KnowledgeBase Semantic Analysis</a><ul id="R-subsections-c718aa372d1e4f26c29659df75d5d07f" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/doc_sum/index.html"><a class="padding" href="/langchain_project_book/doc_sum/index.html">Document Summarization</a><ul id="R-subsections-c75a3cc5095251ebcf3be162192ea6c9" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/ticketing_sys/index.html"><a class="padding" href="/langchain_project_book/ticketing_sys/index.html">Ticketing System</a><ul id="R-subsections-3f5863c85ccf3c65e662463e67f08191" class="collapsible-menu"></ul></li>
+            <li class="" data-nav-id="/langchain_project_book/knowledgebase_semantic_analysis/index.html"><a class="padding" href="/langchain_project_book/knowledgebase_semantic_analysis/index.html">KnowledgeBase Semantic Analysis</a><ul id="R-subsections-c498a6349176744d42feaf82a24933fb" class="collapsible-menu"></ul></li>
           </ul>
         </div>
-        <div class="padding footermargin footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter"></div>
-        <div id="R-menu-footer">
-          <hr class="padding default-animation footerLangSwitch footerVariantSwitch footerVisitedLinks footerFooter showFooter">
-          <div id="R-prefooter" class="footerLangSwitch footerVariantSwitch footerVisitedLinks">
-            <ul>
-              <li id="R-select-language-container" class="footerLangSwitch">
-                <div class="padding menu-control">
-                  <i class="fa-fw fas fa-language"></i>
-                  <span>&nbsp;</span>
-                  <div class="control-style">
-                    <label class="a11y-only" for="R-select-language">Language</label>
-                    <select id="R-select-language" onchange="location = this.querySelector( this.value ).dataset.url;">
-                      <option id="R-select-language-en" value="#R-select-language-en" data-url="/langchain_project_book/tools_n_lib/setup_env/index.html" lang="en-us" selected></option>
-                    </select>
-                  </div>
-                  <div class="clear"></div>
-                </div>
-              </li>
-              <li id="R-select-variant-container" class="footerVariantSwitch">
-                <div class="padding menu-control">
-                  <i class="fa-fw fas fa-paint-brush"></i>
-                  <span>&nbsp;</span>
-                  <div class="control-style">
-                    <label class="a11y-only" for="R-select-variant">Theme</label>
-                    <select id="R-select-variant" onchange="window.variants && variants.changeVariant( this.value );">
-                      <option id="R-select-variant-auto" value="auto" selected>Auto</option>
-                    </select>
-                  </div>
-                  <div class="clear"></div>
-                </div>
-                <script>window.variants && variants.markSelectedVariant();</script>
-              </li>
-              <li class="footerVisitedLinks">
-                <div class="padding menu-control">
-                  <i class="fa-fw fas fa-history"></i>
-                  <span>&nbsp;</span>
-                  <div class="control-style">
-                    <button onclick="clearHistory();">Clear History</button>
-                  </div>
-                  <div class="clear"></div>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div id="R-footer" class="footerFooter showFooter">
-        <p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p>
-          </div>
+        <div class="R-sidebarmenu R-shortcutmenu-shortcuts">
+          <ul class="space collapsible-menu">
+          </ul>
         </div>
+        <div id="R-footer-margin"></div>
+        <div class="R-menu-divider default-animation">
+          <hr class="padding">
+        </div>
+        <div class="R-sidebarmenu R-shortcutmenu-footercontrols">
+          <ul class="">
+          </ul>
+        </div>
+<div id="R-footer"><p>Built with <a href="https://github.com/McShelby/hugo-theme-relearn" title="love"><i class="fas fa-heart"></i></a> by <a href="https://gohugo.io/">Hugo</a></p></div>
       </div>
     </aside>
-    <script src="/langchain_project_book/js/clipboard.min.js?1755622507" defer></script>
-    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1755622507" defer></script>
-    <script src="/langchain_project_book/js/theme.js?1755622507" defer></script>
+    <script src="/langchain_project_book/js/clipboard/clipboard.min.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar/perfect-scrollbar.min.js?1755623690" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1755623690" defer></script>
   </body>
 </html>

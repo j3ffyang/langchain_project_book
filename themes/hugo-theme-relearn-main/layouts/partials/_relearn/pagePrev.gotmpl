@@ -2,7 +2,7 @@
 {{- if eq .Page.Kind "term" }}
   {{- /* go to previous term page or taxonomy page if it is the first term */}}
   {{- $taxonomy_page := .Site.GetPage .Data.Plural }}
-  {{- $pages := partialCached "partials/_relearn/pagesTaxonomy.gotmpl" $taxonomy_page $taxonomy_page.Path }}
+  {{- $pages := partialCached "_relearn/pagesTaxonomy.gotmpl" $taxonomy_page $taxonomy_page.Path }}
   {{- $prev = partial "inline/prev-term" (dict "collection" $pages "item" .) | default $taxonomy_page }}
 {{- else if eq .Page.Kind "taxonomy" }}
   {{- $prev = .Site.Home }}
@@ -62,7 +62,7 @@
   {{- range $siblings }}
     {{- if eq . $currentNode }}
       {{- break }}
-    {{- else if not (or (.Params.hidden) (eq .Title "")) }}
+    {{- else if not (or (eq .Title "") .Params.hidden .Params.menuUrl .Params.menuPageRef) }}
       {{- $previousSibling = . }}
     {{- end }}
   {{- end }}
@@ -73,7 +73,7 @@
   {{- $rightmostVisible := . }}
   {{- $pages := (partialCached "_relearn/pages.gotmpl" (dict "page" $rightmostVisible) $rightmostVisible.Path) | collections.Reverse }}
   {{- range $pages }}
-    {{- if not (or (.Params.hidden) (eq .Title "")) }}
+    {{- if not (or (eq .Title "") .Params.hidden .Params.menuUrl .Params.menuPageRef) }}
       {{- with partial "inline/rightmost_descendant" . }}
         {{- if .RelPermalink }}
           {{- $rightmostVisible = . }}
