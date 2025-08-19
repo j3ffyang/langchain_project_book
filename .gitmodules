@@ -6,4 +6,4 @@
 	url = https://github.com/alex-shpak/hugo-book
 [submodule "themes/hugo-theme-relearn"]
 	path = themes/hugo-theme-relearn
-	url = https://github.com/McShelby/hugo-theme-relearn.git  # Replace with the actual URL
+	url = https://github.com/McShelby/hugo-theme-relearn-main.git  # Replace with the actual URL
