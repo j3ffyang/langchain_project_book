@@ -3,20 +3,20 @@
   <head><script src="/langchain_project_book/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=langchain_project_book/livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="height=device-height, width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <meta name="generator" content="Hugo 0.134.2">
+    <meta name="generator" content="Hugo 0.131.0">
     <meta name="generator" content="Relearn 7.0.1+72a875f1db967152c77914cff4d53f8fcee0e619">
     <meta name="description" content="We will introduce Supabase as a vector store and walk through the process of storing various embeddings in Supabase Vector, a combination of PostgreSQL and pgVector, aimed at facilitating semantic search.
-Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL, a robust SQL database suitable for production environments. Given that Supabase Vector is built on pgVector, it allows for the storage of embeddings alongside other application data within the same database. This integration with pgvector’s indexing algorithms ensures that vector searches remain efficient even at large scales.">
+Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL, a robust SQL database suitable for production environments. Given that Supabase Vector is built on pgVector, it allows for the storage of embeddings alongside other application data within the same database.">
     <meta name="author" content="">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Supabase as VectorStore :: LangChain AI">
     <meta name="twitter:description" content="We will introduce Supabase as a vector store and walk through the process of storing various embeddings in Supabase Vector, a combination of PostgreSQL and pgVector, aimed at facilitating semantic search.
-Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL, a robust SQL database suitable for production environments. Given that Supabase Vector is built on pgVector, it allows for the storage of embeddings alongside other application data within the same database. This integration with pgvector’s indexing algorithms ensures that vector searches remain efficient even at large scales.">
+Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL, a robust SQL database suitable for production environments. Given that Supabase Vector is built on pgVector, it allows for the storage of embeddings alongside other application data within the same database.">
     <meta property="og:url" content="http://localhost:1313/langchain_project_book/knowledgebase_semantic_analysis/supabase_as_vectorstore/index.html">
     <meta property="og:site_name" content="LangChain AI">
     <meta property="og:title" content="Supabase as VectorStore :: LangChain AI">
     <meta property="og:description" content="We will introduce Supabase as a vector store and walk through the process of storing various embeddings in Supabase Vector, a combination of PostgreSQL and pgVector, aimed at facilitating semantic search.
-Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL, a robust SQL database suitable for production environments. Given that Supabase Vector is built on pgVector, it allows for the storage of embeddings alongside other application data within the same database. This integration with pgvector’s indexing algorithms ensures that vector searches remain efficient even at large scales.">
+Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL, a robust SQL database suitable for production environments. Given that Supabase Vector is built on pgVector, it allows for the storage of embeddings alongside other application data within the same database.">
     <meta property="og:locale" content="en_us">
     <meta property="og:type" content="article">
     <meta property="article:section" content="KnowledgeBase Semantic Analysis">
@@ -24,21 +24,21 @@ Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL
     <meta property="article:modified_time" content="2024-10-28T22:26:09+08:00">
     <meta itemprop="name" content="Supabase as VectorStore :: LangChain AI">
     <meta itemprop="description" content="We will introduce Supabase as a vector store and walk through the process of storing various embeddings in Supabase Vector, a combination of PostgreSQL and pgVector, aimed at facilitating semantic search.
-Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL, a robust SQL database suitable for production environments. Given that Supabase Vector is built on pgVector, it allows for the storage of embeddings alongside other application data within the same database. This integration with pgvector’s indexing algorithms ensures that vector searches remain efficient even at large scales.">
+Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL, a robust SQL database suitable for production environments. Given that Supabase Vector is built on pgVector, it allows for the storage of embeddings alongside other application data within the same database.">
     <meta itemprop="datePublished" content="2024-10-28T22:26:09+08:00">
     <meta itemprop="dateModified" content="2024-10-28T22:26:09+08:00">
     <meta itemprop="wordCount" content="1202">
     <title>Supabase as VectorStore :: LangChain AI</title>
-    <link href="/langchain_project_book/css/fontawesome-all.min.css?1731909436" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1731909436" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/nucleus.css?1731909436" rel="stylesheet">
-    <link href="/langchain_project_book/css/auto-complete.css?1731909436" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1731909436" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1731909436" rel="stylesheet">
-    <link href="/langchain_project_book/css/fonts.css?1731909436" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1731909436" rel="stylesheet"></noscript>
-    <link href="/langchain_project_book/css/theme.css?1731909436" rel="stylesheet">
-    <link href="/langchain_project_book/css/theme-auto.css?1731909436" rel="stylesheet" id="R-variant-style">
-    <link href="/langchain_project_book/css/chroma-auto.css?1731909436" rel="stylesheet" id="R-variant-chroma-style">
-    <link href="/langchain_project_book/css/print.css?1731909436" rel="stylesheet" media="print">
-    <script src="/langchain_project_book/js/variant.js?1731909436"></script>
+    <link href="/langchain_project_book/css/fontawesome-all.min.css?1755622507" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fontawesome-all.min.css?1755622507" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/nucleus.css?1755622507" rel="stylesheet">
+    <link href="/langchain_project_book/css/auto-complete.css?1755622507" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/auto-complete.css?1755622507" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/perfect-scrollbar.min.css?1755622507" rel="stylesheet">
+    <link href="/langchain_project_book/css/fonts.css?1755622507" rel="stylesheet" media="print" onload="this.media='all';this.onload=null;"><noscript><link href="/langchain_project_book/css/fonts.css?1755622507" rel="stylesheet"></noscript>
+    <link href="/langchain_project_book/css/theme.css?1755622507" rel="stylesheet">
+    <link href="/langchain_project_book/css/theme-auto.css?1755622507" rel="stylesheet" id="R-variant-style">
+    <link href="/langchain_project_book/css/chroma-auto.css?1755622507" rel="stylesheet" id="R-variant-chroma-style">
+    <link href="/langchain_project_book/css/print.css?1755622507" rel="stylesheet" media="print">
+    <script src="/langchain_project_book/js/variant.js?1755622507"></script>
     <script>
       window.relearn = window.relearn || {};
       window.relearn.relBasePath='..\/..';
@@ -166,8 +166,8 @@ Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL
 <p>Security Warning: The IP address on port 8000 is intended to be accessible from anywhere on the network. Therefore, it is not advisable to expose this directly to the internet without first setting up a proper firewall configuration.</p>
 </blockquote>
 <p>After you successfully log into the portal, you can see</p>
-<p><a href="#R-image-8a62436dee4ffb6f4b5e8910ee74c06f" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/langchain_project_book/images/2024-05-01-21-22-34.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-8a62436dee4ffb6f4b5e8910ee74c06f"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/langchain_project_book/images/2024-05-01-21-22-34.png"></a></p>
+<p><a href="#R-image-86736977d66ccbbc26db1eefb09ab229" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/langchain_project_book/images/2024-05-01-21-22-34.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-86736977d66ccbbc26db1eefb09ab229"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/langchain_project_book/images/2024-05-01-21-22-34.png"></a></p>
 <p>Figure 6.2 Supabase Dashboard</p>
 <!-- raw HTML omitted -->
 <p>Select <code>SQL Editor</code> from navigation panel, copy and paste the following SQL into <code>SQL Query</code>, then click <code>Run</code>. The SQL code creates an extension of <code>vector</code> and a table called <code>documents</code> which will be used to store the embedded documents.</p>
@@ -220,8 +220,8 @@ Supabase, an open-source alternative to Firebase, is constructed atop PostgreSQL
 <!-- raw HTML omitted -->
 <p>On macOS, you may experience an issue where the containers <code>supabase-meta</code> and <code>supabase-studio</code> continuously restart. This problem can be resolved by disabling the &ldquo;Use Virtualization Framework&rdquo; option and changing the file sharing implementation from &ldquo;VirtioFS&rdquo; to &ldquo;gRPC FUSE&rdquo;. This solution applies to Docker Desktop version <code>v4.29.0</code>.</p>
 <p>Settings &gt; General &gt; Use Virtualization framework &gt; select &ldquo;gRPC FUSE&rdquo; then un-check &ldquo;Use Virtualization framework&rdquo;</p>
-<p><a href="#R-image-fcac045484c556c6f664368140fd32df" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/langchain_project_book/images/2024-05-07-11-29-17.png" style=" height: auto; width: auto;"></a>
-<a href="javascript:history.back();" class="lightbox-back" id="R-image-fcac045484c556c6f664368140fd32df"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/langchain_project_book/images/2024-05-07-11-29-17.png"></a></p>
+<p><a href="#R-image-c9f9b779e2e08b8c7786f4d07d9c441a" class="lightbox-link"><img class="noborder lazy lightbox noshadow figure-image" loading="lazy" src="/langchain_project_book/images/2024-05-07-11-29-17.png" style=" height: auto; width: auto;"></a>
+<a href="javascript:history.back();" class="lightbox-back" id="R-image-c9f9b779e2e08b8c7786f4d07d9c441a"><img class="noborder lazy lightbox noshadow lightbox-image" loading="lazy" src="/langchain_project_book/images/2024-05-07-11-29-17.png"></a></p>
 <p>Figure 6.3 Change Virtualization framework for Supabase on macOS</p>
 <blockquote>
 <p>Reference &gt; <a href="https://github.com/supabase/cli/issues/1724" rel="external" target="_blank">https://github.com/supabase/cli/issues/1724</a></p>
@@ -296,7 +296,7 @@ LangChain AI
           </a>
         </div>
         <script>
-          window.index_js_url="/langchain_project_book/searchindex.js?1731909436";
+          window.index_js_url="/langchain_project_book/searchindex.js?1755622507";
         </script>
         <search><form action="/langchain_project_book/search/index.html" method="get">
           <div class="searchbox default-animation">
@@ -309,12 +309,12 @@ LangChain AI
         <script>
           var contentLangs=['en'];
         </script>
-        <script src="/langchain_project_book/js/auto-complete.js?1731909436" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.min.js?1731909436" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1731909436" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1731909436" defer></script>
-        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1731909436" defer></script>
-        <script src="/langchain_project_book/js/search.js?1731909436" defer></script>
+        <script src="/langchain_project_book/js/auto-complete.js?1755622507" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.min.js?1755622507" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.stemmer.support.min.js?1755622507" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.multi.min.js?1755622507" defer></script>
+        <script src="/langchain_project_book/js/lunr/lunr.en.min.js?1755622507" defer></script>
+        <script src="/langchain_project_book/js/search.js?1755622507" defer></script>
       </div>
       <div id="R-homelinks" class="default-animation homelinks">
         <ul>
@@ -391,8 +391,8 @@ LangChain AI
         </div>
       </div>
     </aside>
-    <script src="/langchain_project_book/js/clipboard.min.js?1731909436" defer></script>
-    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1731909436" defer></script>
-    <script src="/langchain_project_book/js/theme.js?1731909436" defer></script>
+    <script src="/langchain_project_book/js/clipboard.min.js?1755622507" defer></script>
+    <script src="/langchain_project_book/js/perfect-scrollbar.min.js?1755622507" defer></script>
+    <script src="/langchain_project_book/js/theme.js?1755622507" defer></script>
   </body>
 </html>
